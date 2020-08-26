@@ -1,0 +1,81 @@
+<UserControl
+    x:Class="Coimbra.Controls.LaneSetupControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Coimbra.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    DataContext="{Binding RelativeSource={RelativeSource Self}}">
+
+    <Grid Height="60" BorderBrush="Black" BorderThickness="2" ColumnSpacing="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="200" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Background="{Binding PitchBackground, Mode=OneWay}" Grid.Column="0">
+            <Button Content="Change color" x:Uid="LaneSetupControl.ChangeColor" x:Name="ChangeColor">
+                <Button.Flyout>
+                    <Flyout>
+                        <StackPanel Orientation="Vertical">
+                        <ColorPicker x:Name="LaneColorPicker"
+                            ColorSpectrumShape="Ring"
+                            IsColorPreviewVisible="True"
+                            IsColorChannelTextInputVisible="True"
+                            IsHexInputVisible="False"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="Confirm" x:Name="ColorConfirm" Click="ColorConfirm_Click" x:Uid="LaneSetupControl.Confirm" />
+                                <Button Content="Cancel" x:Name="ColorCancel" Click="ColorCancel_Click" x:Uid="LaneSetupControl.Cancel" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Flyout>
+                </Button.Flyout>
+            </Button>
+        </StackPanel>
+        <StackPanel Grid.Column="1">
+            <ComboBox x:Name="SymbolCombo" Header="Symbols" x:Uid="LaneSetupControl.Symbols" Height="60" Width="200" Foreground="Black"
+          ItemsSource="{Binding AllSymbolsToDisplay}" SelectedItem="{Binding SelectedSymbol, Mode=TwoWay}" SelectionChanged="SymbolCombo_SelectionChanged">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock FontFamily="Segoe MDL2 Assets" Text="{Binding Value}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Column="2">
+            <TextBlock Text="{Binding SelectedKeysText, Mode=OneWay}" Foreground="Black" />
+            <local:MultiSelectDropDown x:Name="MultiSelectVirtualKeys"
+                x:Uid="LaneSetupControl.KeySelection"
+                ItemsSelectedTextFormat="\{0\} of \{1\} selected"
+                NoItemsSelectedText="No keys selected"
+                ItemsSource="{Binding AllKeysToDisplay}"
+                SelectedItems="{Binding SelectedKeys, Mode=TwoWay}"
+                MaximumSelectedItems="2">
+                <local:MultiSelectDropDown.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Value}" Width="300" />
+                    </DataTemplate>
+                </local:MultiSelectDropDown.ItemTemplate>
+            </local:MultiSelectDropDown>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Column="3">
+            <TextBlock Text="{Binding SelectedNotesText, Mode=OneWay}" Foreground="Black" />
+            <local:MultiSelectDropDown x:Name="MultiSelectNotes"
+                x:Uid="LaneSetupControl.NoteSelection"
+                ItemsSelectedTextFormat="\{0\} selected"
+                NoItemsSelectedText="No notes selected"
+                ItemsSource="{Binding AllNotesToDisplay}"
+                SelectedItems="{Binding SelectedNotes, Mode=TwoWay}">
+                <local:MultiSelectDropDown.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Value}" Width="300" />
+                    </DataTemplate>
+                </local:MultiSelectDropDown.ItemTemplate>
+            </local:MultiSelectDropDown>
+        </StackPanel>
+    </Grid>
+</UserControl>

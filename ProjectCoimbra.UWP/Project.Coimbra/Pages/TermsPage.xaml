@@ -1,0 +1,39 @@
+<!--
+Licensed under the MIT License.
+-->
+<Page
+    x:Class="Coimbra.Pages.TermsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:WinRTXamlToolkit.Controls"
+    mc:Ignorable="d"
+    Background="#F5F5F5">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <TextBlock HorizontalAlignment="Center" Style="{StaticResource HeaderTextBlockStyle}" Padding="0,50,0,50" Text="Terms" x:Uid="TermsPage.Header" />
+        </StackPanel>
+
+        <WebView Name="TermsContainer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="0" />
+
+        <StackPanel Grid.Row="2" Orientation="Vertical">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <CheckBox Name="AcceptCheck" Click="AcceptCheck_Click" Content="I accept these terms" x:Uid="TermsPage.AcceptCheck" VerticalAlignment="Center" />
+                <TextBlock Name="NeedAcceptError" Text="You need to accept the terms to continue." x:Uid="TermsPage.NeedAcceptError" Foreground="Red" VerticalAlignment="Center" Margin="20, -2, 0, 0" />
+            </StackPanel>
+            <Button Content="Next" Name="NextButton" x:Uid="TermsPage.NextButton" VerticalAlignment="Bottom" Margin="10" 
+                HorizontalAlignment="Stretch" Click="NextButton_Click" FontSize="20" IsEnabled="False"/>
+        </StackPanel>
+    </Grid>
+</Page>

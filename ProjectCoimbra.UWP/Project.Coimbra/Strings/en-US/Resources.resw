@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BandSongPage.AllPlayersReady.Text" xml:space="preserve">
+    <value>All players are ready to start</value>
+    <comment>The text of the All players are ready to start label on the Band Song Page.</comment>
+  </data>
+  <data name="BandSongPage.EnterNickName.Text" xml:space="preserve">
+    <value>Enter your nickname</value>
+    <comment>The text of the Enter your nickname label on the Band Song Page.</comment>
+  </data>
+  <data name="BandSongPage.JoinButton.Content" xml:space="preserve">
+    <value>Join</value>
+    <comment>The text of the Joinbutton on the Band Song Page.</comment>
+  </data>
+  <data name="BandSongPage.Or.Text" xml:space="preserve">
+    <value>or</value>
+    <comment>The text of the or label on the Band Song Page.</comment>
+  </data>
+  <data name="BandSongPage.OtherPlayers.Text" xml:space="preserve">
+    <value>Other Players</value>
+    <comment>The text of the Other Players label on the Band Song Page.</comment>
+  </data>
+  <data name="BandSongPage.SongToPlay.Text" xml:space="preserve">
+    <value>Song To Play</value>
+    <comment>The text of the Song To Play label on the Band Song Page.</comment>
+  </data>
+  <data name="BandSongPage.StartGameButton.Content" xml:space="preserve">
+    <value>Start Game</value>
+    <comment>The text of the Start Game button on the Band Song Page.</comment>
+  </data>
+  <data name="BandSongPage.UseSelectedSong.Content" xml:space="preserve">
+    <value>Use selected song</value>
+    <comment>The text of the Use selected song button on the Band Song Page.</comment>
+  </data>
+  <data name="BandSongPage.YouCanChooseYourInstrumentNow" xml:space="preserve">
+    <value>You can choose your instrument now</value>
+    <comment>The text of the You can choose your instrument now label on the Band Song Page.</comment>
+  </data>
+  <data name="BandSongPage.YourNickname.Text" xml:space="preserve">
+    <value>Your nickname</value>
+    <comment>The text of the Your nickname label on the Band Song Page.</comment>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Play songs collaboratively using accessible devices, such as an eye tracker or the Xbox Adaptive Controller.</value>
+    <comment>A description for the app.</comment>
+  </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Project Coimbra</value>
+    <comment>The display name of the app.</comment>
+  </data>
+  <data name="DurationPage.BackButton.Content" xml:space="preserve">
+    <value>Back</value>
+    <comment>The text of the back button on the Duration Page.</comment>
+  </data>
+  <data name="DurationPage.Details.Text" xml:space="preserve">
+    <value>This will change the number of seconds available to play a note.</value>
+    <comment>The details text on the Duration Page.</comment>
+  </data>
+  <data name="DurationPage.Long.Content" xml:space="preserve">
+    <value>Long</value>
+    <comment>The long option on the Duration Page.</comment>
+  </data>
+  <data name="DurationPage.Medium.Content" xml:space="preserve">
+    <value>Medium</value>
+    <comment>The long option on the Duration Page.</comment>
+  </data>
+  <data name="DurationPage.NextButton.Content" xml:space="preserve">
+    <value>Choose your instrument</value>
+    <comment>The text of the next button on the Duration Page.</comment>
+  </data>
+  <data name="DurationPage.Short.Content" xml:space="preserve">
+    <value>Short</value>
+    <comment>The long option on the Duration Page.</comment>
+  </data>
+  <data name="DurationPage.Title.Text" xml:space="preserve">
+    <value>Choose your duration</value>
+    <comment>The title on the Duration Page.</comment>
+  </data>
+  <data name="InstrumentsPage.BackButton.Content" xml:space="preserve">
+    <value>Back</value>
+    <comment>The text of the back button on the Instruments Page.</comment>
+  </data>
+  <data name="InstrumentsPage.NextButton.Content" xml:space="preserve">
+    <value>Next</value>
+    <comment>The text of the next button on the Instruments Page.</comment>
+  </data>
+  <data name="InstrumentsPage.OtherPlayers.Text" xml:space="preserve">
+    <value>Other Players</value>
+    <comment>The text of the Other Players label on the Instruments Page.</comment>
+  </data>
+  <data name="InstrumentsPage.StartGameButton.Content" xml:space="preserve">
+    <value>Start game</value>
+    <comment>The text of the Start Game button on the Instruments Page.</comment>
+  </data>
+  <data name="InstrumentsPage.WaitingForOtherPlayers.Text" xml:space="preserve">
+    <value>Waiting for other players to choose their instruments...</value>
+    <comment>The text of the Waiting for other players label on the Instruments Page.</comment>
+  </data>
+  <data name="InstrumentsPageSelectInstrument.Text" xml:space="preserve">
+    <value>Choose your instrument</value>
+    <comment>The text of the Select Instrument title on the Instruments Page.</comment>
+  </data>
+  <data name="IntroPage.NextButton.Content" xml:space="preserve">
+    <value>Start</value>
+    <comment>The text of the next button on the Intro Page.</comment>
+  </data>
+  <data name="ModePage.BackButton.Content" xml:space="preserve">
+    <value>Back</value>
+    <comment>The text of the back button on the Mode Page.</comment>
+  </data>
+  <data name="ModePage.Band.Content" xml:space="preserve">
+    <value>Local Area Network Band</value>
+    <comment>The band option on the Mode Page.</comment>
+  </data>
+  <data name="ModePage.Gig.Text" xml:space="preserve">
+    <value>Choose your gig</value>
+    <comment>The text above the solo/band control on the Mode Page.</comment>
+  </data>
+  <data name="ModePage.NextButton.Content" xml:space="preserve">
+    <value>Choose your song</value>
+    <comment>The text of the next button on the Mode Page.</comment>
+  </data>
+  <data name="ModePage.Solo.Content" xml:space="preserve">
+    <value>Solo</value>
+    <comment>The solo option on the Mode Page.</comment>
+  </data>
+  <data name="Ready.Text" xml:space="preserve">
+    <value>Ready</value>
+    <comment>The text of the Ready label.</comment>
+  </data>
+  <data name="SongPage.BackButton.Content" xml:space="preserve">
+    <value>Back</value>
+    <comment>The text of the back button on the Song Page.</comment>
+  </data>
+  <data name="SongPage.NextButton.Content" xml:space="preserve">
+    <value>Choose your duration</value>
+    <comment>The text of the next button on the Song Page.</comment>
+  </data>
+  <data name="SongPage.SelectFileButton.Content" xml:space="preserve">
+    <value>Add a song</value>
+    <comment>The text of the select file button on the Song Page.</comment>
+  </data>
+  <data name="SongPage.SelectSong.Text" xml:space="preserve">
+    <value>Choose your song</value>
+    <comment>The text of the select song control on the Song Page.</comment>
+  </data>
+  <data name="TermsPage.AcceptCheck.Content" xml:space="preserve">
+    <value>I accept these terms</value>
+    <comment>Accept button for terms page</comment>
+  </data>
+  <data name="TermsPage.Header.Text" xml:space="preserve">
+    <value>Terms</value>
+    <comment>Header for terms page</comment>
+  </data>
+  <data name="TermsPage.NeedAcceptError.Text" xml:space="preserve">
+    <value>You need to accept the terms to continue.</value>
+    <comment>The next of the warning on Terms Page in case user did not accept terms.</comment>
+  </data>
+  <data name="TermsPage.NextButton.Content" xml:space="preserve">
+    <value>Next</value>
+    <comment>The text of the Next button Terms page</comment>
+  </data>
+  <data name="TimePage.Error" xml:space="preserve">
+    <value>Please choose a time in the future.</value>
+    <comment>Error message displayed when a time in the past is chosen.</comment>
+  </data>
+  <data name="TimePageBackButton.Content" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="TimePageNextButton.Content" xml:space="preserve">
+    <value>Lets Go!</value>
+  </data>
+  <data name="TimePageStartAt.Text" xml:space="preserve">
+    <value>Start at</value>
+  </data>
+  <data name="LaneSettingsNextButton.Content" xml:space="preserve">
+    <value>Start Game</value>
+  </data>
+  <data name="LaneSettingsBackButton.Content" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="LaneSettingsPage.SelectedPitchCount.Text" xml:space="preserve">
+    <value>Amount of musical pitches</value>
+  </data>
+  <data name="LaneSetupControl.ChangeColor.Text" xml:space="preserve">
+    <value>Change color</value>
+  </data>
+  <data name="LaneSetupControl.Confirm.Content" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="LaneSetupControl.Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="LaneSetupControl.Symbols.Header" xml:space="preserve">
+    <value>Symbols</value>
+  </data>
+  <data name="LaneSetupControl.KeySelection.NoSelectionText" xml:space="preserve">
+    <value>No keys selected</value>
+  </data>
+  <data name="LaneSetupControl.KeySelection.MultipleSelectionTextFormat" xml:space="preserve">
+    <value>{0} of {1} selected</value>
+  </data>
+  <data name="LaneSetupControl.NoteSelection.NoSelectionText" xml:space="preserve">
+    <value>No notes selected</value>
+  </data>
+  <data name="LaneSetupControl.NoteSelection.MultipleSelectionTextFormat" xml:space="preserve">
+    <value>{0} selected</value>
+  </data>
+  <data name="LaneSetupControl.NotesSelected" xml:space="preserve">
+    <value>Notes {0} selected.</value>
+  </data>
+  <data name="LaneSetupControl.KeysSelected" xml:space="preserve">
+    <value>Keys {0} selected.</value>
+  </data>
+</root>

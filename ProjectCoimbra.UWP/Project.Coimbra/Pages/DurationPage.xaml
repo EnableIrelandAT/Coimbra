@@ -1,0 +1,42 @@
+<!--
+Licensed under the MIT License.
+-->
+<Page
+    x:Class="Coimbra.Pages.DurationPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="#F5F5F5">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0">
+            <TextBlock HorizontalAlignment="Center" Style="{StaticResource HeaderTextBlockStyle}" Padding="0,50,0,50" Text="Choose your duration" x:Uid="DurationPage.Title" />
+            <TextBlock HorizontalAlignment="Center" Style="{StaticResource BodyTextBlockStyle}" Padding="0,50,0,50" Text="This will change the number of seconds available to play a note." x:Uid="DurationPage.Details" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0">
+            <StackPanel HorizontalAlignment="Center">
+                <RadioButton Content="Long" x:Uid="DurationPage.Long" x:Name="Long" GroupName="Mode" IsChecked="False" FontSize="20" />
+                <RadioButton Content="Medium" x:Uid="DurationPage.Medium" x:Name="Medium" GroupName="Mode" IsChecked="True" FontSize="20" />
+                <RadioButton Content="Short" x:Uid="DurationPage.Short" x:Name="Short" GroupName="Mode" IsChecked="False" FontSize="20" />
+            </StackPanel>
+        </StackPanel>
+
+        <Button x:Name="BackButton" x:Uid="DurationPage.BackButton" Content="Back" VerticalAlignment="Bottom" Margin="10" Grid.Row="2" Grid.Column="0"
+                HorizontalAlignment="Stretch" Click="BackButton_Click" FontSize="20" />
+        <Button x:Name="NextButton" x:Uid="DurationPage.NextButton" Content="Choose your instrument" VerticalAlignment="Bottom" Margin="10" Grid.Row="2" Grid.Column="1"
+                HorizontalAlignment="Stretch" Click="NextButton_Click" FontSize="20" />
+    </Grid>
+</Page>

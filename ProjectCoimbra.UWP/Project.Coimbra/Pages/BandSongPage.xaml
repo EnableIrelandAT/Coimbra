@@ -1,0 +1,64 @@
+<!--
+Licensed under the MIT License.
+-->
+<Page
+    x:Class="Coimbra.BandSongPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="#F5F5F5">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Visibility="Visible">
+            <TextBlock HorizontalAlignment="Center" Style="{StaticResource HeaderTextBlockStyle}" Padding="0,50,0,50" Text="Join online session" x:Uid="InstrumentsPage.SelectInstrument" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+            <TextBlock x:Name="lblEnterNickname" x:Uid="BandSongPage.EnterNickName" HorizontalAlignment="Center" Margin="0,50,0,0" Text="Enter your nickname" Width="500" FontSize="20" />
+            <TextBox x:Name="txtNickName" Text="" TextWrapping="Wrap" Margin="0,50,0,0" Width="500" />
+            <Button x:Name="btnJoin" Content="Join" x:Uid="BandSongPage.JoinButton" HorizontalAlignment="Center" VerticalAlignment="Top" Click="BtnJoin_Click" Margin="0,50,0,0" Width="500" FontSize="20" />
+            <StackPanel x:Name="pnlNickNameInfo" Visibility="Collapsed">
+                <TextBlock x:Name="lblYourNickname" x:Uid="BandSongPage.YourNickname" HorizontalAlignment="Center" Margin="0,50,0,0" Text="Your nickname"  Width="500" FontSize="20" FontWeight="Normal"/>
+                <TextBlock x:Name="lblNickname" HorizontalAlignment="Center" Margin="0,15,0,0" Text="" Width="500" TextAlignment="Center" />
+            </StackPanel>
+            <StackPanel x:Name="pnlOtherPlayers" Visibility="Visible" Margin="0,15,0,0">
+                <TextBlock x:Name="lblOtherPlayersText" x:Uid="BandSongPage.OtherPlayers" Text="Other Players" Width="500" FontSize="20" FontWeight="Normal" />
+                <TextBlock x:Name="lblOtherPlayerNames" TextAlignment="Center" Text="" Width="500" Margin="0,15,0,0"/>
+            </StackPanel>
+
+            <TextBlock x:Name="lblReceivedSongNameText" x:Uid="BandSongPage.SongToPlay" HorizontalAlignment="Center" Margin="0,15,0,0" Text="Song to play" Visibility="Collapsed" Width="500" FontSize="20" />
+            <TextBlock x:Name="lblReceivedSongName" HorizontalAlignment="Center" Text="" Visibility="Collapsed" Margin="0,15,0,0" Width="500" TextAlignment="Center" />
+
+            <StackPanel x:Name="pnlSelectSong" Visibility="Visible" Margin="0,15,0,0">
+                <TextBlock x:Name="lblSelectSong" HorizontalAlignment="Center" Margin="0,50,0,0" Text="Select a song" x:Uid="SongPage.SelectSong" Width="500"  FontSize="20" FontWeight="Normal"/>
+                <ListBox x:Name="SongsListBox" Visibility="Collapsed" SelectionChanged="SongsListBox_SelectionChanged" Margin="0,15,0,0" Width="500" />
+                <Button x:Name="btnUseSelectedSong" Content="Use selected song" x:Uid="BandSongPage.UseSelectedSong" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20" Click="BtnUseSelectedSong_Click" Margin="0,50,0,0" Width="500" />
+                <TextBlock x:Name="lblOr" Text="or" Width="500" x:Uid="BandSongPage.Or" FontWeight="Normal" Margin="0,15,0,0" TextAlignment="Center"/>
+                <Button x:Name="FilePicker" HorizontalAlignment="Center" Content="Pick a file" Click="FilePicker_Click"  x:Uid="SongPage.SelectFile" Margin="0,15,0,0" Width="500" FontSize="20" />
+            </StackPanel>
+            <Button x:Name="btnStartMultiplayerGame" Content="Start Game" Visibility="Collapsed" x:Uid="BandSongPage.StartGameButton" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20" Click="BtnStartMultiplayerGame_Click" Margin="0,50,0,0" Width="500" />
+            <StackPanel x:Name="pnlAllPlayersAreReady" Visibility="Collapsed" Margin="0,15,0,0">
+                <TextBlock x:Name="lblAllPlayersAreReady" Text="All players are ready to start" x:Uid="BandSongPage.AllPlayersReady" Width="500" FontWeight="Normal" Margin="0,15,0,0" TextAlignment="Center" FontSize="20"/>
+                <TextBlock x:Name="lblChooseInstrumentNow" Text="You can choose your instrument now" x:Uid="BandSongPage.YouCanChooseYourInstrumentNow" Width="500" FontWeight="Normal" Margin="0,15,0,0" TextAlignment="Center" FontSize="20"/>
+        </StackPanel>
+        </StackPanel>
+
+        <Button x:Name="BackButton" Content="Back" VerticalAlignment="Bottom" Margin="10" Grid.Row="3" Grid.Column="0"
+                HorizontalAlignment="Stretch" Click="BackButton_Click" x:Uid="SongPage.BackButton" FontSize="20" />
+        <Button x:Name="NextButton" Content="Choose your duration" VerticalAlignment="Bottom" Margin="10" Grid.Row="3"
+                Grid.Column="1" HorizontalAlignment="Stretch" Click="NextButton_Click" IsEnabled="False" x:Uid="SongPage.NextButton" FontSize="20" />
+    </Grid>
+</Page>

@@ -1,0 +1,20 @@
+<!--
+Licensed under the MIT License.
+-->
+<Page
+    x:Class="Coimbra.Pages.GamePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:localControls="using:Coimbra.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="#F5F5F5">
+
+    <Grid>
+        <localControls:InputControl x:Name="InputControl" />
+        <TextBlock Name="Clockface" TextAlignment="Center" HorizontalAlignment="Center"
+                   Text="{Binding OriginalText, UpdateSourceTrigger=Default}" TextWrapping="Wrap"
+                   VerticalAlignment="Center" Height="664" FontSize="300" />
+    </Grid>
+</Page>

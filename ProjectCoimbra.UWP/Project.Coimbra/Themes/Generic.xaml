@@ -1,0 +1,68 @@
+<!--
+Licensed under the MIT License.
+-->
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:extensions="using:WinRTXamlToolkit.Controls.Extensions"
+    xmlns:localControls="using:Coimbra.Controls">
+    <Style TargetType="ItemsControl" x:Key="PitchListStyle" />
+    <Style TargetType="localControls:InputControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="localControls:InputControl">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock HorizontalAlignment="Center" Style="{StaticResource HeaderTextBlockStyle}" Padding="0,50,0,50" Text="{TemplateBinding SongTitle}" />
+                            <Grid Grid.Row="1" x:Name="PitchBackground" Margin="200,0,0,0" />
+                            <ItemsControl Grid.Row="1" x:Name="PitchTracks" Margin="100,0,0,0"
+                                          Style="{StaticResource PitchListStyle}" />
+                            <Canvas x:Name="Notes" Grid.Row="1" Margin="120,0,0,0" extensions:FrameworkElementExtensions.ClipToBounds="True" />
+                            <ItemsControl Grid.Row="1" x:Name="Buttons" HorizontalContentAlignment="Stretch" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="localControls:NoteControl">
+        <Setter Property="FontSize" Value="30" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="localControls:NoteControl">
+                    <Border
+                        x:Name="Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <Border.RenderTransform>
+                            <CompositeTransform TranslateX="0" ScaleX="1" ScaleY="1" x:Name="CompositeTransform" />
+                        </Border.RenderTransform>
+                        <Border.Resources>
+                            <Storyboard x:Key="PlayNote">
+                                <DoubleAnimation x:Name="TranslateX" From="{TemplateBinding TranslateX}"
+                                                 To="{TemplateBinding ToPosition}"
+                                                 Duration="{TemplateBinding Duration}"
+                                                 Storyboard.TargetName="CompositeTransform"
+                                                 Storyboard.TargetProperty="TranslateX" />
+                            </Storyboard>
+                        </Border.Resources>
+                        <ContentPresenter x:Name="Presenter">
+                            <ContentPresenter.Foreground>
+                                <SolidColorBrush x:Name="ForegroundBrush" Color="Green" />
+                            </ContentPresenter.Foreground>
+                        </ContentPresenter>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
