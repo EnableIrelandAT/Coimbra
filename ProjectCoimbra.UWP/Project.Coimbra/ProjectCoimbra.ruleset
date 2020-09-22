@@ -43,15 +43,6 @@
   <Rules AnalyzerId="Microsoft.CodeAnalysis.CSharp.Features" RuleNamespace="Microsoft.CodeAnalysis.CSharp.Features">
     <Rule Id="IDE0060" Action="Info" />
   </Rules>
-  <Rules AnalyzerId="Microsoft.CodeAnalysis.PublicApiAnalyzers" RuleNamespace="Microsoft.CodeAnalysis.PublicApiAnalyzers">
-    <Rule Id="RS0016" Action="Error" />
-    <Rule Id="RS0017" Action="Error" />
-    <Rule Id="RS0022" Action="Error" />
-    <Rule Id="RS0024" Action="Error" />
-    <Rule Id="RS0025" Action="Error" />
-    <Rule Id="RS0026" Action="Error" />
-    <Rule Id="RS0027" Action="Error" />
-  </Rules>
   <Rules AnalyzerId="Microsoft.CodeAnalysis.VersionCheckAnalyzer" RuleNamespace="Microsoft.CodeAnalysis.VersionCheckAnalyzer">
     <Rule Id="CA9999" Action="Error" />
   </Rules>
