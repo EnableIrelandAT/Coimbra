@@ -70,8 +70,8 @@ namespace Coimbra.DryWetMidiIntegration
 
             this.TempoMap = tempoMap;
 
-            this.regularPrecisionTickGenerator = new RegularPrecisionTickGenerator(ClockInterval);
-            this.clock = new MidiClock(true, this.regularPrecisionTickGenerator);
+            this.regularPrecisionTickGenerator = new RegularPrecisionTickGenerator();
+            this.clock = new MidiClock(true, this.regularPrecisionTickGenerator, ClockInterval);
             this.clock.Ticked += this.OnClockTick;
 
             this.ProcessInstrumentNotes();

@@ -20,7 +20,7 @@ namespace Coimbra.Extensions
         /// <param name="position">Func determining position of value.</param>
         public static void SortIn<T>(this ObservableCollection<T> collection, T value, Func<T, int> position)
         {
-            if (collection == null)
+            if (collection == null || position == null)
             {
                 return;
             }
