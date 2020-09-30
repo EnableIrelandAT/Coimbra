@@ -241,18 +241,37 @@ namespace Coimbra.Midi
 
         private void AddInstruments(MidiFile midi)
         {
-            foreach (var programChangeEvent in midi.GetTimedEvents().Select(e => e.Event).OfType<ProgramChangeEvent>())
+            var timedEvents = midi.GetTimedEvents();
+            var programChangedEvents = timedEvents.Select(e => e.Event).OfType<ProgramChangeEvent>().ToList<ChannelEvent>();
+            var events = programChangedEvents;
+
+            if (!programChangedEvents.Any())
             {
-                if (this.Instruments.ContainsKey(programChangeEvent.Channel))
+                events = timedEvents
+                    .Select(e => e.Event)
+                    .OfType<NoteOnEvent>()
+                    .ToList<ChannelEvent>();
+            }
+
+            foreach (var currentEvent in events)
+            {
+                var programNumber = new SevenBitNumber(1);
+
+                if (currentEvent is ProgramChangeEvent currentParsedEvent)
                 {
-                    if (!this.Instruments[programChangeEvent.Channel].Contains(programChangeEvent.ProgramNumber))
+                    programNumber = currentParsedEvent.ProgramNumber;
+                }
+
+                if (this.Instruments.ContainsKey(currentEvent.Channel))
+                {
+                    if (!this.Instruments[currentEvent.Channel].Contains(programNumber))
                     {
-                        this.Instruments[programChangeEvent.Channel].Add(programChangeEvent.ProgramNumber);
+                        this.Instruments[currentEvent.Channel].Add(programNumber);
                     }
                 }
                 else
                 {
-                    this.Instruments[programChangeEvent.Channel] = new List<SevenBitNumber> { programChangeEvent.ProgramNumber };
+                    this.Instruments[currentEvent.Channel] = new List<SevenBitNumber> { programNumber };
                 }
             }
         }
