@@ -199,7 +199,7 @@ namespace Coimbra.Pages
             const int newLanes = 7;
             this.SelectedPitchCount.Maximum = Math.Max(newLanes, this.notes.Count);
 
-            var gamepadKeys = new VirtualKey[newLanes] { VirtualKey.Number1, VirtualKey.Number2, VirtualKey.Number3, VirtualKey.Number4, VirtualKey.Number5, VirtualKey.Number6, VirtualKey.Number7 };
+            var keyboardKeys = new VirtualKey[newLanes] { VirtualKey.Number1, VirtualKey.Number2, VirtualKey.Number3, VirtualKey.Number4, VirtualKey.Number5, VirtualKey.Number6, VirtualKey.Number7 };
             var notes = new string[newLanes] { "C", "D", "E", "F", "G", "A", "B" };
 
             var currentSymbol = '\uF146';
@@ -216,7 +216,7 @@ namespace Coimbra.Pages
                     lane.SelectedNotes.Add(note);
                 }
 
-                lane.SelectedKeys.Add(this.AvailableKeys.First(key => string.Equals(key.Value, gamepadKeys[currentAdd].ToString(), StringComparison.Ordinal)));
+                lane.SelectedKeys.Add(this.AvailableKeys.First(key => string.Equals(key.Value, keyboardKeys[currentAdd].ToString(), StringComparison.Ordinal)));
 
                 lane.SelectedSymbol = this.AvailableSymbols.First(symbol => string.Equals(symbol.Value, currentSymbol.ToString(), StringComparison.Ordinal));
                 lane.PitchBackground = new SolidColorBrush(RetrieveColor());
