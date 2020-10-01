@@ -38,11 +38,15 @@ namespace Coimbra.Midi
 
         private MarkablePlayback playback;
 
-        private Thread startThread;
+        private Task startThread;
+
+        private CancellationTokenSource startThreadCancellationToken;
 
         private Timer startTimer;
 
-        private Thread thread;
+        private Task thread;
+
+        private CancellationTokenSource threadCancellationToken;
 
         private bool disposed;
 
@@ -87,6 +91,11 @@ namespace Coimbra.Midi
         /// The render current notes event.
         /// </summary>
         public event RenderCurrentNotesAsync RenderCurrentNotesAsyncEvent;
+
+        /// <summary>
+        /// The playback finished.
+        /// </summary>
+        public event EventHandler<EventArgs> PlaybackFinished; 
 
         /// <summary>
         /// Gets or sets the MIDI file.
@@ -152,11 +161,8 @@ namespace Coimbra.Midi
         /// </summary>
         public void Start()
         {
-            this.startThread = new Thread(() => this.playback.Start())
-            {
-                IsBackground = true,
-                Priority = ThreadPriority.Highest,
-            };
+            this.startThreadCancellationToken = new CancellationTokenSource();
+            this.startThread = new Task(() => this.playback.Start(), this.startThreadCancellationToken.Token);
 
             this.startTimer = new Timer(_ => this.startThread.Start(), null, TimeSpan.Zero, TimeSpan.Zero);
         }
@@ -182,7 +188,8 @@ namespace Coimbra.Midi
                 this.notesOnDisplay[i] = new ConcurrentQueue<MarkablePlaybackEvent>();
             }
 
-            this.thread = new Thread(this.RenderCurrentNotes);
+            this.threadCancellationToken = new CancellationTokenSource();
+            this.thread = new Task(this.RenderCurrentNotes, this.threadCancellationToken.Token);
             this.thread.Start();
         }
 
@@ -211,8 +218,8 @@ namespace Coimbra.Midi
                 this.playback?.Dispose();
                 this.outputDevice?.Dispose();
                 this.startTimer?.Dispose();
-                this.thread?.Join();
-                this.startThread?.Join();
+                this.startThreadCancellationToken.Cancel();
+                this.threadCancellationToken.Cancel();
                 this.media?.Dispose();
             }
 
@@ -309,11 +316,16 @@ namespace Coimbra.Midi
 
         private void Playback_Finished(object sender, EventArgs e)
         {
-            this.playback?.Dispose();
-            this.outputDevice?.Dispose();
-            this.startTimer?.Dispose();
-            this.thread?.Join();
-            this.startThread?.Join();
+            Task.Delay(6000).ContinueWith(t =>
+            {
+                this.startTimer?.Dispose();
+                this.threadCancellationToken.Cancel();
+                this.startThreadCancellationToken.Cancel();
+                this.playback?.Dispose();
+                this.outputDevice?.Dispose();
+
+                PlaybackFinished?.Invoke(this, null);
+            });
         }
 
         private void OutputDevice_EventSent(object sender, MidiEventSentEventArgs e) =>
