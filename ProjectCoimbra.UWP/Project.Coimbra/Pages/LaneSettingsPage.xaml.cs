@@ -196,17 +196,29 @@ namespace Coimbra.Pages
 
             this.Lanes.Children.Clear();
 
+            const int newLanes = 7;
+            this.SelectedPitchCount.Maximum = Math.Max(newLanes, this.notes.Count);
+
+            var gamepadKeys = new VirtualKey[newLanes] { VirtualKey.Number1, VirtualKey.Number2, VirtualKey.Number3, VirtualKey.Number4, VirtualKey.Number5, VirtualKey.Number6, VirtualKey.Number7 };
+            var notes = new string[newLanes] { "C", "D", "E", "F", "G", "A", "B" };
+
             var currentSymbol = '\uF146';
-            for (var currentAdd = 0; currentAdd < this.notes.Count; currentAdd++)
+            for (var currentAdd = 0; currentAdd < newLanes; currentAdd++)
             {
 #pragma warning disable CA2000 // Dispose objects before losing scope
                 var lane = new LaneSetupControl(this.AvailableSymbols, this.AvailableNotes, this.AvailableKeys);
 #pragma warning restore CA2000 // Dispose objects before losing scope
                 lane.PropertyChanged += this.Lane_PropertyChanged;
                 this.Lanes.Children.Add(lane);
-                lane.SelectedNotes.Add(this.AvailableNotes[0]);
-                lane.SelectedKeys.Add(this.AvailableKeys.First(key => string.Equals(key.Value, $"Number{(currentAdd + 1).ToString(CultureInfo.InvariantCulture)}", StringComparison.Ordinal)));
-                lane.SelectedSymbol = this.AvailableSymbols.First(symbol => string.Equals(symbol.Value, currentSymbol.ToString(CultureInfo.InvariantCulture), StringComparison.Ordinal));
+
+                foreach (var note in this.AvailableNotes.ToList().Where(note => note.Value.StartsWith(notes[currentAdd], StringComparison.InvariantCultureIgnoreCase)))
+                {
+                    lane.SelectedNotes.Add(note);
+                }
+
+                lane.SelectedKeys.Add(this.AvailableKeys.First(key => string.Equals(key.Value, gamepadKeys[currentAdd].ToString(), StringComparison.Ordinal)));
+
+                lane.SelectedSymbol = this.AvailableSymbols.First(symbol => string.Equals(symbol.Value, currentSymbol.ToString(), StringComparison.Ordinal));
                 lane.PitchBackground = new SolidColorBrush(RetrieveColor());
 
                 if (currentSymbol != '\uF155')
@@ -215,7 +227,7 @@ namespace Coimbra.Pages
                 }
             }
 
-            this.SelectedPitchCount.Value = this.notes.Count;
+            this.SelectedPitchCount.Value = newLanes;
         }
 
         private void OptimizeXbox_Click(object sender, RoutedEventArgs e)
