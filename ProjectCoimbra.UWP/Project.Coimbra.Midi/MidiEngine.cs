@@ -242,10 +242,9 @@ namespace Coimbra.Midi
         private void AddInstruments(MidiFile midi)
         {
             var timedEvents = midi.GetTimedEvents();
-            var programChangedEvents = timedEvents.Select(e => e.Event).OfType<ProgramChangeEvent>().ToList<ChannelEvent>();
-            var events = programChangedEvents;
+            var events = timedEvents.Select(e => e.Event).OfType<ProgramChangeEvent>().ToList<ChannelEvent>();
 
-            if (!programChangedEvents.Any())
+            if (!events.Any())
             {
                 events = timedEvents
                     .Select(e => e.Event)
