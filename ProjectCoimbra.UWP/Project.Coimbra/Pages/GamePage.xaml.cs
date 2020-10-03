@@ -72,7 +72,9 @@ namespace Coimbra.Pages
         }
 
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-        private void MidiEngine_PlaybackFinished(object sender, EventArgs e) => CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => this.Frame.Navigate(typeof(ModePage), null, new DrillInNavigationTransitionInfo()));
+        private void MidiEngine_PlaybackFinished(object sender, EventArgs e) =>
+            CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                this.Frame.Navigate(typeof(ModePage), null, new DrillInNavigationTransitionInfo()));
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
 
         private void RemoveOldNotes()

@@ -316,6 +316,8 @@ namespace Coimbra.Midi
 
         private void Playback_Finished(object sender, EventArgs e)
         {
+            // The finished event fires 5 seconds before the last note finished playing,
+            // due to difference between display and audio, leaving one second of buffer.
             Task.Delay(6000).ContinueWith(t =>
             {
                 this.startTimer?.Dispose();
