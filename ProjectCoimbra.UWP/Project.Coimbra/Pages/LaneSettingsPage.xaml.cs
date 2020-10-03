@@ -196,14 +196,23 @@ namespace Coimbra.Pages
 
             this.Lanes.Children.Clear();
 
-            const int newLanes = 7;
-            this.SelectedPitchCount.Maximum = Math.Max(newLanes, this.notes.Count);
+            var keyboardKeys = new VirtualKey[]
+            {
+                VirtualKey.Number1,
+                VirtualKey.Number2,
+                VirtualKey.Number3,
+                VirtualKey.Number4,
+                VirtualKey.Number5,
+                VirtualKey.Number6,
+                VirtualKey.Number7,
+            };
 
-            var keyboardKeys = new VirtualKey[newLanes] { VirtualKey.Number1, VirtualKey.Number2, VirtualKey.Number3, VirtualKey.Number4, VirtualKey.Number5, VirtualKey.Number6, VirtualKey.Number7 };
-            var notes = new string[newLanes] { "C", "D", "E", "F", "G", "A", "B" };
+            this.SelectedPitchCount.Maximum = Math.Max(keyboardKeys.Length, this.notes.Count);
+
+            var notes = new string[] { "C", "D", "E", "F", "G", "A", "B" };
 
             var currentSymbol = '\uF146';
-            for (var currentAdd = 0; currentAdd < newLanes; currentAdd++)
+            for (var currentAdd = 0; currentAdd < keyboardKeys.Length; currentAdd++)
             {
 #pragma warning disable CA2000 // Dispose objects before losing scope
                 var lane = new LaneSetupControl(this.AvailableSymbols, this.AvailableNotes, this.AvailableKeys);
@@ -211,7 +220,7 @@ namespace Coimbra.Pages
                 lane.PropertyChanged += this.Lane_PropertyChanged;
                 this.Lanes.Children.Add(lane);
 
-                foreach (var note in this.AvailableNotes.ToList().Where(note => note.Value.StartsWith(notes[currentAdd], StringComparison.InvariantCultureIgnoreCase)))
+                foreach (var note in this.AvailableNotes.Where(note => note.Value.StartsWith(notes[currentAdd], StringComparison.OrdinalIgnoreCase)))
                 {
                     lane.SelectedNotes.Add(note);
                 }
@@ -227,7 +236,7 @@ namespace Coimbra.Pages
                 }
             }
 
-            this.SelectedPitchCount.Value = newLanes;
+            this.SelectedPitchCount.Value = keyboardKeys.Length;
         }
 
         private void OptimizeXbox_Click(object sender, RoutedEventArgs e)
