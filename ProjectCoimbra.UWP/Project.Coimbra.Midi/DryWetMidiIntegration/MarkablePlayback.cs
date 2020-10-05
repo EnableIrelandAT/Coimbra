@@ -372,6 +372,7 @@ namespace Coimbra.DryWetMidiIntegration
         private void OnClockTick(object sender, object eventArgs)
         {
             var currentTime = this.clock.CurrentTime;
+            var largestEndTime = this.clock.CurrentTime;
             foreach (var playbackEvent in this.midiPlaybackEvents)
             {
                 if (!this.IsRunning)
@@ -397,6 +398,17 @@ namespace Coimbra.DryWetMidiIntegration
 
                 this.CheckDisplay(currentTime, playbackEvent);
                 this.CheckPlaySound(currentTime, playbackEvent);
+
+                var endTime = playbackEvent.Time.Add(new TimeSpan(playbackEvent.Event.DeltaTime));
+                if (largestEndTime < endTime)
+                {
+                    largestEndTime = endTime;
+                }
+            }
+
+            if (largestEndTime > currentTime)
+            {
+                return;
             }
 
             this.clock.Stop();
