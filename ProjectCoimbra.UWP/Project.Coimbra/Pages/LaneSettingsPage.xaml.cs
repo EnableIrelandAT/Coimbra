@@ -220,7 +220,7 @@ namespace Coimbra.Pages
                 lane.PropertyChanged += this.Lane_PropertyChanged;
                 this.Lanes.Children.Add(lane);
 
-                foreach (var note in this.AvailableNotes.Where(note => note.Value.StartsWith(notes[currentAdd], StringComparison.OrdinalIgnoreCase)))
+                foreach (var note in this.AvailableNotes.Where(note => note.Value.StartsWith(notes[currentAdd], StringComparison.OrdinalIgnoreCase)).ToList())
                 {
                     lane.SelectedNotes.Add(note);
                 }
