@@ -38,11 +38,15 @@ namespace Coimbra.Midi
 
         private MarkablePlayback playback;
 
-        private Thread startThread;
+        private Task startThread;
+
+        private CancellationTokenSource startThreadCancellationToken;
 
         private Timer startTimer;
 
-        private Thread thread;
+        private Task thread;
+
+        private CancellationTokenSource threadCancellationToken;
 
         private bool disposed;
 
@@ -87,6 +91,11 @@ namespace Coimbra.Midi
         /// The render current notes event.
         /// </summary>
         public event RenderCurrentNotesAsync RenderCurrentNotesAsyncEvent;
+
+        /// <summary>
+        /// The playback finished.
+        /// </summary>
+        public event EventHandler<EventArgs> PlaybackFinished; 
 
         /// <summary>
         /// Gets or sets the MIDI file.
@@ -152,11 +161,8 @@ namespace Coimbra.Midi
         /// </summary>
         public void Start()
         {
-            this.startThread = new Thread(() => this.playback.Start())
-            {
-                IsBackground = true,
-                Priority = ThreadPriority.Highest,
-            };
+            this.startThreadCancellationToken = new CancellationTokenSource();
+            this.startThread = new Task(() => this.playback.Start(), this.startThreadCancellationToken.Token);
 
             this.startTimer = new Timer(_ => this.startThread.Start(), null, TimeSpan.Zero, TimeSpan.Zero);
         }
@@ -182,7 +188,8 @@ namespace Coimbra.Midi
                 this.notesOnDisplay[i] = new ConcurrentQueue<MarkablePlaybackEvent>();
             }
 
-            this.thread = new Thread(this.RenderCurrentNotes);
+            this.threadCancellationToken = new CancellationTokenSource();
+            this.thread = new Task(this.RenderCurrentNotes, this.threadCancellationToken.Token);
             this.thread.Start();
         }
 
@@ -211,8 +218,8 @@ namespace Coimbra.Midi
                 this.playback?.Dispose();
                 this.outputDevice?.Dispose();
                 this.startTimer?.Dispose();
-                this.thread?.Join();
-                this.startThread?.Join();
+                this.startThreadCancellationToken.Cancel();
+                this.threadCancellationToken.Cancel();
                 this.media?.Dispose();
             }
 
@@ -241,18 +248,36 @@ namespace Coimbra.Midi
 
         private void AddInstruments(MidiFile midi)
         {
-            foreach (var programChangeEvent in midi.GetTimedEvents().Select(e => e.Event).OfType<ProgramChangeEvent>())
+            var timedEvents = midi.GetTimedEvents();
+            var events = timedEvents.Select(e => e.Event).OfType<ProgramChangeEvent>().ToList<ChannelEvent>();
+
+            if (!events.Any())
             {
-                if (this.Instruments.ContainsKey(programChangeEvent.Channel))
+                events = timedEvents
+                    .Select(e => e.Event)
+                    .OfType<NoteOnEvent>()
+                    .ToList<ChannelEvent>();
+            }
+
+            foreach (var currentEvent in events)
+            {
+                var programNumber = new SevenBitNumber(1);
+
+                if (currentEvent is ProgramChangeEvent currentParsedEvent)
                 {
-                    if (!this.Instruments[programChangeEvent.Channel].Contains(programChangeEvent.ProgramNumber))
+                    programNumber = currentParsedEvent.ProgramNumber;
+                }
+
+                if (this.Instruments.ContainsKey(currentEvent.Channel))
+                {
+                    if (!this.Instruments[currentEvent.Channel].Contains(programNumber))
                     {
-                        this.Instruments[programChangeEvent.Channel].Add(programChangeEvent.ProgramNumber);
+                        this.Instruments[currentEvent.Channel].Add(programNumber);
                     }
                 }
                 else
                 {
-                    this.Instruments[programChangeEvent.Channel] = new List<SevenBitNumber> { programChangeEvent.ProgramNumber };
+                    this.Instruments[currentEvent.Channel] = new List<SevenBitNumber> { programNumber };
                 }
             }
         }
@@ -309,11 +334,18 @@ namespace Coimbra.Midi
 
         private void Playback_Finished(object sender, EventArgs e)
         {
-            this.playback?.Dispose();
-            this.outputDevice?.Dispose();
-            this.startTimer?.Dispose();
-            this.thread?.Join();
-            this.startThread?.Join();
+            // The finished event fires 5 seconds before the last note finished playing,
+            // due to difference between display and audio, leaving one second of buffer.
+            Task.Delay(6000).ContinueWith(t =>
+            {
+                this.startTimer?.Dispose();
+                this.threadCancellationToken.Cancel();
+                this.startThreadCancellationToken.Cancel();
+                this.playback?.Dispose();
+                this.outputDevice?.Dispose();
+
+                PlaybackFinished?.Invoke(this, null);
+            });
         }
 
         private void OutputDevice_EventSent(object sender, MidiEventSentEventArgs e) =>

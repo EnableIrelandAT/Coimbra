@@ -14,9 +14,11 @@ namespace Coimbra.Pages
     using Coimbra.Model;
     using Melanchall.DryWetMidi.Core;
     using Microsoft.Toolkit.Uwp.Input.GazeInteraction;
+    using Windows.ApplicationModel.Core;
     using Windows.UI.Core;
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;
+    using Windows.UI.Xaml.Media.Animation;
 
     /// <summary>
     /// A class encapsulating the logic of the game page of the app.
@@ -41,6 +43,7 @@ namespace Coimbra.Pages
             }
 
             this.InitializeComponent();
+            this.midiEngine.PlaybackFinished += this.MidiEngine_PlaybackFinished;
             this.midiEngine.RenderCurrentNotesAsyncEvent += this.MidiEngine_RenderCurrentNotesEventAsync;
             this.InputControl.LaneButtonClicked += this.InputControl_LaneButtonClicked;
             this.InputControl.EyeGazeInteracted += this.InputControl_EyeGazeInteracted;
@@ -67,6 +70,12 @@ namespace Coimbra.Pages
             return Array.Find(UserData.PitchMap.Pitches, pitch => pitch.NoteNames.Any(
                     (pitchNoteName) => string.Equals(pitchNoteName, noteName, StringComparison.Ordinal)))?.Index;
         }
+
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+        private void MidiEngine_PlaybackFinished(object sender, EventArgs e) =>
+            CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                this.Frame.Navigate(typeof(ModePage), null, new DrillInNavigationTransitionInfo()));
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
 
         private void RemoveOldNotes()
         {
