@@ -94,8 +94,36 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\logo-splash.png" />
-    <Content Include="Assets\logo.png" />
+    <Content Include="Assets\logo-splash.scale-100.png" />
+    <Content Include="Assets\logo-splash.scale-125.png" />
+    <Content Include="Assets\logo-splash.scale-150.png" />
+    <Content Include="Assets\logo-splash.scale-200.png" />
+    <Content Include="Assets\logo-splash.scale-400.png" />
+    <Content Include="Assets\logo.altform-lightunplated_targetsize-16.png" />
+    <Content Include="Assets\logo.altform-lightunplated_targetsize-24.png" />
+    <Content Include="Assets\logo.altform-lightunplated_targetsize-256.png" />
+    <Content Include="Assets\logo.altform-lightunplated_targetsize-32.png" />
+    <Content Include="Assets\logo.altform-lightunplated_targetsize-48.png" />
+    <Content Include="Assets\logo.altform-unplated_targetsize-16.png" />
+    <Content Include="Assets\logo.altform-unplated_targetsize-24.png" />
+    <Content Include="Assets\logo.altform-unplated_targetsize-256.png" />
+    <Content Include="Assets\logo.altform-unplated_targetsize-32.png" />
+    <Content Include="Assets\logo.altform-unplated_targetsize-48.png" />
+    <Content Include="Assets\logo.scale-100.png" />
+    <Content Include="Assets\logo.scale-125.png" />
+    <Content Include="Assets\logo.scale-150.png" />
+    <Content Include="Assets\logo.scale-200.png" />
+    <Content Include="Assets\logo.scale-400.png" />
+    <Content Include="Assets\logo.targetsize-16.png" />
+    <Content Include="Assets\logo.targetsize-24.png" />
+    <Content Include="Assets\logo.targetsize-256.png" />
+    <Content Include="Assets\logo.targetsize-32.png" />
+    <Content Include="Assets\logo.targetsize-48.png" />
+    <Content Include="Assets\SmallTile.scale-100.png" />
+    <Content Include="Assets\SmallTile.scale-125.png" />
+    <Content Include="Assets\SmallTile.scale-150.png" />
+    <Content Include="Assets\SmallTile.scale-200.png" />
+    <Content Include="Assets\SmallTile.scale-400.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Strings\de-DE\Terms.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -239,6 +267,7 @@
       <Name>Project.Coimbra.Model</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
