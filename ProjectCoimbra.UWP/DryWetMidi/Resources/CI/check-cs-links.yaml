@@ -1,0 +1,43 @@
+trigger:
+  branches:
+    include:
+    - master
+    - develop
+  paths:
+    include:
+    - 'DryWetMidi/*'
+    - 'Resources/Scripts/Check links.ps1'
+    - 'Resources/CI/check-cs-links.yaml'
+
+pr:
+  branches:
+    include:
+    - develop
+  paths:
+    include:
+    - 'DryWetMidi/*'
+    - 'Resources/Scripts/Check links.ps1'
+    - 'Resources/CI/check-cs-links.yaml'
+
+schedules:
+- cron: '0 0,9,15,20 * * *'
+  displayName: Check cs links schedule
+  branches:
+    include:
+    - master
+    - develop
+  always: 'true'
+
+pool:
+  vmImage: 'windows-latest'
+
+name: $(TeamProject)_$(SourceBranchName)_CheckCsLinks_$(Rev:r)
+
+steps:
+- task: PowerShell@2
+  displayName: Check links
+  inputs:
+    targetType: filePath
+    filePath: '$(Build.SourcesDirectory)/Resources/Scripts/Check links.ps1'
+    arguments: '-Folder "$(Build.SourcesDirectory)/DryWetMidi" -Filter "*.cs"'
+    failOnStderr: 'true'

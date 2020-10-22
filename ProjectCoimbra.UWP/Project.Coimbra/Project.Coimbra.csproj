@@ -222,6 +222,10 @@
     </SDKReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DryWetMidi\DryWetMidi\Melanchall.DryWetMidi.csproj">
+      <Project>{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}</Project>
+      <Name>Melanchall.DryWetMidi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Project.Coimbra.Communication\Project.Coimbra.Communication.csproj">
       <Project>{5742f8f2-deda-4679-9ee0-f76400aa2cea}</Project>
       <Name>Project.Coimbra.Communication</Name>
