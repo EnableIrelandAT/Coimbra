@@ -1,0 +1,99 @@
+trigger:
+  batch: true
+  branches:
+    include:
+    - master
+    - develop
+  paths:
+    include:
+    - 'DryWetMidi/*'
+    - 'Docs/*'
+    - 'Resources/CI/build-artifacts-docs.yaml'
+    - 'README.md'
+
+pr: none
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  version: '5.2.0'
+
+name: $(TeamProject)_$(SourceBranchName)_BuildDocs_$(version)$(Rev:.r)
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: Build project
+  inputs:
+    command: 'build'
+    arguments: '--configuration $(buildConfiguration)'
+    projects: 'DryWetMidi/Melanchall.DryWetMidi.csproj'
+
+- task: PowerShell@2
+  displayName: Setup docs pages
+  inputs:
+    targetType: 'inline'
+    script: |
+      #Write-Host "Writing build datetime to site footer..."
+      #$content = Get-Content -Path Docs\docfx.json -Raw
+      #$currentDateTime = Get-Date -Format "MMMM d, yyyy HH:mm:ss"
+      #$content = $content -Replace "{BUILD_DATETIME}",$currentDateTime
+      #Set-Content -Path Docs\docfx.json -Value $content
+      
+      Write-Host "Copying README.md as index.md to Docs folder..."
+      Copy-Item README.md -Destination Docs\index.md
+
+- task: PowerShell@2
+  displayName: Generate obsolete API section
+  inputs:
+    targetType: filePath
+    filePath: '$(Build.SourcesDirectory)/Resources/Scripts/Generate obsolete API section.ps1'
+
+- task: PowerShell@2
+  displayName: Install docfx
+  inputs:
+    targetType: 'inline'
+    script: choco install docfx -y --version $(DocFxVersion)
+      
+- task: PowerShell@2
+  displayName: Build docs
+  inputs:
+    targetType: 'inline'
+    script: docfx Docs/docfx.json
+
+- task: PublishPipelineArtifact@1
+  displayName: Publish 'Docs' artifact
+  inputs:
+    targetPath: Docs\_site
+    artifact: Docs
+
+- task: PublishPipelineArtifact@1
+  displayName: Publish 'LatestReleaseNotes' artifact
+  inputs:
+    targetPath: Docs\latest-release-notes.md
+    artifact: LatestReleaseNotes
+
+- task: PowerShell@2
+  displayName: Prepare release notes for midi.org
+  inputs:
+    targetType: 'inline'
+    script: |
+      $content = Get-Content Docs\latest-release-notes.md
+      $content = $content `
+        -Replace '\[`?(.+?)`?\]\((.+?)\)', '[url=$2]$1[/url]' `
+        -Replace '# (.+?)$', '[u]$1[/u]' `
+        -Replace '\*\*(.+?)\*\*', '[b]$1[/b]' `
+        -Replace '`(.+?)`', '[i]$1[/i]' `
+        -Replace '\b_(.+?)_\b', '[i]$1[/i]' `
+        -Replace '^\*', '[*]' `
+        -Replace '^  \*', '  -'
+      Set-Content -Path "Docs\latest-release-notes-midi-org.txt" -Value $content
+
+- task: PublishPipelineArtifact@1
+  displayName: Publish 'LatestReleaseNotesMidiOrg' artifact
+  inputs:
+    targetPath: Docs\latest-release-notes-midi-org.txt
+    artifact: LatestReleaseNotesMidiOrg

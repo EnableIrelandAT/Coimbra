@@ -1,0 +1,66 @@
+trigger:
+  batch: true
+  branches:
+    include:
+    - master
+    - develop
+  paths:
+    include:
+    - 'DryWetMidi/*'
+    - 'DryWetMidi.Tests/*'
+    - 'DryWetMidi.Tests.Common/*'
+    - 'Resources/CI/win-test-netframework-core.yaml'
+    exclude:
+    - 'DryWetMidi/Devices/*'
+    - 'DryWetMidi.Tests/Devices/*'
+
+pr:
+  branches:
+    include:
+    - develop
+  paths:
+    include:
+    - 'DryWetMidi/*'
+    - 'DryWetMidi.Tests/*'
+    - 'DryWetMidi.Tests.Common/*'
+    - 'Resources/CI/win-test-netframework-core.yaml'
+    exclude:
+    - 'DryWetMidi/Devices/*'
+    - 'DryWetMidi.Tests/Devices/*'
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  version: '5.2.0'
+
+name: Windows_Test_NetFramework_Core_$(version)$(Rev:.r)
+
+steps:
+- task: NugetToolInstaller@1
+  displayName: Install latest NuGet tool
+
+- task: DotNetCoreCLI@2
+  displayName: Restore NuGet packages
+  inputs:
+    command: restore
+
+- task: DotNetCoreCLI@2
+  displayName: Build solution
+  inputs:
+    command: 'build'
+    arguments: '--configuration $(buildConfiguration)'
+
+- task: VSTest@2
+  displayName: Run unit tests
+  inputs:
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+    testSelector: testAssemblies
+    testAssemblyVer2:
+      '**/*.Tests.dll'
+    testFiltercriteria: 'FullyQualifiedName!~.Devices'
+    rerunMaxAttempts: '3'
