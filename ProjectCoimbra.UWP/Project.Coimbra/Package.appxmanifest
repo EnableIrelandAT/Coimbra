@@ -38,7 +38,7 @@
         Square44x44Logo="Assets\logo.png"
         Description="ms-resource:Description"
         BackgroundColor="#0099BC">
-        <uap:DefaultTile  Square310x310Logo="Assets\logo.png" Wide310x150Logo="Assets\logo-splash.png">
+        <uap:DefaultTile  Square310x310Logo="Assets\logo.png" Wide310x150Logo="Assets\logo-splash.png" Square71x71Logo="Assets\SmallTile.png">
           <uap:ShowNameOnTiles>
             <uap:ShowOn Tile="square150x150Logo"/>
             <uap:ShowOn Tile="square310x310Logo"/>
