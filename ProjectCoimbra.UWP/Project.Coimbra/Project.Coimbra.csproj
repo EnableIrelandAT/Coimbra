@@ -32,6 +32,7 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
+    <GenerateMSBuildEditorConfigFile>false</GenerateMSBuildEditorConfigFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
