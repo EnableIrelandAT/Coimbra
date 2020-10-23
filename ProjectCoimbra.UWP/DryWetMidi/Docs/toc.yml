@@ -1,9 +1,0 @@
-- name: Overview
-  href: index.md
-  homepage: index.md
-- name: API
-  href: obj/api/
-- name: Articles
-  href: articles/
-- name: GitHub
-  href: https://github.com/melanchall/drywetmidi
