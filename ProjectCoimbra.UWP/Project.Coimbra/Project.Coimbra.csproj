@@ -6,9 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
-    <AssemblyName>Microsoft.Coimbra</AssemblyName>
+    <AssemblyName>Coimbra</AssemblyName>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-    <CodeAnalysisRuleSet>ProjectCoimbra.ruleset</CodeAnalysisRuleSet>
     <DefaultLanguage>en-US</DefaultLanguage>
     <DefineConstants>NETFX_CORE;WINDOWS_UWP;CODE_ANALYSIS</DefineConstants>
     <DocumentationFile>bin\$(Platform)\$(Configuration)\$(AssemblyName).xml</DocumentationFile>
@@ -25,7 +24,6 @@
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <RootNamespace>$(AssemblyName)</RootNamespace>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.18362.0</TargetPlatformVersion>
@@ -160,25 +158,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers">
-      <Version>3.3.0</Version>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.CodeAnalysis.BinSkim">
-      <Version>1.6.1</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp">
-      <Version>3.7.0</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces">
-      <Version>3.7.0</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers">
-      <Version>3.3.0</Version>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.10</Version>
     </PackageReference>
@@ -187,21 +166,6 @@
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
       <Version>2.4.3</Version>
-    </PackageReference>
-    <PackageReference Include="Roslynator.Analyzers">
-      <Version>3.0.0</Version>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="Roslynator.CodeFixes">
-      <Version>2.0.0</Version>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="StyleCop.Analyzers">
-      <Version>1.1.118</Version>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="WinRTXamlToolkit.UWP">
       <Version>2.3.0</Version>
