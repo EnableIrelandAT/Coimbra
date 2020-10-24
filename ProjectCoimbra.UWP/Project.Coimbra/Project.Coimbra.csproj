@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
+    <AppxBundlePlatforms>x64</AppxBundlePlatforms>
     <AssemblyName>Coimbra</AssemblyName>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     <DefaultLanguage>en-US</DefaultLanguage>
@@ -31,6 +31,14 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
     <GenerateMSBuildEditorConfigFile>false</GenerateMSBuildEditorConfigFile>
+    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <GenerateTestArtifacts>True</GenerateTestArtifacts>
+    <AppxBundle>Always</AppxBundle>
+    <PackageCertificateThumbprint>14E0AB75F568C80F57B2493A3A94CBE5E6328092</PackageCertificateThumbprint>
+    <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
+    <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
+    <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -93,36 +101,52 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\logo-splash.scale-100.png" />
-    <Content Include="Assets\logo-splash.scale-125.png" />
-    <Content Include="Assets\logo-splash.scale-150.png" />
-    <Content Include="Assets\logo-splash.scale-200.png" />
-    <Content Include="Assets\logo-splash.scale-400.png" />
-    <Content Include="Assets\logo.altform-lightunplated_targetsize-16.png" />
-    <Content Include="Assets\logo.altform-lightunplated_targetsize-24.png" />
-    <Content Include="Assets\logo.altform-lightunplated_targetsize-256.png" />
-    <Content Include="Assets\logo.altform-lightunplated_targetsize-32.png" />
-    <Content Include="Assets\logo.altform-lightunplated_targetsize-48.png" />
-    <Content Include="Assets\logo.altform-unplated_targetsize-16.png" />
-    <Content Include="Assets\logo.altform-unplated_targetsize-24.png" />
-    <Content Include="Assets\logo.altform-unplated_targetsize-256.png" />
-    <Content Include="Assets\logo.altform-unplated_targetsize-32.png" />
-    <Content Include="Assets\logo.altform-unplated_targetsize-48.png" />
-    <Content Include="Assets\logo.scale-100.png" />
-    <Content Include="Assets\logo.scale-125.png" />
-    <Content Include="Assets\logo.scale-150.png" />
-    <Content Include="Assets\logo.scale-200.png" />
-    <Content Include="Assets\logo.scale-400.png" />
-    <Content Include="Assets\logo.targetsize-16.png" />
-    <Content Include="Assets\logo.targetsize-24.png" />
-    <Content Include="Assets\logo.targetsize-256.png" />
-    <Content Include="Assets\logo.targetsize-32.png" />
-    <Content Include="Assets\logo.targetsize-48.png" />
+    <None Include="Package.StoreAssociation.xml" />
+    <Content Include="AppTile.scale-100.png" />
+    <Content Include="AppTile.scale-125.png" />
+    <Content Include="AppTile.scale-150.png" />
+    <Content Include="AppTile.scale-200.png" />
+    <Content Include="AppTile.scale-400.png" />
+    <Content Include="Assets\AppTile.scale-100.png" />
+    <Content Include="Assets\AppTile.scale-125.png" />
+    <Content Include="Assets\AppTile.scale-150.png" />
+    <Content Include="Assets\AppTile.scale-200.png" />
+    <Content Include="Assets\AppTile.scale-400.png" />
+    <Content Include="Assets\Badge.scale-100.png" />
+    <Content Include="Assets\Badge.scale-125.png" />
+    <Content Include="Assets\Badge.scale-150.png" />
+    <Content Include="Assets\Badge.scale-200.png" />
+    <Content Include="Assets\Badge.scale-400.png" />
+    <Content Include="Assets\LargeTile.scale-100.png" />
+    <Content Include="Assets\LargeTile.scale-125.png" />
+    <Content Include="Assets\LargeTile.scale-150.png" />
+    <Content Include="Assets\LargeTile.scale-200.png" />
+    <Content Include="Assets\LargeTile.scale-400.png" />
+    <Content Include="Assets\MediumTile.scale-100.png" />
+    <Content Include="Assets\MediumTile.scale-125.png" />
+    <Content Include="Assets\MediumTile.scale-150.png" />
+    <Content Include="Assets\MediumTile.scale-200.png" />
+    <Content Include="Assets\MediumTile.scale-400.png" />
+    <Content Include="Assets\Package.scale-100.png" />
+    <Content Include="Assets\Package.scale-125.png" />
+    <Content Include="Assets\Package.scale-150.png" />
+    <Content Include="Assets\Package.scale-200.png" />
+    <Content Include="Assets\Package.scale-400.png" />
     <Content Include="Assets\SmallTile.scale-100.png" />
     <Content Include="Assets\SmallTile.scale-125.png" />
     <Content Include="Assets\SmallTile.scale-150.png" />
     <Content Include="Assets\SmallTile.scale-200.png" />
     <Content Include="Assets\SmallTile.scale-400.png" />
+    <Content Include="Assets\Splash.scale-100.png" />
+    <Content Include="Assets\Splash.scale-125.png" />
+    <Content Include="Assets\Splash.scale-150.png" />
+    <Content Include="Assets\Splash.scale-200.png" />
+    <Content Include="Assets\Splash.scale-400.png" />
+    <Content Include="Assets\WideTile.scale-100.png" />
+    <Content Include="Assets\WideTile.scale-125.png" />
+    <Content Include="Assets\WideTile.scale-150.png" />
+    <Content Include="Assets\WideTile.scale-200.png" />
+    <Content Include="Assets\WideTile.scale-400.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Strings\de-DE\Terms.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
