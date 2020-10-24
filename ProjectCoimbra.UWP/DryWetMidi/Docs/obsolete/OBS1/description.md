@@ -1,1 +1,0 @@
-[WritingSettings.CompressionPolicy](xref:Melanchall.DryWetMidi.Core.WritingSettings.CompressionPolicy) has been replaced by corresponding properties of [WritingSettings](xref:Melanchall.DryWetMidi.Core.WritingSettings). No compression applied by default, as before.
