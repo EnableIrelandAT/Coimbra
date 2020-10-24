@@ -1,0 +1,7 @@
+MainPackage=C:\src\Coimbra\ProjectCoimbra.UWP\Project.Coimbra\bin\x64\Release\Upload\Project.Coimbra_2.0.0.0_x64.msix
+SymbolPackage=C:\src\Coimbra\ProjectCoimbra.UWP\Project.Coimbra\bin\x64\Release\Upload\Project.Coimbra_2.0.0.0\Project.Coimbra_2.0.0.0_x64.appxsym
+ResourcePack=C:\src\Coimbra\ProjectCoimbra.UWP\Project.Coimbra\bin\x64\Release\Upload\Project.Coimbra_2.0.0.0_language-de.msix
+ResourcePack=C:\src\Coimbra\ProjectCoimbra.UWP\Project.Coimbra\bin\x64\Release\Upload\Project.Coimbra_2.0.0.0_scale-100.msix
+ResourcePack=C:\src\Coimbra\ProjectCoimbra.UWP\Project.Coimbra\bin\x64\Release\Upload\Project.Coimbra_2.0.0.0_scale-125.msix
+ResourcePack=C:\src\Coimbra\ProjectCoimbra.UWP\Project.Coimbra\bin\x64\Release\Upload\Project.Coimbra_2.0.0.0_scale-150.msix
+ResourcePack=C:\src\Coimbra\ProjectCoimbra.UWP\Project.Coimbra\bin\x64\Release\Upload\Project.Coimbra_2.0.0.0_scale-400.msix

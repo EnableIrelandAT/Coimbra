@@ -8,16 +8,16 @@
   IgnorableNamespaces="uap mp uap3">
 
   <Identity
-    Name="9db741c8-3c21-42fa-a4cb-51bec16f07b3"
-    Publisher="CN=Microsoft Corporation"
-    Version="1.0.0.0" />
+    Name="62155AndreasBalzer.ProjectCoimbra-InternalTest"
+    Publisher="CN=DF151369-BF2A-4390-919A-40CE0C57CC96"
+    Version="2.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="9db741c8-3c21-42fa-a4cb-51bec16f07b3" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="be0a663b-fb6e-44c1-8ac2-c6d2675762a3" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>Project Coimbra</DisplayName>
-    <PublisherDisplayName>Project Coimbra</PublisherDisplayName>
-    <Logo>Assets\logo.png</Logo>
+    <DisplayName>Project Coimbra - Internal Test</DisplayName>
+    <PublisherDisplayName>Andreas Balzer</PublisherDisplayName>
+    <Logo>Assets\Package.png</Logo>
   </Properties>
 
   <Dependencies>
@@ -34,19 +34,17 @@
       EntryPoint="ProjectCoimbra.App">
       <uap:VisualElements
         DisplayName="ms-resource:DisplayName"
-        Square150x150Logo="Assets\logo.png"
-        Square44x44Logo="Assets\logo.png"
         Description="ms-resource:Description"
-        BackgroundColor="#0099BC">
-        <uap:DefaultTile  Square310x310Logo="Assets\logo.png" Wide310x150Logo="Assets\logo-splash.png" Square71x71Logo="Assets\SmallTile.png">
+        BackgroundColor="#0099BC" Square150x150Logo="Assets\MediumTile.png"  Square44x44Logo="AppTile.png">
+        <uap:DefaultTile   Square71x71Logo="Assets\SmallTile.png" Wide310x150Logo="Assets\WideTile.png" Square310x310Logo="Assets\LargeTile.png">
           <uap:ShowNameOnTiles>
             <uap:ShowOn Tile="square150x150Logo"/>
             <uap:ShowOn Tile="square310x310Logo"/>
             <uap:ShowOn Tile="wide310x150Logo"/>
           </uap:ShowNameOnTiles>
         </uap:DefaultTile >
-        <uap:SplashScreen Image="Assets\logo-splash.png" />
-        <uap:LockScreen BadgeLogo="Assets\logo.png" Notification="badge"/>
+        <uap:LockScreen Notification="badge" BadgeLogo="Assets\Badge.png"/>
+        <uap:SplashScreen Image="Assets\Splash.png"/>
       </uap:VisualElements>
     </Application>
   </Applications>
