@@ -208,7 +208,6 @@ namespace Coimbra.Helpers
                 return;
             }
 
-
             await file.DeleteAsync();
         }
     }
