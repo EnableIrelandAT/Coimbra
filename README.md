@@ -1,31 +1,5 @@
 # Introduction 
-Project Coimbra 
-
-# Setup for development
-1. Clone https://github.com/melanchall/drywetmidi/  , and put the repo in this structure 
-<pre>
-Coimbra repo  
- |-.gitignore  
- |-README.md  
- |-...  
- |-ProjectCoimbra.UWP  
-   |-Project.Coimbra  
-   |-Project.Communication
-   |-...  
-   |-<b>drywetmidi</b>
-	 |-.gitignore  
-	 |-README.md  
-	 |-...
-	 |-<b>DryWetMidi</b>
-	   |-<b>Melanchall.DryWetMidi.csproj</b>
-</pre>
-2. Launch solution ProjectCoimbra.UWP/Project.Coimbra.sln
-3. Create your own certificate for development by  
-3.1. In Visual Studio, Solution Explorer, open Project.Coimbra (Universal Windows) / Package.appxmanifest   
-3.2. Go to <b>Packaging</b> tab, click <b>Choose Certificate...</b>, then click <b>Create...</b> to create your own certificate for development  
-4. Replace MIDI reference by  
-4.1. In Visual Studio, Solution Explorer, open Project.Coimbra (Universal Windows) / References, right click to remove current Microsoft General MIDI DLS for Universal Windows Apps reference (showing exclamination)    
-4.2. Right click on References > Add Reference..., in the left pane, select Universal Windows > Extensions, and enable <b>Microsoft General MIDI DLS for Universal Windows Apps</b>
+Project Coimbra
 
 # Usage
 The application has three game modes:
