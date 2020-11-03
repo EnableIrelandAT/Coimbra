@@ -4,6 +4,8 @@ namespace Coimbra.Pages
 {
     using Coimbra.Helpers;
     using Coimbra.Model;
+    using System;
+    using System.Collections.Generic;
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;
     using Windows.UI.Xaml.Media.Animation;
@@ -45,6 +47,35 @@ namespace Coimbra.Pages
             }
 
             this.Next.IsEnabled = false;
+        }
+
+        private async void Remove_Item(object sender, RoutedEventArgs e)
+        {
+            ContentDialog dialog = new ContentDialog
+            {
+                Title = "Remove Song from List",
+                Content = "Are you sure you want to delete this song from your list?",
+                PrimaryButtonText = "Yes",
+                CloseButtonText = "Cancel"
+            };
+
+            var result = await dialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                var item = (KeyValuePair<string, string>)((FrameworkElement)sender).DataContext;
+
+                try
+                {
+                    await SongPagesHelper.RemoveFile(item.Key);
+                }
+                catch (Exception)
+                {
+                    return;
+                }
+
+                await SongPagesHelper.FillListBoxAsync(this.SongsListBox, null, this.Next).ConfigureAwait(true);
+            }
         }
     }
 }

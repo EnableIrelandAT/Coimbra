@@ -2,14 +2,14 @@
 
 namespace Coimbra.Helpers
 {
+    using Coimbra.Communication;
+    using Coimbra.Midi;
+    using Coimbra.Model;
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
-    using Coimbra.Communication;
-    using Coimbra.Midi;
-    using Coimbra.Model;
     using Windows.Storage;
     using Windows.Storage.Pickers;
     using Windows.Storage.Search;
@@ -162,7 +162,6 @@ namespace Coimbra.Helpers
             }
 
             listBox.ItemsSource = songs;
-            listBox.DisplayMemberPath = "Value";
             listBox.SelectedValuePath = "Key";
             if (!string.IsNullOrWhiteSpace(selectedValue))
             {
@@ -184,6 +183,33 @@ namespace Coimbra.Helpers
             {
                 nextButton.IsEnabled = true;
             }
+        }
+
+        /// <summary>
+        /// Removes Item from list
+        /// </summary>
+        /// <param name="key">item key</param>
+        public static async Task RemoveFile(string key)
+        {
+            if (key == null)
+            {
+                return;
+            }
+
+            var midiFolder = await GetMidiFolderAsync(false).ConfigureAwait(true);
+            if (midiFolder == null)
+            {
+                return;
+            }
+
+            var file = await midiFolder.GetFileAsync(key.Substring(key.LastIndexOf('\\') + 1));
+            if (file == null)
+            {
+                return;
+            }
+
+
+            await file.DeleteAsync();
         }
     }
 }
