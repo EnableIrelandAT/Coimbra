@@ -5,11 +5,11 @@ Project Coimbra
 1. In root folder, run `git submodule init` to clone nested repo (DryWetMidi)
 2. Launch solution ProjectCoimbra.UWP/Project.Coimbra.sln
 3. Create your own certificate for development by  
-    3.1. In Visual Studio, Solution Explorer, open Project.Coimbra (Universal Windows) / Package.appxmanifest   
-    3.2. Go to **Packaging** tab, click **Choose Certificate...**, then click **Create...** to create your own certificate for development  
+    1. In Visual Studio, Solution Explorer, open Project.Coimbra (Universal Windows) / Package.appxmanifest   
+    2. Go to **Packaging** tab, click **Choose Certificate...**, then click **Create...** to create your own certificate for development  
 4. Replace MIDI reference by  
-    4.1. In Visual Studio, Solution Explorer, open Project.Coimbra (Universal Windows) / References, right click to remove current Microsoft General MIDI DLS for Universal Windows Apps reference (showing exclamation)    
-    4.2. Right click on References > Add Reference..., in the left pane, select Universal Windows > Extensions, and enable **Microsoft General MIDI DLS for Universal Windows Apps***
+    1. In Visual Studio, Solution Explorer, open Project.Coimbra (Universal Windows) / References, right click to remove current Microsoft General MIDI DLS for Universal Windows Apps reference (showing exclamation)    
+    2. Right click on References > Add Reference..., in the left pane, select Universal Windows > Extensions, and enable **Microsoft General MIDI DLS for Universal Windows Apps**
 
 # Usage
 The application has three game modes:
