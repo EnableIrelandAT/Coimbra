@@ -13,6 +13,11 @@ Coimbra repo
    |-Project.Communication
    |-...  
    |-<b>drywetmidi</b>
+	 |-.gitignore  
+	 |-README.md  
+	 |-...
+	 |-<b>DryWetMidi</b>
+	   |-<b>Melanchall.DryWetMidi.csproj</b>
 </pre>
 2. Launch solution ProjectCoimbra.UWP/Project.Coimbra.sln
 3. Create your own certificate for development by  
