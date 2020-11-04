@@ -4,6 +4,7 @@ namespace Coimbra.Pages
 {
     using Coimbra.Helpers;
     using Coimbra.Model;
+    using Windows.ApplicationModel.DataTransfer;
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;
     using Windows.UI.Xaml.Media.Animation;
@@ -29,6 +30,20 @@ namespace Coimbra.Pages
             {
                 await SongPagesHelper.FillListBoxAsync(this.SongsListBox, songFilePath, this.Next).ConfigureAwait(true);
             }
+        }
+
+        private async void File_Drop(object sender, DragEventArgs e)
+        {
+            var songFilePath = await SongPagesHelper.UploadSongDropAsync(e).ConfigureAwait(true);
+            if (songFilePath != null)
+            {
+                await SongPagesHelper.FillListBoxAsync(this.SongsListBox, songFilePath, this.Next).ConfigureAwait(true);
+            }
+        }
+
+        private void File_DragOver(object sender, DragEventArgs e)
+        {
+            e.AcceptedOperation = DataPackageOperation.Copy;
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e) =>

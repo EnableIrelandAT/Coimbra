@@ -27,7 +27,7 @@ Licensed under the MIT License.
 
         <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
             <StackPanel HorizontalAlignment="Center">
-                <ListBox x:Name="SongsListBox" Width="500" Height="250" FontSize="20" />
+                <ListBox x:Name="SongsListBox" AllowDrop="true" DragOver="File_DragOver" Drop="File_Drop" Width="500" Height="250" FontSize="20" />
                 <Button Content="Add a song..." Click="FilePicker_Click" x:Uid="SongPage.SelectFile" Width="500" Margin="0,50,0,0" FontSize="20" />
             </StackPanel>
         </StackPanel>
