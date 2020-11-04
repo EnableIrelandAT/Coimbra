@@ -2,14 +2,14 @@
 
 namespace Coimbra.Helpers
 {
-    using Coimbra.Communication;
-    using Coimbra.Midi;
-    using Coimbra.Model;
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
+    using Coimbra.Communication;
+    using Coimbra.Midi;
+    using Coimbra.Model;
     using Windows.Storage;
     using Windows.Storage.Pickers;
     using Windows.Storage.Search;
@@ -191,21 +191,21 @@ namespace Coimbra.Helpers
         /// <param name="key">item key</param>
         public static async Task RemoveFile(string key)
         {
-            if (key == null)
+            if (string.IsNullOrWhiteSpace(key))
             {
-                return;
+                throw new ArgumentNullException(nameof(key));
             }
 
             var midiFolder = await GetMidiFolderAsync(false).ConfigureAwait(true);
             if (midiFolder == null)
             {
-                return;
+                throw new ArgumentNullException(nameof(midiFolder));
             }
 
             var file = await midiFolder.GetFileAsync(key.Substring(key.LastIndexOf('\\') + 1));
             if (file == null)
             {
-                return;
+                throw new ArgumentNullException(nameof(file));
             }
 
             await file.DeleteAsync();

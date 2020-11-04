@@ -2,10 +2,11 @@
 
 namespace Coimbra.Pages
 {
-    using Coimbra.Helpers;
-    using Coimbra.Model;
     using System;
     using System.Collections.Generic;
+    using Coimbra.Helpers;
+    using Coimbra.Model;
+    using Windows.ApplicationModel.Resources;
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;
     using Windows.UI.Xaml.Media.Animation;
@@ -26,6 +27,7 @@ namespace Coimbra.Pages
 
         private async void FilePicker_Click(object sender, RoutedEventArgs e)
         {
+            this.ErrorBox.Text = string.Empty;
             var songFilePath = await SongPagesHelper.UploadSongAsync().ConfigureAwait(true);
             if (songFilePath != null)
             {
@@ -38,6 +40,7 @@ namespace Coimbra.Pages
 
         private async void NextButton_Click(object sender, RoutedEventArgs e)
         {
+            this.ErrorBox.Text = string.Empty;
             var selectedValue = this.SongsListBox.SelectedValue;
             if (selectedValue != null)
             {
@@ -51,12 +54,15 @@ namespace Coimbra.Pages
 
         private async void Remove_Item(object sender, RoutedEventArgs e)
         {
+            var res = ResourceLoader.GetForCurrentView();
+            this.ErrorBox.Text = string.Empty;
+
             ContentDialog dialog = new ContentDialog
             {
-                Title = "Remove Song from List",
-                Content = "Are you sure you want to delete this song from your list?",
-                PrimaryButtonText = "Yes",
-                CloseButtonText = "Cancel"
+                Title = res.GetString("SongPage/DeleteDialog/Title"),
+                Content = res.GetString("SongPage/DeleteDialog/Content"),
+                PrimaryButtonText = res.GetString("SongPage/DeleteDialog/Confirm"),
+                CloseButtonText = res.GetString("SongPage/DeleteDialog/Cancel"),
             };
 
             var result = await dialog.ShowAsync();
@@ -67,10 +73,11 @@ namespace Coimbra.Pages
 
                 try
                 {
-                    await SongPagesHelper.RemoveFile(item.Key);
+                    await SongPagesHelper.RemoveFile(null);
                 }
-                catch (Exception)
+                catch (ArgumentNullException)
                 {
+                    this.ErrorBox.Text = res.GetString("SongPage/DeleteSong/Error");
                     return;
                 }
 

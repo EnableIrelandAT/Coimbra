@@ -29,7 +29,7 @@ Licensed under the MIT License.
 
         <StackPanel Grid.Row="2" Orientation="Vertical">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <CheckBox Name="AcceptCheck" Click="AcceptCheck_Click" Content="I accept these terms" x:Uid="TermsPage.AcceptCheck" VerticalAlignment="Center"   Margin="10"/>
+                <CheckBox Name="AcceptCheck" Click="AcceptCheck_Click" Content="I accept these terms" x:Uid="TermsPage.AcceptCheck" VerticalAlignment="Center" Margin="10"/>
                 <TextBlock Name="NeedAcceptError" Text="You need to accept the terms to continue." x:Uid="TermsPage.NeedAcceptError" Foreground="Red" VerticalAlignment="Center" Margin="20, -2, 0, 0" />
             </StackPanel>
             <Button Content="Next" Name="NextButton" x:Uid="TermsPage.NextButton" VerticalAlignment="Bottom" Margin="10"

@@ -27,6 +27,8 @@ Licensed under the MIT License.
 
         <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
             <StackPanel HorizontalAlignment="Center">
+                <TextBlock Margin="0,0,0,10" Name="ErrorBox" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Red"
+                       Text="{Binding OriginalText, UpdateSourceTrigger=Default}" Width="Auto" Height="Auto" />
                 <ListBox x:Name="SongsListBox" Width="500" Height="250" FontSize="20">
                     <ListBox.ItemTemplate>
                         <DataTemplate>

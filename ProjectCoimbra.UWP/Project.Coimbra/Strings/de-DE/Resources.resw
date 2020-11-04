@@ -329,4 +329,27 @@
   <data name="LaneSetupControl.KeysSelected" xml:space="preserve">
     <value>Keys {0} selected.</value>
   </data>
+  <data name="SongPage.DeleteDialog.Cancel" xml:space="preserve">
+    <value>Cancel</value>
+    <comment>The cancel button text of the confirmation dialog when deleting a song off of your list</comment>
+  </data>
+  <data name="SongPage.DeleteDialog.Confirm" xml:space="preserve">
+    <value>Yes</value>
+    <comment>The confirm button text of the confirmation dialog when deleting a song off of your list</comment>
+  </data>
+  <data name="SongPage.DeleteDialog.Content" xml:space="preserve">
+    <value>Are you sure you want to delete this song from your list?</value>
+    <comment>The content text of the confirmation dialog when deleting a song off of your list</comment>
+  </data>
+  <data name="SongPage.DeleteDialog.Title" xml:space="preserve">
+    <value>Remove Song from List</value>
+    <comment>The title text of the confirmation dialog when deleting a song off of your list</comment>
+  </data>
+  <data name="SongPage.DeleteSong.Error" xml:space="preserve">
+    <value>An Error Occurred While Deleting the Song</value>
+    <comment>Error message when deleting a song from the song list</comment>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
 </root>
