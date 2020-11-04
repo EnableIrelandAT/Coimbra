@@ -19,7 +19,6 @@ namespace Coimbra.Pages
         public OptionsPage() =>
             this.InitializeComponent();
 
-
         private void AddOptionChangeFlag()
         {
             UserData.IsOptionChangeMode = true;

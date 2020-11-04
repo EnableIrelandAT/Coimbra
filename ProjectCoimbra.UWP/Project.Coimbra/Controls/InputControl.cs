@@ -118,14 +118,11 @@ namespace Coimbra.Controls
         /// <summary>
         /// Sets the song title.
         /// </summary>
-        public async void SetTimeToNextNote(string value)
-        {
-            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+        public async void SetTimeToNextNote(string value) => await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                 () =>
                 {
                     this.SetValue(TimeToNextNoteProperty, value);
                 });
-        }
 
         /// <summary>
         /// Gets or sets the name of the pitch rows.

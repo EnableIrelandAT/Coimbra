@@ -33,7 +33,6 @@ Licensed under the MIT License.
                 <Button x:Name="btnChangeSong" Content="Select a different song" x:Uid="OptionsPage.ChangeSongButton" HorizontalAlignment="Center" VerticalAlignment="Top" Click="BtnChangeSong_Click" Margin="0,50,0,0" Width="500" FontSize="20" />
                 <Button x:Name="btnChangeLaneSettings" Content="Change the control options" x:Uid="OptionsPage.ChangeLaneSettingsButton" HorizontalAlignment="Center" VerticalAlignment="Top" Click="BtnChangeLaneSettings_Click" Margin="0,50,0,0" Width="500" FontSize="20" />
                 <Button x:Name="btnChangeMode" Content="Select a different gig mode" x:Uid="OptionsPage.ChangeModeButton" HorizontalAlignment="Center" VerticalAlignment="Top" Click="BtnChangeMode_Click" Margin="0,50,0,0" Width="500" FontSize="20" />
-
             </StackPanel>
         </StackPanel>
     </Grid>

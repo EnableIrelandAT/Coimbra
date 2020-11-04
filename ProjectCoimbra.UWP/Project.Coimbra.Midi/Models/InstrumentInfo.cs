@@ -4,6 +4,7 @@ namespace Coimbra.Midi.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using System.Text.RegularExpressions;
     using Melanchall.DryWetMidi.Common;
@@ -30,12 +31,12 @@ namespace Coimbra.Midi.Models
         /// <summary>
         /// A string that contains the name and the note count of the instrument
         /// </summary>
-        public string NameAndNoteCount => string.Format("{0} - {1} notes", string.Join(
+        public string NameAndNoteCount => string.Format(CultureInfo.CurrentUICulture, "{0} - {1} notes", string.Join(
                 ", ",
                 ProgramNumbers.Select(d =>
                     RegularExpression.Replace(
                         Enum.GetName(typeof(GeneralMidi2Program), (int)d) ?? throw new InvalidOperationException(),
-                        " $1"))), NoteCount.ToString());
+                        " $1"))), string.Format(CultureInfo.CurrentUICulture, "{0:#,0}", NoteCount));
 
         /// <summary>
         /// Channel of the instrument

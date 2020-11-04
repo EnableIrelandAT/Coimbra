@@ -34,9 +34,9 @@ namespace Coimbra.Pages
         private readonly TimeSpan noteDuration = TimeSpan.FromSeconds(5);
 
         private List<long> noteTimes;
-        private int lastPlayedNoteTimeIndex = 0;
-        private int dotCounter = 0;
-        private long previousTimeToNote = 0;
+        private int lastPlayedNoteTimeIndex;
+        private int dotCounter;
+        private long previousTimeToNote;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GamePage"/> class.
@@ -58,10 +58,6 @@ namespace Coimbra.Pages
 
             this.midiEngine.Initialize();
             noteTimes = this.midiEngine.RetrieveNoteTimesForInstrument(this.midiEngine.SelectedTrack);
-
-            this.lastPlayedNoteTimeIndex = 0;
-            this.dotCounter = 0;
-            this.previousTimeToNote = 0;
 
             if (UserData.GameMode == UserData.Mode.Offline || UserData.GameMode == UserData.Mode.Online)
             {
@@ -111,7 +107,6 @@ namespace Coimbra.Pages
             }
 
             TimeSpan lastNoteOffScreenTime = default(TimeSpan);
-
             if (lastNoteOnScreen != null && lastNoteOnScreen.Time.TotalMilliseconds > 0)
             {
                 lastNoteOffScreenTime = lastNoteOnScreen.Time + noteDuration;
@@ -126,9 +121,9 @@ namespace Coimbra.Pages
             long timeToNextNote = nextNoteTime - (long)currentTime.TotalMilliseconds;
 
             long timeToNextNoteAfterLastNote = timeToNextNote -
-                // Substract note duration because it will show up earlier
+                // Subtract note duration because it will show up earlier
                 (long)noteDuration.TotalMilliseconds +
-                // Substract currentTime to get the difference
+                // Subtract currentTime to get the difference
                 (long)currentTime.TotalMilliseconds;
 
             // No point of showing this if the next note is less than 3 second away

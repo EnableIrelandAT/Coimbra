@@ -246,11 +246,6 @@
     </SDKReference>
   </ItemGroup>
   <ItemGroup>
-    <PRIResource Include="Strings\de-DE\Resources.resw">
-      <SubType>Designer</SubType>
-    </PRIResource>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\DryWetMidi\DryWetMidi\Melanchall.DryWetMidi.csproj">
       <Project>{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}</Project>
       <Name>Melanchall.DryWetMidi</Name>

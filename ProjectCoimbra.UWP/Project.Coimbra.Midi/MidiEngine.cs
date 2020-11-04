@@ -142,16 +142,10 @@ namespace Coimbra.Midi
             var midiMap = this.midi.GetTempoMap();
             return this.midi.GetNotes()
                 .Where(note => note.Channel == instrument)
-                .Select(note =>
-                {
-                    var ms = ((MetricTimeSpan)note.TimeAs(TimeSpanType.Metric, midiMap)).TotalMicroseconds / 1000;
-                    return ms;
-                })
+                .Select(note => ((MetricTimeSpan)note.TimeAs(TimeSpanType.Metric, midiMap)).TotalMicroseconds / 1000)
                 .Distinct()
                 .ToList();
         }
-
-
 
         /// <summary>
         /// Gets how many notes are there for each instrument.
@@ -202,6 +196,7 @@ namespace Coimbra.Midi
             this.startThread = new Task(() => this.playback.Start(), this.startThreadCancellationToken.Token);
 
             this.startTimer = new Timer(_ => this.startThread.Start(), null, TimeSpan.Zero, TimeSpan.Zero);
+            this.isStopped = false;
         }
 
         /// <summary>
@@ -385,6 +380,7 @@ namespace Coimbra.Midi
                 this.startThreadCancellationToken.Cancel();
                 this.playback?.Dispose();
                 this.outputDevice?.Dispose();
+                this.isStopped = true;
 
                 PlaybackFinished?.Invoke(this, null);
             });
