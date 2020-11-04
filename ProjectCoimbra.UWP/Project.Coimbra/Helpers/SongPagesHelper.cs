@@ -2,14 +2,14 @@
 
 namespace Coimbra.Helpers
 {
-    using Coimbra.Communication;
-    using Coimbra.Midi;
-    using Coimbra.Model;
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
+    using Coimbra.Communication;
+    using Coimbra.Midi;
+    using Coimbra.Model;
     using Windows.ApplicationModel.DataTransfer;
     using Windows.Storage;
     using Windows.Storage.Pickers;
@@ -115,6 +115,36 @@ namespace Coimbra.Helpers
                 return null;
             }
 
+            return await SaveFile(file);
+        }
+
+        /// <summary>
+        /// Upload Song by Dropping File Async
+        /// </summary>
+        /// <param name="e">Drag Event</param>
+        /// <returns>Uploaded File path</returns>
+        public static async Task<string> UploadSongDropAsync(DragEventArgs e)
+        {
+            if (e.DataView.Contains(StandardDataFormats.StorageItems))
+            {
+                var items = await e.DataView.GetStorageItemsAsync();
+                if (items.Count > 0)
+                {
+                    var file = items[0] as StorageFile;
+                    return await SaveFile(file);
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Save file in Midi Folder
+        /// </summary>
+        /// <param name="file">File to save</param>
+        /// <returns>Saved File path</returns>
+        private static async Task<string> SaveFile(StorageFile file)
+        {
             var midiFolder = await GetMidiFolderAsync(true).ConfigureAwait(true);
             var destinationFile =
                 await midiFolder.CreateFileAsync(file.Name, CreationCollisionOption.GenerateUniqueName);
@@ -131,45 +161,7 @@ namespace Coimbra.Helpers
                     }
                 }
             }
-
             return destinationFile.Path;
-        }
-
-        /// <summary>
-        /// Upload Drop Async
-        /// </summary>
-        /// <param name="e"></param>
-        /// <returns></returns>
-        public static async Task<string> UploadSongDropAsync(DragEventArgs e)
-        {
-            if (e.DataView.Contains(StandardDataFormats.StorageItems))
-            {
-                var items = await e.DataView.GetStorageItemsAsync();
-                if (items.Count > 0)
-                {
-                    var file = items[0] as StorageFile;
-                    var midiFolder = await GetMidiFolderAsync(true).ConfigureAwait(true);
-                    var destinationFile =
-                    await midiFolder.CreateFileAsync(file.Name, CreationCollisionOption.GenerateUniqueName);
-                    using (var readFile = await file.OpenReadAsync())
-                    {
-                        using (var readFileStream = readFile.GetInputStreamAt(0))
-                        {
-                            using (var writeFile = await destinationFile.OpenAsync(FileAccessMode.ReadWrite))
-                            {
-                                using (var writeFileStream = writeFile.GetOutputStreamAt(0))
-                                {
-                                    _ = await RandomAccessStream.CopyAndCloseAsync(readFileStream, writeFileStream);
-                                }
-                            }
-                        }
-                    }
-
-                    return destinationFile.Path;
-                }
-            }
-
-            return null;
         }
 
         /// <summary>
