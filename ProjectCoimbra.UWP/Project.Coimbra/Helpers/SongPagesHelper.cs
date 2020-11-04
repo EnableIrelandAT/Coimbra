@@ -115,7 +115,7 @@ namespace Coimbra.Helpers
                 return null;
             }
 
-            return await SaveFile(file);
+            return await SaveFileAsync(file).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -131,7 +131,10 @@ namespace Coimbra.Helpers
                 if (items.Count > 0)
                 {
                     var file = items[0] as StorageFile;
-                    return await SaveFile(file);
+                    if (string.Equals(Path.GetExtension(file.Path), ".mid", StringComparison.Ordinal) || string.Equals(Path.GetExtension(file.Path), ".midi", StringComparison.Ordinal))
+                    {
+                        return await SaveFileAsync(file).ConfigureAwait(false);
+                    }
                 }
             }
 
@@ -143,7 +146,7 @@ namespace Coimbra.Helpers
         /// </summary>
         /// <param name="file">File to save</param>
         /// <returns>Saved File path</returns>
-        private static async Task<string> SaveFile(StorageFile file)
+        private static async Task<string> SaveFileAsync(StorageFile file)
         {
             var midiFolder = await GetMidiFolderAsync(true).ConfigureAwait(true);
             var destinationFile =
