@@ -214,5 +214,37 @@ namespace Coimbra.Pages
                 }
             }
         }
+
+        /// Only pause the playback for SOLO mode
+        private async void Pause_Click(object sender, RoutedEventArgs e)
+        {
+            if (UserData.GameMode == UserData.Mode.Solo)
+            {
+                midiEngine.Pause();
+            }
+            ContentDialog dialog = new ContentDialog
+            {
+                Title = "Game paused",
+                Content = "Do you want to continue the game?",
+                PrimaryButtonText = "Continue",
+                CloseButtonText = "Exit to Game Mode",
+                DefaultButton = ContentDialogButton.Primary
+            };
+
+            var result = await dialog.ShowAsync();
+            
+            if (result != ContentDialogResult.Primary)
+            {
+                midiEngine.Dispose();
+                this.Frame.Navigate(typeof(ModePage), null, new DrillInNavigationTransitionInfo());
+            }
+            else
+            {
+                if (UserData.GameMode == UserData.Mode.Solo)
+                {
+                    midiEngine.UnPause();
+                }
+            }
+        }
     }
 }
