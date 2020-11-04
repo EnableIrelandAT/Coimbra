@@ -21,7 +21,7 @@
         <StackPanel Grid.Column="1" Grid.Row="0">
             <TextBlock x:Uid="LoginPage.SignIntoAccount" Text="COIMBRA" 
                        Foreground="LightBlue" Style="{StaticResource HeaderTextBlockStyle}" HorizontalAlignment="Center" Padding="0,65,0,0" FontSize="70"/>
-            <TextBlock x:Uid="LoginPage.SignIntoAccount" Text="Create Account!" 
+            <TextBlock x:Uid="LoginPage.SignIntoAccount" Text="Create Account" 
                        Foreground="LightGray" Style="{StaticResource HeaderTextBlockStyle}" HorizontalAlignment="Center" FontSize="40"/>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Padding="0,0,0,50">
