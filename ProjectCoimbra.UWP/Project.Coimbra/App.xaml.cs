@@ -4,9 +4,9 @@ namespace Coimbra
 {
     using System;
     using System.Globalization;
-    using System.Threading.Tasks;
     using Coimbra.Communication;
     using Coimbra.Pages;
+    using DataAccessLibrary;
     using Microsoft.Toolkit.Uwp.Input.GazeInteraction;
     using Windows.ApplicationModel;
     using Windows.ApplicationModel.Activation;
@@ -28,6 +28,8 @@ namespace Coimbra
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
             NetworkListener.StartListener();
+
+            DataAccess.InitializeDatabase();
         }
 
         /// <summary>
@@ -54,7 +56,9 @@ namespace Coimbra
                 Window.Current.Content = rootFrame;
             }
 
-            _ = rootFrame.Navigate(typeof(TermsPage), args.Arguments);
+            // Navigate to the login page once application has started
+            _ = rootFrame.Navigate(typeof(LoginPage), args.Arguments);
+
             Window.Current.Activate();
             GazeInput.Interaction = Interaction.Enabled;
         }
