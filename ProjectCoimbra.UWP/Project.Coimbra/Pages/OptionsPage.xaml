@@ -1,0 +1,40 @@
+<!--
+Licensed under the MIT License.
+-->
+<Page
+    x:Class="Coimbra.Pages.OptionsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="#F5F5F5">
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+
+		<StackPanel Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0">
+			<TextBlock HorizontalAlignment="Center" Style="{StaticResource HeaderTextBlockStyle}" Padding="0,50,0,50" Text="Well done! What would you like to do next?" x:Uid="OptionsPage.Gig" />
+		</StackPanel>
+
+		<StackPanel Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0">
+			<StackPanel HorizontalAlignment="Center">
+				<Button x:Name="btnPlayAgain" Content="Play again" x:Uid="OptionsPage.PlayAgainButton" HorizontalAlignment="Center" VerticalAlignment="Top" Click="BtnPlayAgain_Click" Margin="0,50,0,0" Width="500" FontSize="20" />
+				<Button x:Name="btnChangeNoteDuration" Content="Change the note duration" x:Uid="OptionsPage.ChangeNoteDurationButton" HorizontalAlignment="Center" VerticalAlignment="Top" Click="BtnChangeNoteDuration_Click" Margin="0,50,0,0" Width="500" FontSize="20" />
+				<Button x:Name="btnChangeInstrument" Content="Select a different instrument" x:Uid="OptionsPage.ChangeInstrumentButton" HorizontalAlignment="Center" VerticalAlignment="Top" Click="BtnChangeInstrument_Click" Margin="0,50,0,0" Width="500" FontSize="20" />
+				<Button x:Name="btnChangeSong" Content="Select a different song" x:Uid="OptionsPage.ChangeSongButton" HorizontalAlignment="Center" VerticalAlignment="Top" Click="BtnChangeSong_Click" Margin="0,50,0,0" Width="500" FontSize="20" />
+				<Button x:Name="btnChangeLaneSettings" Content="Change the control options" x:Uid="OptionsPage.ChangeLaneSettingsButton" HorizontalAlignment="Center" VerticalAlignment="Top" Click="BtnChangeLaneSettings_Click" Margin="0,50,0,0" Width="500" FontSize="20" />
+				<Button x:Name="btnChangeMode" Content="Select a different gig mode" x:Uid="OptionsPage.ChangeModeButton" HorizontalAlignment="Center" VerticalAlignment="Top" Click="BtnChangeMode_Click" Margin="0,50,0,0" Width="500" FontSize="20" />
+
+			</StackPanel>
+		</StackPanel>
+	</Grid>
+</Page>

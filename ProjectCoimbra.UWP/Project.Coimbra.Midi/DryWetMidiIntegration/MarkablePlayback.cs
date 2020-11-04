@@ -138,6 +138,11 @@ namespace Coimbra.DryWetMidiIntegration
         public bool IsRunning => this.clock.IsRunning;
 
         /// <summary>
+        /// Gets the current playback time.
+        /// </summary>
+        public TimeSpan CurrentTime => this.clock.CurrentTime;
+
+        /// <summary>
         /// Gets or sets a value indicating whether currently playing notes must be stopped on playback stop or not.
         /// </summary>
         public bool InterruptNotesOnStop { get; set; }
