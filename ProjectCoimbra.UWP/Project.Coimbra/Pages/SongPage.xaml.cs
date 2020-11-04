@@ -31,7 +31,7 @@ namespace Coimbra.Pages
             var songFilePath = await SongPagesHelper.UploadSongAsync().ConfigureAwait(true);
             if (songFilePath != null)
             {
-                await SongPagesHelper.FillListBoxAsync(this.SongsListBox, songFilePath, this.Next).ConfigureAwait(true);
+                await SongPagesHelper.FillListBoxAsync(this.SongsListBox, songFilePath, this.Next).ConfigureAwait(false);
             }
         }
 
@@ -71,17 +71,14 @@ namespace Coimbra.Pages
             {
                 var item = (KeyValuePair<string, string>)((FrameworkElement)sender).DataContext;
 
-                try
-                {
-                    await SongPagesHelper.RemoveFile(null);
-                }
-                catch (ArgumentNullException)
+                bool fileRemoved = await SongPagesHelper.RemoveFileAsync(item.Key).ConfigureAwait(true);
+                if (!fileRemoved)
                 {
                     this.ErrorBox.Text = res.GetString("SongPage/DeleteSong/Error");
                     return;
                 }
 
-                await SongPagesHelper.FillListBoxAsync(this.SongsListBox, null, this.Next).ConfigureAwait(true);
+                await SongPagesHelper.FillListBoxAsync(this.SongsListBox, null, this.Next).ConfigureAwait(false);
             }
         }
     }

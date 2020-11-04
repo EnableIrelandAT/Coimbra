@@ -41,7 +41,7 @@ Licensed under the MIT License.
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Text="{Binding Value}" />
-                                <Button Grid.Column="4"  Click="Remove_Item" >
+                                <Button Grid.Column="4" Click="Remove_Item" >
                                     <SymbolIcon Symbol="Cancel" />
                                 </Button>
                                 <TextBlock Grid.Column="2" />

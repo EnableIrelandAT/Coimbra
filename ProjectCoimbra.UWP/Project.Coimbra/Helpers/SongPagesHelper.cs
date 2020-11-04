@@ -189,26 +189,27 @@ namespace Coimbra.Helpers
         /// Removes Item from list
         /// </summary>
         /// <param name="key">item key</param>
-        public static async Task RemoveFile(string key)
+        public static async Task<bool> RemoveFileAsync(string key)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
-                throw new ArgumentNullException(nameof(key));
+                return false;
             }
 
-            var midiFolder = await GetMidiFolderAsync(false).ConfigureAwait(true);
+            var midiFolder = await GetMidiFolderAsync(false).ConfigureAwait(false);
             if (midiFolder == null)
             {
-                throw new ArgumentNullException(nameof(midiFolder));
+                return false;
             }
 
             var file = await midiFolder.GetFileAsync(key.Substring(key.LastIndexOf('\\') + 1));
             if (file == null)
             {
-                throw new ArgumentNullException(nameof(file));
+                return false;
             }
 
             await file.DeleteAsync();
+            return true;
         }
     }
 }

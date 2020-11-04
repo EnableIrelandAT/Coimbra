@@ -346,7 +346,7 @@
     <comment>The title text of the confirmation dialog when deleting a song off of your list</comment>
   </data>
   <data name="SongPage.DeleteSong.Error" xml:space="preserve">
-    <value>An Error Occurred While Deleting the Song</value>
+    <value>An error occurred while deleting the song</value>
     <comment>Error message when deleting a song from the song list</comment>
   </data>
 </root>
