@@ -10,38 +10,38 @@ Licensed under the MIT License.
     mc:Ignorable="d"
     Background="#F5F5F5">
 
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="*" />
-			<RowDefinition Height="Auto" />
-		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="*" />
-		</Grid.ColumnDefinitions>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-		<StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
-			<TextBlock HorizontalAlignment="Center" Style="{StaticResource HeaderTextBlockStyle}" Padding="0,50,0,50" Text="Choose your instrument" x:Uid="InstrumentsPage.SelectInstrument" />
-		</StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <TextBlock HorizontalAlignment="Center" Style="{StaticResource HeaderTextBlockStyle}" Padding="0,50,0,50" Text="Choose your instrument" x:Uid="InstrumentsPage.SelectInstrument" />
+        </StackPanel>
 
-		<StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-			<ListBox x:Name="InstrumentsBox" HorizontalAlignment="Center" Width="500" Height="250" FontSize="20">
-				<ListBox.ItemTemplate>
-					<DataTemplate>
-						<TextBlock Text="{Binding NameAndNoteCount}" />
-					</DataTemplate>
-				</ListBox.ItemTemplate>
-			</ListBox>
-			<Button x:Name="btnInstrumentSelected" HorizontalAlignment="Center" Content="Next" Width="500" Click="BtnInstrumentSelected_OnClick" x:Uid="InstrumentsPage.NextButton.Content" FontSize="20"  />
-			<TextBlock x:Name="lblOtherPlayersText" HorizontalAlignment="Center" Padding="0,50,0,0" Width="500" Text="Other Players" x:Uid="InstrumentsPage.OtherPlayers.Text" FontSize="22" />
-			<TextBlock x:Name="lblOtherPlayerNames" HorizontalAlignment="Center" Text="" Width="500" TextAlignment="Center"/>
-			<TextBlock x:Name="lblOtherPlayers" HorizontalAlignment="Center" Padding="0,50,0,0" Width="500" Text="Waiting for other players to choose their instruments..." x:Uid="InstrumentsPage.WaitingForOtherPlayers.Text" FontSize="20" />
-		</StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+            <ListBox x:Name="InstrumentsBox" HorizontalAlignment="Center" Width="500" Height="250" FontSize="20">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding NameAndNoteCount}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Button x:Name="btnInstrumentSelected" HorizontalAlignment="Center" Content="Next" Width="500" Click="BtnInstrumentSelected_OnClick" x:Uid="InstrumentsPage.NextButton.Content" FontSize="20"  />
+            <TextBlock x:Name="lblOtherPlayersText" HorizontalAlignment="Center" Padding="0,50,0,0" Width="500" Text="Other Players" x:Uid="InstrumentsPage.OtherPlayers.Text" FontSize="22" />
+            <TextBlock x:Name="lblOtherPlayerNames" HorizontalAlignment="Center" Text="" Width="500" TextAlignment="Center"/>
+            <TextBlock x:Name="lblOtherPlayers" HorizontalAlignment="Center" Padding="0,50,0,0" Width="500" Text="Waiting for other players to choose their instruments..." x:Uid="InstrumentsPage.WaitingForOtherPlayers.Text" FontSize="20" />
+        </StackPanel>
 
-		<Button x:Name="BackButton" x:Uid="InstrumentsPage.BackButton" Content="Back" VerticalAlignment="Bottom" Margin="10" Grid.Row="2" Grid.Column="0"
+        <Button x:Name="BackButton" x:Uid="InstrumentsPage.BackButton" Content="Back" VerticalAlignment="Bottom" Margin="10" Grid.Row="2" Grid.Column="0"
                 HorizontalAlignment="Stretch" Click="BackButton_Click" FontSize="20" />
-		<Button x:Name="NextButton" x:Uid="InstrumentsPage.NextButton" Content="Next" VerticalAlignment="Bottom" Margin="10" Grid.Row="2" Grid.Column="1"
+        <Button x:Name="NextButton" x:Uid="InstrumentsPage.NextButton" Content="Next" VerticalAlignment="Bottom" Margin="10" Grid.Row="2" Grid.Column="1"
                 HorizontalAlignment="Stretch" Click="NextButton_Click" FontSize="20" />
-	</Grid>
+    </Grid>
 </Page>

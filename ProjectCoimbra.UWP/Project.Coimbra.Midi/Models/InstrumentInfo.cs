@@ -2,17 +2,17 @@
 
 namespace Coimbra.Midi.Models
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Text.RegularExpressions;
-	using Melanchall.DryWetMidi.Common;
-	using Melanchall.DryWetMidi.Standards;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text.RegularExpressions;
+    using Melanchall.DryWetMidi.Common;
+    using Melanchall.DryWetMidi.Standards;
 
-	/// <summary>
-	/// A class representing an instrument.
-	/// </summary>
-	public class InstrumentInfo
+    /// <summary>
+    /// A class representing an instrument.
+    /// </summary>
+    public class InstrumentInfo
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="InstrumentInfo"/> class.
