@@ -10,6 +10,7 @@ namespace Coimbra.Midi
 	using System.Threading;
 	using System.Threading.Tasks;
 	using Coimbra.DryWetMidiIntegration;
+	using Coimbra.Midi.Models;
 	using Coimbra.OSIntegration;
 	using Melanchall.DryWetMidi.Common;
 	using Melanchall.DryWetMidi.Core;
@@ -116,8 +117,8 @@ namespace Coimbra.Midi
 		/// <summary>
 		/// Gets the set of instruments associated with the MIDI file.
 		/// </summary>
-		public IDictionary<FourBitNumber, ICollection<SevenBitNumber>> Instruments { get; } =
-			new Dictionary<FourBitNumber, ICollection<SevenBitNumber>>();
+		public IDictionary<FourBitNumber, InstrumentInfo> Instruments { get; } =
+			new Dictionary<FourBitNumber, InstrumentInfo>();
 
 		/// <summary>
 		/// Gets the set of pitches associated with the selected instrument.
@@ -131,35 +132,40 @@ namespace Coimbra.Midi
 				.Distinct()
 				.ToList();
 
-		///// <summary>
-		///// Gets the play times of notes associated with the selected instrument.
-		///// </summary>
-		///// <param name="instrument">Instrument to retrieve note times for.</param>
-		///// <returns>Note times for instrument.</returns>
-		//public List<long> RetrieveNoteTimesForInstrument(FourBitNumber instrument) =>
-		//	this.midi.GetNotes()
-		//		.Where(note => note.Channel == instrument)
-		//		.Select(note => note.Time)
-		//		.Distinct()
-		//		.OrderBy(noteTime => noteTime)
-		//		.ToList();	
-
 		/// <summary>
 		/// Gets the play times of notes associated with the selected instrument.
 		/// </summary>
 		/// <param name="instrument">Instrument to retrieve note times for.</param>
 		/// <returns>Note times for instrument.</returns>
-		public List<long> RetrieveNoteTimesForInstrument(FourBitNumber instrument) =>
-			this.midi.GetNotes()
+		public List<long> RetrieveNoteTimesForInstrument(FourBitNumber instrument)
+		{
+			var midiMap = this.midi.GetTempoMap();
+			return this.midi.GetNotes()
 				.Where(note => note.Channel == instrument)
 				.Select(note =>
 				{
-					var ms = ((MetricTimeSpan)note.TimeAs(TimeSpanType.Metric, this.midi.GetTempoMap())).TotalMicroseconds / 1000;
+					var ms = ((MetricTimeSpan)note.TimeAs(TimeSpanType.Metric, midiMap)).TotalMicroseconds / 1000;
 					return ms;
 				})
 				.Distinct()
-				.OrderBy(noteTime => noteTime)
 				.ToList();
+		}
+
+
+
+		/// <summary>
+		/// Gets how many notes are there for each instrument.
+		/// </summary>
+		/// <returns>Note counts of each instrument.</returns>
+		public Dictionary<FourBitNumber, int> RetrieveNoteCountsOfInstruments() =>
+			this.midi.GetNotes()
+			.GroupBy(note => note.Channel)
+			.Select(group => new
+			{
+				Channel = group.Key,
+				Count = group.Count()
+			})
+			.ToDictionary(channelAndNoteCount => channelAndNoteCount.Channel, channelAndNoteCount => channelAndNoteCount.Count);
 
 		/// <summary>
 		/// Called when parsing a file.
@@ -280,6 +286,8 @@ namespace Coimbra.Midi
 		private void AddInstruments(MidiFile midi)
 		{
 			this.Instruments.Clear();
+			var noteCountsOfInstrument = this.RetrieveNoteCountsOfInstruments();
+
 			var timedEvents = midi.GetTimedEvents();
 			var events = timedEvents.Select(e => e.Event).OfType<ProgramChangeEvent>().ToList<ChannelEvent>();
 
@@ -302,14 +310,16 @@ namespace Coimbra.Midi
 
 				if (this.Instruments.ContainsKey(currentEvent.Channel))
 				{
-					if (!this.Instruments[currentEvent.Channel].Contains(programNumber))
+					if (!this.Instruments[currentEvent.Channel].ProgramNumbers.Contains(programNumber))
 					{
-						this.Instruments[currentEvent.Channel].Add(programNumber);
+						this.Instruments[currentEvent.Channel].ProgramNumbers.Add(programNumber);
 					}
 				}
 				else
 				{
-					this.Instruments[currentEvent.Channel] = new List<SevenBitNumber> { programNumber };
+					this.Instruments[currentEvent.Channel] =
+						new InstrumentInfo(currentEvent.Channel, new List<SevenBitNumber> { programNumber },
+							noteCountsOfInstrument.ContainsKey(currentEvent.Channel) ? noteCountsOfInstrument[currentEvent.Channel] : 0);
 				}
 			}
 		}

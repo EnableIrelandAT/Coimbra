@@ -10,6 +10,7 @@ namespace Coimbra.Pages
 	using System.Text.RegularExpressions;
 	using Coimbra.Communication;
 	using Coimbra.Midi;
+	using Coimbra.Midi.Models;
 	using Coimbra.Model;
 	using Melanchall.DryWetMidi.Common;
 	using Melanchall.DryWetMidi.Standards;
@@ -23,9 +24,8 @@ namespace Coimbra.Pages
 	/// </summary>
 	public sealed partial class InstrumentsPage : Page
 	{
-		private static readonly Regex RegularExpression = new Regex("(\\B([A-Z]|[0-9]))", RegexOptions.Compiled);
 
-		private static readonly List<string> Instruments = new List<string>();
+		private static readonly List<InstrumentInfo> Instruments = new List<InstrumentInfo>();
 
 		private readonly MidiEngine midiEngine = MidiEngine.Instance;
 
@@ -61,38 +61,21 @@ namespace Coimbra.Pages
 			}
 		}
 
-		private void RenderInstruments(IDictionary<FourBitNumber, ICollection<SevenBitNumber>> dictionary)
+		private void RenderInstruments(IDictionary<FourBitNumber, InstrumentInfo> dictionary)
 		{
 			Instruments.Clear();
-			Instruments.AddRange(dictionary.ToImmutableSortedDictionary().Select(dict => string.Join(
-				", ",
-				dict.Value.Select(d =>
-					RegularExpression.Replace(
-						Enum.GetName(typeof(GeneralMidi2Program), (int)d) ?? throw new InvalidOperationException(),
-						" $1")))));
+			Instruments.AddRange(dictionary.OrderByDescending(x => x.Value.NoteCount).Select(dict => dict.Value));
 
 			this.InstrumentsBox.ItemsSource = Instruments;
 			if (Instruments.Count != 0)
 			{
-				this.InstrumentsBox.SelectedValue = Instruments[0];
+				this.InstrumentsBox.SelectedItem = Instruments[0];
 			}
-		}
-
-		private void InstrumentButton_Click(object sender, RoutedEventArgs e)
-		{
-			var content = ((Button)sender).Content;
-			if (content == null)
-			{
-				return;
-			}
-
-			var buttonText = content.ToString();
-			this.midiEngine.SelectTrack(Convert.ToInt32(buttonText.Substring(0, length: buttonText.IndexOf(":", StringComparison.OrdinalIgnoreCase)), CultureInfo.InvariantCulture));
 		}
 
 		private void NextButton_Click(object sender, RoutedEventArgs e)
 		{
-			this.midiEngine.SelectTrack(this.InstrumentsBox.SelectedIndex);
+			this.midiEngine.SelectTrack(((InstrumentInfo)this.InstrumentsBox.SelectedItem).Channel);
 
 			if (UserData.IsOptionChangeMode)
 			{
@@ -152,7 +135,7 @@ namespace Coimbra.Pages
 
 		private void BtnInstrumentSelected_OnClick(object sender, RoutedEventArgs e)
 		{
-			this.midiEngine.SelectTrack(this.InstrumentsBox.SelectedIndex);
+			this.midiEngine.SelectTrack(((InstrumentInfo)this.InstrumentsBox.SelectedItem).Channel);
 			NetworkDataSender.SendPlayerInstrumentInfo(this.InstrumentsBox.SelectedIndex);
 			this.btnInstrumentSelected.Visibility = Visibility.Collapsed;
 			this.CheckAndStartTheGame();
