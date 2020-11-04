@@ -27,7 +27,28 @@ Licensed under the MIT License.
 
         <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
             <StackPanel HorizontalAlignment="Center">
-                <ListBox x:Name="SongsListBox" AllowDrop="true" DragOver="File_DragOver" Drop="File_Drop" Width="500" Height="250" FontSize="20" />
+                <TextBlock Margin="0,0,0,10" Name="ErrorBox" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Red"
+                       Text="{Binding OriginalText, UpdateSourceTrigger=Default}" Width="Auto" Height="Auto" />
+                <ListBox x:Name="SongsListBox" AllowDrop="true" DragOver="File_DragOver" Drop="File_Drop" Width="500" Height="250" FontSize="20">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Width="460">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="3" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="3" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding Value}" />
+                                <Button Grid.Column="4" Click="Remove_Item" >
+                                    <SymbolIcon Symbol="Cancel" />
+                                </Button>
+                                <TextBlock Grid.Column="2" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
                 <Button Content="Add a song..." Click="FilePicker_Click" x:Uid="SongPage.SelectFile" Width="500" Margin="0,50,0,0" FontSize="20" />
             </StackPanel>
         </StackPanel>
