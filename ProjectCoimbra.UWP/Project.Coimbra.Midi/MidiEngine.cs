@@ -176,12 +176,11 @@ namespace Coimbra.Midi
         }
 
         /// <summary>
-        /// UnPause the playback
+        /// Unpause the playback
         /// </summary>
         public void UnPause()
         {
             this.playback.Start();
-            
         }
 
         /// <summary>

@@ -215,7 +215,7 @@ namespace Coimbra.Pages
             }
         }
 
-        /// Only pause the playback for SOLO mode
+        /// Only pause the playback in SOLO mode
         private async void Pause_Click(object sender, RoutedEventArgs e)
         {
             if (UserData.GameMode == UserData.Mode.Solo)
