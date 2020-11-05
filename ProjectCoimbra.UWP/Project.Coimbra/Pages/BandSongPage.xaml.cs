@@ -33,6 +33,7 @@ namespace Coimbra
 
             this.SetCustomEventHandlers();
 
+            // TODO: Display a loading bar when initializing this BandSongPage, related to issue#53
             Task.Run(NetworkDataSender.ConnectToAllServersAsync).Wait();
 
             this.ShowOrHideBandControls();

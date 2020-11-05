@@ -9,7 +9,7 @@
 
   <Identity
     Name="62155AndreasBalzer.ProjectCoimbra-InternalTest"
-    Publisher="CN=DF151369-BF2A-4390-919A-40CE0C57CC96"
+    Publisher="CN=dimeehan"
     Version="2.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="be0a663b-fb6e-44c1-8ac2-c6d2675762a3" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
