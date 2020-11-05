@@ -333,17 +333,33 @@
     <value>Well done! What would you like to do next?</value>
     <comment>The text of the Title on the Options Page</comment>
   </data>
+  <data name="SongPage.DeleteDialog.Cancel" xml:space="preserve">
+    <value>Cancel</value>
+    <comment>The cancel button text of the confirmation dialog when deleting a song off of your list</comment>
+  </data>
   <data name="OptionsPage.ChangeNoteDurationButton.Content" xml:space="preserve">
     <value>Change the note duration</value>
     <comment>The text of the Change the note duration button on the Options Page</comment>
+  </data>
+  <data name="SongPage.DeleteDialog.Confirm" xml:space="preserve">
+    <value>Yes</value>
+    <comment>The confirm button text of the confirmation dialog when deleting a song off of your list</comment>
   </data>
   <data name="OptionsPage.ChangeInstrumentButton.Content" xml:space="preserve">
     <value>Select a different instrument</value>
     <comment>The text of the Select a different instrument button on the Options Page</comment>
   </data>
+  <data name="SongPage.DeleteDialog.Content" xml:space="preserve">
+    <value>Are you sure you want to delete this song from your list?</value>
+    <comment>The content text of the confirmation dialog when deleting a song off of your list</comment>
+  </data>
   <data name="OptionsPage.ChangeLaneSettingsButton.Content" xml:space="preserve">
     <value>Change the control options</value>
     <comment>The text of the Change the control options button on the Options Page</comment>
+  </data>
+  <data name="SongPage.DeleteDialog.Title" xml:space="preserve">
+    <value>Remove Song from List</value>
+    <comment>The title text of the confirmation dialog when deleting a song off of your list</comment>
   </data>
   <data name="OptionsPage.ChangeModeButton.Content" xml:space="preserve">
     <value>Select a different gig mode</value>
@@ -372,5 +388,9 @@
   <data name="InstrumentInfo.IntrumentNameAndNoteCount.Text" xml:space="preserve">
     <value>{0} - {1} notes</value>
     <comment>The text to use the show the instrument name and note count where {0} is the instrument name and {1} is the note count.</comment>
+  </data>
+  <data name="SongPage.DeleteSong.Error" xml:space="preserve">
+    <value>An error occurred while deleting the song</value>
+    <comment>Error message when deleting a song from the song list</comment>
   </data>
 </root>

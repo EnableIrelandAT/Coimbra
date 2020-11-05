@@ -10,6 +10,7 @@ namespace Coimbra.Helpers
     using Coimbra.Communication;
     using Coimbra.Midi;
     using Coimbra.Model;
+    using Windows.ApplicationModel.DataTransfer;
     using Windows.Storage;
     using Windows.Storage.Pickers;
     using Windows.Storage.Search;
@@ -114,6 +115,39 @@ namespace Coimbra.Helpers
                 return null;
             }
 
+            return await SaveFileAsync(file).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Upload Song by Dropping File Async
+        /// </summary>
+        /// <param name="e">Drag Event</param>
+        /// <returns>Uploaded File path</returns>
+        public static async Task<string> UploadSongDropAsync(DragEventArgs e)
+        {
+            if (e.DataView.Contains(StandardDataFormats.StorageItems))
+            {
+                var items = await e.DataView.GetStorageItemsAsync();
+                if (items.Count > 0)
+                {
+                    var file = items[0] as StorageFile;
+                    if (string.Equals(Path.GetExtension(file.Path), ".mid", StringComparison.Ordinal) || string.Equals(Path.GetExtension(file.Path), ".midi", StringComparison.Ordinal))
+                    {
+                        return await SaveFileAsync(file).ConfigureAwait(false);
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Save file in Midi Folder
+        /// </summary>
+        /// <param name="file">File to save</param>
+        /// <returns>Saved File path</returns>
+        private static async Task<string> SaveFileAsync(StorageFile file)
+        {
             var midiFolder = await GetMidiFolderAsync(true).ConfigureAwait(true);
             var destinationFile =
                 await midiFolder.CreateFileAsync(file.Name, CreationCollisionOption.GenerateUniqueName);
@@ -130,7 +164,6 @@ namespace Coimbra.Helpers
                     }
                 }
             }
-
             return destinationFile.Path;
         }
 
@@ -162,7 +195,6 @@ namespace Coimbra.Helpers
             }
 
             listBox.ItemsSource = songs;
-            listBox.DisplayMemberPath = "Value";
             listBox.SelectedValuePath = "Key";
             if (!string.IsNullOrWhiteSpace(selectedValue))
             {
@@ -184,6 +216,33 @@ namespace Coimbra.Helpers
             {
                 nextButton.IsEnabled = true;
             }
+        }
+
+        /// <summary>
+        /// Removes Item from list
+        /// </summary>
+        /// <param name="key">item key</param>
+        public static async Task<bool> RemoveFileAsync(string key)
+        {
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                return false;
+            }
+
+            var midiFolder = await GetMidiFolderAsync(false).ConfigureAwait(false);
+            if (midiFolder == null)
+            {
+                return false;
+            }
+
+            var file = await midiFolder.GetFileAsync(key.Substring(key.LastIndexOf('\\') + 1));
+            if (file == null)
+            {
+                return false;
+            }
+
+            await file.DeleteAsync();
+            return true;
         }
     }
 }
