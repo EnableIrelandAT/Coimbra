@@ -14,6 +14,7 @@ namespace Coimbra.Pages
     using Coimbra.Model;
     using Melanchall.DryWetMidi.Common;
     using Melanchall.DryWetMidi.Standards;
+    using Windows.ApplicationModel.Resources;
     using Windows.UI.Core;
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;
@@ -29,6 +30,9 @@ namespace Coimbra.Pages
 
         private readonly MidiEngine midiEngine = MidiEngine.Instance;
 
+        private readonly ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView();
+        private string waitingIndicatorResource = string.Empty;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="InstrumentsPage"/> class.
         /// </summary>
@@ -39,6 +43,9 @@ namespace Coimbra.Pages
             this.SetCustomEventHandlers();
             this.ShowHideControlsBandSolo();
             this.ShowPlayersInstrumentInfo();
+
+            // Get the strings from resources
+            waitingIndicatorResource = resourceLoader.GetString("InstrumentsPage/Waiting/Text");
         }
 
         private void ShowHideControlsBandSolo()
@@ -94,7 +101,7 @@ namespace Coimbra.Pages
             _ = this.Frame.Navigate(typeof(DurationPage), null, new DrillInNavigationTransitionInfo());
 
         /// <summary>
-        /// To ADD.
+        /// Set the event handlers.
         /// </summary>
         private void SetCustomEventHandlers()
         {
@@ -130,7 +137,7 @@ namespace Coimbra.Pages
                         (x.Instrument > -1
                             ? " - " +
                             Instruments[x.Instrument]
-                            : " - Waiting..."))
+                            : $" - {waitingIndicatorResource}"))
                     .ToArray());
 
             this.CheckAndStartTheGame();

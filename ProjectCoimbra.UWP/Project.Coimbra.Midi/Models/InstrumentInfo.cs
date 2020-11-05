@@ -9,6 +9,7 @@ namespace Coimbra.Midi.Models
     using System.Text.RegularExpressions;
     using Melanchall.DryWetMidi.Common;
     using Melanchall.DryWetMidi.Standards;
+    using Windows.ApplicationModel.Resources;
 
     /// <summary>
     /// A class representing an instrument.
@@ -31,7 +32,7 @@ namespace Coimbra.Midi.Models
         /// <summary>
         /// A string that contains the name and the note count of the instrument
         /// </summary>
-        public string NameAndNoteCount => string.Format(CultureInfo.CurrentUICulture, "{0} - {1} notes", string.Join(
+        public string NameAndNoteCount => string.Format(CultureInfo.CurrentUICulture, ResourceLoader.GetForCurrentView().GetString("InstrumentInfo/IntrumentNameAndNoteCount/Text"), string.Join(
                 ", ",
                 ProgramNumbers.Select(d =>
                     RegularExpression.Replace(

@@ -15,6 +15,7 @@ namespace Coimbra.Pages
     using Melanchall.DryWetMidi.Core;
     using Microsoft.Toolkit.Uwp.Input.GazeInteraction;
     using Windows.ApplicationModel.Core;
+    using Windows.ApplicationModel.Resources;
     using Windows.UI.Core;
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;
@@ -32,11 +33,16 @@ namespace Coimbra.Pages
 
         private readonly DispatcherTimer timer = new DispatcherTimer();
         private readonly TimeSpan noteDuration = TimeSpan.FromSeconds(5);
+        private readonly long msInASecond = (long)TimeSpan.FromSeconds(1).TotalMilliseconds;
 
         private List<long> noteTimes;
         private int lastPlayedNoteTimeIndex;
         private int dotCounter;
         private long previousTimeToNote;
+
+        private readonly ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView();
+        private string playingIndicatorResource = string.Empty;
+        private string timeToNextNoteResource = string.Empty;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GamePage"/> class.
@@ -71,9 +77,12 @@ namespace Coimbra.Pages
                 this.midiEngine.Start();
             }
 
-
             // Reset the flag
             UserData.IsOptionChangeMode = false;
+
+            // Get the strings from resources
+            playingIndicatorResource = resourceLoader.GetString("GamePage/Playing/Text");
+            timeToNextNoteResource = resourceLoader.GetString("GamePage/TimeToNextNote/Text");
         }
 
         private static int? ConvertToLane(NoteEvent currentNoteOnEvent)
@@ -127,20 +136,20 @@ namespace Coimbra.Pages
                 (long)currentTime.TotalMilliseconds;
 
             // No point of showing this if the next note is less than 3 second away
-            if ((lastNoteOffScreenTime.TotalMilliseconds == 0 || currentTime.TotalMilliseconds - lastNoteOffScreenTime.TotalMilliseconds > 1000) &&
-                (timeToNextNoteAfterLastNote > 3000 || previousTimeToNote >= 1000) &&
-                timeToNextNote >= 1000 &&
+            if ((lastNoteOffScreenTime.TotalMilliseconds == 0 || currentTime.TotalMilliseconds - lastNoteOffScreenTime.TotalMilliseconds > msInASecond) &&
+                (timeToNextNoteAfterLastNote > 3 * msInASecond || previousTimeToNote >= msInASecond) &&
+                timeToNextNote >= msInASecond &&
                 (lastPlayedNoteTimeIndex < this.noteTimes.Count - 1 ||
                 (lastPlayedNoteTimeIndex == this.noteTimes.Count - 1 && nextNoteTime > currentTime.TotalMilliseconds)))
             {
                 previousTimeToNote = timeToNextNote;
                 this.dotCounter = 0;
-                var seconds = timeToNextNote / 1000;
-                this.InputControl.SetTimeToNextNote($"Next note in: {seconds} seconds");
+                var seconds = timeToNextNote / msInASecond;
+                this.InputControl.SetTimeToNextNote(string.Format(timeToNextNoteResource, seconds));
             }
             else
             {
-                this.InputControl.SetTimeToNextNote($"Playing{new string('.', (this.dotCounter / 5) + 1)}");
+                this.InputControl.SetTimeToNextNote($"{playingIndicatorResource}{new string('.', (this.dotCounter / 5) + 1)}");
                 this.dotCounter++;
                 if (this.dotCounter == 15)
                 {

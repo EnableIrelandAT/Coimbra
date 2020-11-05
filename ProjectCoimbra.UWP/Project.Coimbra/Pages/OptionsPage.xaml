@@ -22,7 +22,7 @@ Licensed under the MIT License.
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0">
-            <TextBlock HorizontalAlignment="Center" Style="{StaticResource HeaderTextBlockStyle}" Padding="0,50,0,50" Text="Well done! What would you like to do next?" x:Uid="OptionsPage.Gig" />
+			<TextBlock HorizontalAlignment="Center" Style="{StaticResource HeaderTextBlockStyle}" x:Uid="OptionsPage.Title" Padding="0,50,0,50" Text="Well done! What would you like to do next?" />
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0">

@@ -329,4 +329,48 @@
   <data name="LaneSetupControl.KeysSelected" xml:space="preserve">
     <value>Keys {0} selected.</value>
   </data>
+  <data name="OptionsPage.Title.Text" xml:space="preserve">
+    <value>Well done! What would you like to do next?</value>
+    <comment>The text of the Title on the Options Page</comment>
+  </data>
+  <data name="OptionsPage.ChangeNoteDurationButton.Content" xml:space="preserve">
+    <value>Change the note duration</value>
+    <comment>The text of the Change the note duration button on the Options Page</comment>
+  </data>
+  <data name="OptionsPage.ChangeInstrumentButton.Content" xml:space="preserve">
+    <value>Select a different instrument</value>
+    <comment>The text of the Select a different instrument button on the Options Page</comment>
+  </data>
+  <data name="OptionsPage.ChangeLaneSettingsButton.Content" xml:space="preserve">
+    <value>Change the control options</value>
+    <comment>The text of the Change the control options button on the Options Page</comment>
+  </data>
+  <data name="OptionsPage.ChangeModeButton.Content" xml:space="preserve">
+    <value>Select a different gig mode</value>
+    <comment>The text of the Select a different gig mode button on the Options Page</comment>
+  </data>
+  <data name="OptionsPage.ChangeSongButton.Content" xml:space="preserve">
+    <value>Select a different song</value>
+    <comment>The text of the Select a different song button on the Options Page</comment>
+  </data>
+  <data name="OptionsPage.PlayAgainButton.Content" xml:space="preserve">
+    <value>Play again</value>
+    <comment>The text of the Play again button on the Options Page</comment>
+  </data>
+  <data name="GamePage.Playing.Text" xml:space="preserve">
+    <value>Playing</value>
+    <comment>The playing indicator text</comment>
+  </data>
+  <data name="GamePage.TimeToNextNote.Text" xml:space="preserve">
+    <value>Next note in: {0} seconds</value>
+    <comment>The time to next note text where {0} is the seconds to next note</comment>
+  </data>
+  <data name="InstrumentsPage.Waiting.Text" xml:space="preserve">
+    <value>Waiting...</value>
+    <comment>The text of the Waiting indicator on the Instruments Page.</comment>
+  </data>
+  <data name="InstrumentInfo.IntrumentNameAndNoteCount.Text" xml:space="preserve">
+    <value>{0} - {1} notes</value>
+    <comment>The text to use the show the instrument name and note count where {0} is the instrument name and {1} is the note count.</comment>
+  </data>
 </root>
