@@ -225,7 +225,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.Sqlite">
-      <Version>1.1.1</Version>
+      <Version>3.1.9</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.10</Version>
@@ -251,9 +251,9 @@
     </PRIResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataAccessLibrary\DataAccessLibrary.csproj">
+    <ProjectReference Include="..\DataAccessLibrary\Project.Coimbra.DataAccess.csproj">
       <Project>{060b8571-854f-4c66-b802-fc93211fe12b}</Project>
-      <Name>DataAccessLibrary</Name>
+      <Name>Project.Coimbra.DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\DryWetMidi\DryWetMidi\Melanchall.DryWetMidi.csproj">
       <Project>{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}</Project>

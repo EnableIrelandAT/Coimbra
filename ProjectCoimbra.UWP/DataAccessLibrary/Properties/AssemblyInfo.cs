@@ -1,15 +1,16 @@
-﻿using System.Reflection;
-using System.Runtime.CompilerServices;
+﻿// Licensed under the MIT License.
+
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("DataAccessLibrary")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Project.Coimbra.DataAccess")]
+[assembly: AssemblyDescription("Accessing SQLite Database for Coimbra application")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("DataAccessLibrary")]
+[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyProduct("Project.Coimbra.DataAccess")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -122,11 +122,11 @@
   <ItemGroup>
     <Compile Include="DataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Properties\DataAccessLibrary.rd.xml" />
+    <None Include="Properties\Project.Coimbra.DataAccess" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.Sqlite">
-      <Version>1.1.1</Version>
+      <Version>3.1.9</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.10</Version>

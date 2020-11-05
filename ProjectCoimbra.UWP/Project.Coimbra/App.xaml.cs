@@ -4,9 +4,9 @@ namespace Coimbra
 {
     using System;
     using System.Globalization;
+    using System.Threading.Tasks;
     using Coimbra.Communication;
     using Coimbra.Pages;
-    using DataAccessLibrary;
     using Microsoft.Toolkit.Uwp.Input.GazeInteraction;
     using Windows.ApplicationModel;
     using Windows.ApplicationModel.Activation;
@@ -28,8 +28,7 @@ namespace Coimbra
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
             NetworkListener.StartListener();
-
-            DataAccess.InitializeDatabase();
+            Task.Run(DataAccess.DataAccess.InitializeDatabaseAsync).Wait();
         }
 
         /// <summary>

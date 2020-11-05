@@ -18,18 +18,19 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="1" Grid.RowSpan="3" Background="white"></StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="0">
-            <TextBlock x:Uid="LoginPage.SignIntoAccount" Text="COIMBRA" 
+            <TextBlock x:Uid="LoginPage.Coimbra" Text="COIMBRA" 
                            Foreground="LightBlue" Style="{StaticResource HeaderTextBlockStyle}" HorizontalAlignment="Center" Padding="0,65,0,0" FontSize="70" />
-            <TextBlock x:Uid="LoginPage.SignIntoAccount" Text="Welcome" 
+            <TextBlock x:Uid="LoginPage.Welcome" Text="Welcome" 
                            Foreground="LightGray" Style="{StaticResource HeaderTextBlockStyle}" HorizontalAlignment="Center" FontSize="40" />
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Padding="0,0,0,50">
-            <TextBlock x:Uid="LoginPage.Nickname" Padding="0,100,0,15" Text="Please enter your nickname:" HorizontalAlignment="Center"/>
+            <TextBlock x:Uid="LoginPage.EnterNickname" Padding="0,100,0,15" Text="Please enter your nickname:" HorizontalAlignment="Center"/>
             <TextBox Name="Input_Box" Width="300" Height="25" MaxLength="100" />
-            <TextBlock Name="ErrorMessage" Foreground="Red" HorizontalAlignment="Center"/>
+            <TextBlock x:Uid="LoginPage.Error" Margin="0,0,0,0" Name="ErrorBox" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Red"
+                       Text="{Binding OriginalText, UpdateSourceTrigger=Default}" />
             <Button x:Name="LoginButton" x:Uid="LoginPage.LoginButton" Content="LOGIN" 
                         Background="LightBlue" Foreground="white" HorizontalAlignment="Center" Margin="10" Click="LoginButton_Click" Width="300" FontSize="25" />
-            <HyperlinkButton Content="No Account? Signup here!"
+            <HyperlinkButton Content="No Account? Signup here!" x:Uid="LoginPage.LinkToSignupPage"
                         Foreground="MediumPurple" Click="GoToSignupPage_Click" HorizontalAlignment="Center" FontSize="15" Padding="0,0,0,30" />
         </StackPanel>
     </Grid>

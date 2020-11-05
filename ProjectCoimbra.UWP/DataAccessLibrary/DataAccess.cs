@@ -1,11 +1,12 @@
 ﻿// Licensed under the MIT License.
 
-namespace DataAccessLibrary
+namespace Coimbra.DataAccess
 {
-    using Microsoft.Data.Sqlite;
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Threading.Tasks;
+    using Microsoft.Data.Sqlite;
     using Windows.Storage;
 
     /// <summary>
@@ -16,22 +17,20 @@ namespace DataAccessLibrary
         /// <summary>
         /// Initializes the database, which is called when application starts
         /// </summary>
-        public async static void InitializeDatabase()
+        public static async Task InitializeDatabaseAsync()
         {
-            await ApplicationData.Current.LocalFolder.CreateFileAsync("coimbra.db", CreationCollisionOption.OpenIfExists);
-            string dbpath = Path.Combine(ApplicationData.Current.LocalFolder.Path, "coimbra.db");
-            using (SqliteConnection db =
-               new SqliteConnection($"Filename={dbpath}"))
+            await ApplicationData.Current.LocalFolder.CreateFileAsync(databaseName, CreationCollisionOption.OpenIfExists)
+                .AsTask().ConfigureAwait(false);
+
+            using (SqliteConnection db = new SqliteConnection(filePath))
             {
                 db.Open();
 
-                string tableCommand = "CREATE TABLE IF NOT " +
+                SqliteCommand createTableCommand = new SqliteCommand("CREATE TABLE IF NOT " +
                     "EXISTS User (Primary_Key INTEGER PRIMARY KEY, " +
-                    "Name NVARCHAR(2048) NULL)";
+                    "Name NVARCHAR(100) NULL)", db);
 
-                SqliteCommand createTable = new SqliteCommand(tableCommand, db);
-
-                createTable.ExecuteReader();
+                ExecuteCommand(createTableCommand);
             }
         }
 
@@ -41,9 +40,7 @@ namespace DataAccessLibrary
         /// <param name="inputText">The input text.</param>
         public static void AddData(string inputText)
         {
-            string dbpath = Path.Combine(ApplicationData.Current.LocalFolder.Path, "coimbra.db");
-            using (SqliteConnection db =
-              new SqliteConnection($"Filename={dbpath}"))
+            using (SqliteConnection db = new SqliteConnection(filePath))
             {
                 db.Open();
 
@@ -54,7 +51,7 @@ namespace DataAccessLibrary
                 insertCommand.CommandText = "INSERT INTO User VALUES (NULL, @Entry);";
                 insertCommand.Parameters.AddWithValue("@Entry", inputText);
 
-                insertCommand.ExecuteReader();
+                ExecuteCommand(insertCommand);
 
                 db.Close();
             }
@@ -68,16 +65,11 @@ namespace DataAccessLibrary
         {
             List<string> entries = new List<string>();
 
-            string dbpath = Path.Combine(ApplicationData.Current.LocalFolder.Path, "coimbra.db");
-            using (SqliteConnection db =
-               new SqliteConnection($"Filename={dbpath}"))
+            using (SqliteConnection db = new SqliteConnection(filePath))
             {
                 db.Open();
 
-                SqliteCommand selectCommand = new SqliteCommand
-                    ("SELECT Name from User", db);
-
-                SqliteDataReader query = selectCommand.ExecuteReader();
+                SqliteDataReader query = ExecuteCommand(new SqliteCommand("SELECT Name from User", db));
 
                 while (query.Read())
                 {
@@ -95,10 +87,22 @@ namespace DataAccessLibrary
         /// Checks if specified name exists in User table
         /// </summary>
         /// <param name="name">The name.</param>
-        /// <returns></returns>
+        /// <returns>true if name exists in local table</returns>
         public static bool Exists(string name)
         {
             return GetAllData().Contains(name);
         }
+
+        private static SqliteDataReader ExecuteCommand(SqliteCommand command)
+        {
+            return command.ExecuteReader();
+        }
+
+        private static string databaseName = "coimbra.db";
+
+        private static string dbpath = Path.Combine(ApplicationData.Current.LocalFolder.Path, databaseName);
+
+        // FormattableString.Invariant used as strings vary by their culture they've run in (e.g. Windows language)
+        private static string filePath = FormattableString.Invariant($"Filename={dbpath}");
     }
 }

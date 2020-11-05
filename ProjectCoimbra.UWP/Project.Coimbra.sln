@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DryWetMidi", "DryWetMidi", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Melanchall.DryWetMidi", "DryWetMidi\DryWetMidi\Melanchall.DryWetMidi.csproj", "{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLibrary", "DataAccessLibrary\DataAccessLibrary.csproj", "{060B8571-854F-4C66-B802-FC93211FE12B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.Coimbra.DataAccess", "DataAccessLibrary\Project.Coimbra.DataAccess.csproj", "{060B8571-854F-4C66-B802-FC93211FE12B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
