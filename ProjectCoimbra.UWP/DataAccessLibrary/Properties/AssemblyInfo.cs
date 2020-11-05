@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Project.Coimbra.DataAccess")]
 [assembly: AssemblyDescription("Accessing SQLite Database for Coimbra application")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("Enable Ireland")]
 [assembly: AssemblyProduct("Project.Coimbra.DataAccess")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]

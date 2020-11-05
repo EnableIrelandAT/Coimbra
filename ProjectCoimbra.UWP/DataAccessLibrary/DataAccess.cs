@@ -69,7 +69,7 @@ namespace Coimbra.DataAccess
             {
                 db.Open();
 
-                SqliteDataReader query = ExecuteCommand(new SqliteCommand("SELECT Name from User", db));
+                SqliteDataReader query = ExecuteCommand(new SqliteCommand("SELECT Name FROM User", db));
 
                 while (query.Read())
                 {
@@ -98,11 +98,11 @@ namespace Coimbra.DataAccess
             return command.ExecuteReader();
         }
 
-        private static string databaseName = "coimbra.db";
+        private const string databaseName = "coimbra.db";
 
-        private static string dbpath = Path.Combine(ApplicationData.Current.LocalFolder.Path, databaseName);
+        private static readonly string dbpath = Path.Combine(ApplicationData.Current.LocalFolder.Path, databaseName);
 
         // FormattableString.Invariant used as strings vary by their culture they've run in (e.g. Windows language)
-        private static string filePath = FormattableString.Invariant($"Filename={dbpath}");
+        private static readonly string filePath = FormattableString.Invariant($"Filename={dbpath}");
     }
 }

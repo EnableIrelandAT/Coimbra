@@ -335,7 +335,7 @@
   </data>
   <data name="LoginPage.Error" xml:space="preserve">
     <value>Nickname does not exist. Please signup via link below or try again.</value>
-    <comment>Error message displayed when login nickname does not exist</comment>
+    <comment>Error message displayed when nickname does not exist</comment>
   </data>
   <data name="CreateAccountPage.Coimbra" xml:space="preserve">
     <value>COIMBRA</value>
@@ -350,8 +350,8 @@
     <comment>Message on signup page to ask users to enter new nickname</comment>
   </data>
   <data name="CreateAccountPage.LinkToLoginPage" xml:space="preserve">
-    <value>Go back to login page? Click here!</value>
-    <comment>Hyperlink text which directs users to login page</comment>
+    <value>Return to sign in page? Click here!</value>
+    <comment>Hyperlink text which directs users to sign in page</comment>
   </data>
   <data name="CreateAccountPage.Register" xml:space="preserve">
     <value>REGISTER</value>
@@ -359,23 +359,23 @@
   </data>
   <data name="LoginPage.Coimbra" xml:space="preserve">
     <value>COIMBRA</value>
-    <comment>Coimbra text on login page</comment>
+    <comment>Coimbra text on sign in page</comment>
   </data>
   <data name="LoginPage.EnterNickname" xml:space="preserve">
     <value>Please enter your nickname: </value>
-    <comment>Message to ask users to enter their nickname when logging into app</comment>
+    <comment>Message to ask users to enter their nickname when signing into app</comment>
   </data>
   <data name="LoginPage.LinkToSignupPage" xml:space="preserve">
     <value>No Account? Signup here!</value>
     <comment>Text of hyperlink which directs users to signup page</comment>
   </data>
   <data name="LoginPage.LoginButton" xml:space="preserve">
-    <value>LOGIN</value>
-    <comment>Message on button to log into account</comment>
+    <value>SIGN IN</value>
+    <comment>Message on button to sign into account</comment>
   </data>
   <data name="LoginPage.Welcome" xml:space="preserve">
     <value>Welcome</value>
-    <comment>Welcome text on login page</comment>
+    <comment>Welcome text on sign in page</comment>
   </data>
   <data name="SongPage.DeleteDialog.Cancel" xml:space="preserve">
     <value>Cancel</value>
