@@ -200,6 +200,22 @@ namespace Coimbra.Midi
         }
 
         /// <summary>
+        /// Pause the playback
+        /// </summary>
+        public void Pause()
+        {
+            this.playback.Stop();
+        }
+
+        /// <summary>
+        /// Resume the playback
+        /// </summary>
+        public void Resume()
+        {
+            this.playback.Start();
+        }
+
+        /// <summary>
         /// Selects a specific track.
         /// </summary>
         /// <param name="channel">The channel corresponding to the track.</param>
@@ -223,6 +239,7 @@ namespace Coimbra.Midi
             this.threadCancellationToken = new CancellationTokenSource();
             this.thread = new Task(this.RenderCurrentNotes, this.threadCancellationToken.Token);
             this.thread.Start();
+            this.disposed = false;
         }
 
         /// <summary>
