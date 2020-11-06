@@ -1,5 +1,8 @@
 // Licensed under the MIT License.
 
+using Windows.ApplicationModel.Resources;
+using Windows.UI;
+
 namespace Coimbra.Pages
 {
     using System;
@@ -215,19 +218,28 @@ namespace Coimbra.Pages
             }
         }
 
-        /// Only pause the playback in SOLO mode
+        /// <summary>
+        /// Event handler when clicking Pause button.
+        /// For Solo mode, the playback will be paused.
+        /// For Offline mode or LAN mode, the playback will continue playing because other players will not be affected while they are playing.
+        /// </summary>
+        /// <param name="sender">A sender of this event</param>
+        /// <param name="e">Contains state information and event data associated with a routed event</param>
         private async void Pause_Click(object sender, RoutedEventArgs e)
         {
             if (UserData.GameMode == UserData.Mode.Solo)
             {
                 midiEngine.Pause();
             }
+
+            ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView();
+
             ContentDialog dialog = new ContentDialog
             {
-                Title = "Game paused",
-                Content = "Do you want to continue the game?",
-                PrimaryButtonText = "Continue",
-                CloseButtonText = "Exit to Game Mode",
+                Title = resourceLoader.GetString("GamePage/PauseDialog/Title"),
+                Content = resourceLoader.GetString("GamePage/PauseDialog/Content"),
+                PrimaryButtonText = resourceLoader.GetString("GamePage/PauseDialog/PrimaryButton"),
+                CloseButtonText = resourceLoader.GetString("GamePage/PauseDialog/CloseButton"),
                 DefaultButton = ContentDialogButton.Primary
             };
 
@@ -242,7 +254,7 @@ namespace Coimbra.Pages
             {
                 if (UserData.GameMode == UserData.Mode.Solo)
                 {
-                    midiEngine.UnPause();
+                    midiEngine.Resume();
                 }
             }
         }

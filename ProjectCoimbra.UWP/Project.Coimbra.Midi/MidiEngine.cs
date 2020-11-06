@@ -176,9 +176,9 @@ namespace Coimbra.Midi
         }
 
         /// <summary>
-        /// Unpause the playback
+        /// Resume the playback
         /// </summary>
-        public void UnPause()
+        public void Resume()
         {
             this.playback.Start();
         }
