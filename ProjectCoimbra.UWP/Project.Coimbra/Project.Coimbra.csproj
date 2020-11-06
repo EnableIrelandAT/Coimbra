@@ -63,6 +63,9 @@
     <Compile Include="Controls\PitchButton.cs" />
     <Compile Include="Extensions\ObservableCollectionExtensions.cs" />
     <Compile Include="Helpers\SongPagesHelper.cs" />
+    <Compile Include="Pages\CreateAccountPage.xaml.cs">
+      <DependentUpon>CreateAccountPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\DurationPage.xaml.cs">
       <DependentUpon>DurationPage.xaml</DependentUpon>
     </Compile>
@@ -78,6 +81,9 @@
     </Compile>
     <Compile Include="Pages\OptionsPage.xaml.cs">
       <DependentUpon>OptionsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\TermsPage.xaml.cs">
       <DependentUpon>TermsPage.xaml</DependentUpon>
@@ -171,6 +177,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\CreateAccountPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\LaneSettingsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -182,6 +192,10 @@
     <Page Include="Pages\OptionsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\LoginPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\TermsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -217,6 +231,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.Data.Sqlite">
+      <Version>3.1.9</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.10</Version>
     </PackageReference>
@@ -245,7 +262,11 @@
       <Name>Microsoft General MIDI DLS for Universal Windows Apps</Name>
     </SDKReference>
   </ItemGroup>
-  <ItemGroup>
+  <ItemGroup> 
+    <ProjectReference Include="..\DataAccessLibrary\Project.Coimbra.DataAccess.csproj">
+      <Project>{060b8571-854f-4c66-b802-fc93211fe12b}</Project>
+      <Name>Project.Coimbra.DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DryWetMidi\DryWetMidi\Melanchall.DryWetMidi.csproj">
       <Project>{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}</Project>
       <Name>Melanchall.DryWetMidi</Name>
@@ -262,6 +283,11 @@
       <Project>{a9d0bf90-0c50-49a6-959e-34caa1ebb87a}</Project>
       <Name>Project.Coimbra.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="Microsoft.Midi.GmDls, Version=10.0.18362.0">
+      <Name>Microsoft General MIDI DLS for Universal Windows Apps</Name>
+    </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
