@@ -129,6 +129,7 @@
     <Compile Include="DryWetMidiIntegration\NotePlaybackEventMetadata.cs" />
     <Compile Include="DryWetMidiIntegration\TrackNotificationEventArgs.cs" />
     <Compile Include="MidiEngine.cs" />
+    <Compile Include="Models\InstrumentInfo.cs" />
     <Compile Include="OSIntegration\MediaControls.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Project.Coimbra.Midi.rd.xml" />

@@ -329,21 +329,113 @@
   <data name="LaneSetupControl.KeysSelected" xml:space="preserve">
     <value>Keys {0} selected.</value>
   </data>
+  <data name="CreateAccountPage.Error" xml:space="preserve">
+    <value>This nickname already exists. Please try again.</value>
+    <comment>Error message displayed if nickname already exists when creating account</comment>
+  </data>
+  <data name="LoginPage.Error" xml:space="preserve">
+    <value>Nickname does not exist. Please signup via link below or try again.</value>
+    <comment>Error message displayed when nickname does not exist</comment>
+  </data>
+  <data name="CreateAccountPage.Coimbra" xml:space="preserve">
+    <value>COIMBRA</value>
+    <comment>Coimbra text on signup page</comment>
+  </data>
+  <data name="CreateAccountPage.CreateAccount" xml:space="preserve">
+    <value>Create account</value>
+    <comment>Create Account title text on signup page</comment>
+  </data>
+  <data name="CreateAccountPage.EnterNickname" xml:space="preserve">
+    <value>Enter a new nickname:</value>
+    <comment>Message on signup page to ask users to enter new nickname</comment>
+  </data>
+  <data name="CreateAccountPage.LinkToLoginPage" xml:space="preserve">
+    <value>Return to sign in page? Click here!</value>
+    <comment>Hyperlink text which directs users to sign in page</comment>
+  </data>
+  <data name="CreateAccountPage.Register" xml:space="preserve">
+    <value>REGISTER</value>
+    <comment>Message on button to create new account / register user locally</comment>
+  </data>
+  <data name="LoginPage.Coimbra" xml:space="preserve">
+    <value>COIMBRA</value>
+    <comment>Coimbra text on sign in page</comment>
+  </data>
+  <data name="LoginPage.EnterNickname" xml:space="preserve">
+    <value>Please enter your nickname: </value>
+    <comment>Message to ask users to enter their nickname when signing into app</comment>
+  </data>
+  <data name="LoginPage.LinkToSignupPage" xml:space="preserve">
+    <value>No Account? Signup here!</value>
+    <comment>Text of hyperlink which directs users to signup page</comment>
+  </data>
+  <data name="LoginPage.LoginButton" xml:space="preserve">
+    <value>SIGN IN</value>
+    <comment>Message on button to sign into account</comment>
+  </data>
+  <data name="LoginPage.Welcome" xml:space="preserve">
+    <value>Welcome</value>
+    <comment>Welcome text on sign in page</comment>
+  </data>
+  <data name="OptionsPage.Title.Text" xml:space="preserve">
+    <value>Well done! What would you like to do next?</value>
+    <comment>The text of the Title on the Options Page</comment>
+  </data>
   <data name="SongPage.DeleteDialog.Cancel" xml:space="preserve">
     <value>Cancel</value>
     <comment>The cancel button text of the confirmation dialog when deleting a song off of your list</comment>
+  </data>
+  <data name="OptionsPage.ChangeNoteDurationButton.Content" xml:space="preserve">
+    <value>Change the note duration</value>
+    <comment>The text of the Change the note duration button on the Options Page</comment>
   </data>
   <data name="SongPage.DeleteDialog.Confirm" xml:space="preserve">
     <value>Yes</value>
     <comment>The confirm button text of the confirmation dialog when deleting a song off of your list</comment>
   </data>
+  <data name="OptionsPage.ChangeInstrumentButton.Content" xml:space="preserve">
+    <value>Select a different instrument</value>
+    <comment>The text of the Select a different instrument button on the Options Page</comment>
+  </data>
   <data name="SongPage.DeleteDialog.Content" xml:space="preserve">
     <value>Are you sure you want to delete this song from your list?</value>
     <comment>The content text of the confirmation dialog when deleting a song off of your list</comment>
   </data>
+  <data name="OptionsPage.ChangeLaneSettingsButton.Content" xml:space="preserve">
+    <value>Change the control options</value>
+    <comment>The text of the Change the control options button on the Options Page</comment>
+  </data>
   <data name="SongPage.DeleteDialog.Title" xml:space="preserve">
     <value>Remove Song from List</value>
     <comment>The title text of the confirmation dialog when deleting a song off of your list</comment>
+  </data>
+  <data name="OptionsPage.ChangeModeButton.Content" xml:space="preserve">
+    <value>Select a different gig mode</value>
+    <comment>The text of the Select a different gig mode button on the Options Page</comment>
+  </data>
+  <data name="OptionsPage.ChangeSongButton.Content" xml:space="preserve">
+    <value>Select a different song</value>
+    <comment>The text of the Select a different song button on the Options Page</comment>
+  </data>
+  <data name="OptionsPage.PlayAgainButton.Content" xml:space="preserve">
+    <value>Play again</value>
+    <comment>The text of the Play again button on the Options Page</comment>
+  </data>
+  <data name="GamePage.Playing.Text" xml:space="preserve">
+    <value>Playing</value>
+    <comment>The playing indicator text</comment>
+  </data>
+  <data name="GamePage.TimeToNextNote.Text" xml:space="preserve">
+    <value>Next note in: {0} seconds</value>
+    <comment>The time to next note text where {0} is the seconds to next note</comment>
+  </data>
+  <data name="InstrumentsPage.Waiting.Text" xml:space="preserve">
+    <value>Waiting...</value>
+    <comment>The text of the Waiting indicator on the Instruments Page.</comment>
+  </data>
+  <data name="InstrumentInfo.IntrumentNameAndNoteCount.Text" xml:space="preserve">
+    <value>{0} - {1} notes</value>
+    <comment>The text to use the show the instrument name and note count where {0} is the instrument name and {1} is the note count.</comment>
   </data>
   <data name="SongPage.DeleteSong.Error" xml:space="preserve">
     <value>An error occurred while deleting the song</value>

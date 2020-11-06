@@ -15,6 +15,7 @@ namespace Coimbra.Pages
     using Melanchall.DryWetMidi.Core;
     using Microsoft.Toolkit.Uwp.Input.GazeInteraction;
     using Windows.ApplicationModel.Core;
+    using Windows.ApplicationModel.Resources;
     using Windows.UI.Core;
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;
@@ -31,6 +32,17 @@ namespace Coimbra.Pages
             new ConcurrentDictionary<Guid, RenderedMarkablePlaybackEvent>();
 
         private readonly DispatcherTimer timer = new DispatcherTimer();
+        private readonly TimeSpan noteDuration = TimeSpan.FromSeconds(5);
+        private readonly long msInASecond = (long)TimeSpan.FromSeconds(1).TotalMilliseconds;
+
+        private List<long> noteTimes;
+        private int lastPlayedNoteTimeIndex;
+        private int dotCounter;
+        private long previousTimeToNote;
+
+        private readonly ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView();
+        private string playingIndicatorResource = string.Empty;
+        private string timeToNextNoteResource = string.Empty;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GamePage"/> class.
@@ -51,6 +63,8 @@ namespace Coimbra.Pages
             this.InputControl.SecondsDuringWhichNoteIsActive = (int)UserData.ActiveDuration;
 
             this.midiEngine.Initialize();
+            noteTimes = this.midiEngine.RetrieveNoteTimesForInstrument(this.midiEngine.SelectedTrack);
+
             if (UserData.GameMode == UserData.Mode.Offline || UserData.GameMode == UserData.Mode.Online)
             {
                 this.timer.Tick += this.Timer_Tick;
@@ -62,6 +76,13 @@ namespace Coimbra.Pages
                 this.InputControl.Pitches = UserData.PitchMap.Pitches;
                 this.midiEngine.Start();
             }
+
+            // Reset the flag
+            UserData.IsOptionChangeMode = false;
+
+            // Get the strings from resources
+            playingIndicatorResource = resourceLoader.GetString("GamePage/Playing/Text");
+            timeToNextNoteResource = resourceLoader.GetString("GamePage/TimeToNextNote/Text");
         }
 
         private static int? ConvertToLane(NoteEvent currentNoteOnEvent)
@@ -74,7 +95,7 @@ namespace Coimbra.Pages
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
         private void MidiEngine_PlaybackFinished(object sender, EventArgs e) =>
             CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                this.Frame.Navigate(typeof(ModePage), null, new DrillInNavigationTransitionInfo()));
+                this.Frame.Navigate(typeof(OptionsPage), null, new DrillInNavigationTransitionInfo()));
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
 
         private void RemoveOldNotes()
@@ -86,9 +107,108 @@ namespace Coimbra.Pages
             }
         }
 
-        private async Task MidiEngine_RenderCurrentNotesEventAsync(ConcurrentQueue<MarkablePlaybackEvent>[] markablePlaybackEvents)
+        private void RenderTimeToNextNote(TimeSpan currentTime)
+        {
+            MarkablePlaybackEvent lastNoteOnScreen = null;
+            if (this.notesOnScreen.Values.Count > 0)
+            {
+                lastNoteOnScreen = this.notesOnScreen.Values.Aggregate((a, b) => a.MarkablePlaybackEvent.RawTime > b.MarkablePlaybackEvent.RawTime ? a : b).MarkablePlaybackEvent;
+            }
+
+            TimeSpan lastNoteOffScreenTime = default(TimeSpan);
+            if (lastNoteOnScreen != null && lastNoteOnScreen.Time.TotalMilliseconds > 0)
+            {
+                lastNoteOffScreenTime = lastNoteOnScreen.Time + noteDuration;
+            }
+
+            long nextNoteTime = GetNextNoteTime((long)currentTime.TotalMilliseconds);
+            if (nextNoteTime < 0)
+            {
+                return;
+            }
+
+            long timeToNextNote = nextNoteTime - (long)currentTime.TotalMilliseconds;
+
+            long timeToNextNoteAfterLastNote = timeToNextNote -
+                // Subtract note duration because it will show up earlier
+                (long)noteDuration.TotalMilliseconds +
+                // Subtract currentTime to get the difference
+                (long)currentTime.TotalMilliseconds;
+
+            // No point of showing this if the next note is less than 3 second away
+            if ((lastNoteOffScreenTime.TotalMilliseconds == 0 || currentTime.TotalMilliseconds - lastNoteOffScreenTime.TotalMilliseconds > msInASecond) &&
+                (timeToNextNoteAfterLastNote > 3 * msInASecond || previousTimeToNote >= msInASecond) &&
+                timeToNextNote >= msInASecond &&
+                (lastPlayedNoteTimeIndex < this.noteTimes.Count - 1 ||
+                (lastPlayedNoteTimeIndex == this.noteTimes.Count - 1 && nextNoteTime > currentTime.TotalMilliseconds)))
+            {
+                previousTimeToNote = timeToNextNote;
+                this.dotCounter = 0;
+                var seconds = timeToNextNote / msInASecond;
+                this.InputControl.SetTimeToNextNote(string.Format(timeToNextNoteResource, seconds));
+            }
+            else
+            {
+                this.InputControl.SetTimeToNextNote($"{playingIndicatorResource}{new string('.', (this.dotCounter / 5) + 1)}");
+                this.dotCounter++;
+                if (this.dotCounter == 15)
+                {
+                    this.dotCounter = 0;
+                }
+            }
+        }
+
+        private long GetNextNoteTime(long currentTime)
+        {
+            if (this.noteTimes != null)
+            {
+                for (int i = this.lastPlayedNoteTimeIndex; i < this.noteTimes.Count; i++)
+                {
+                    // add noteDuration to get the playing note
+                    if (this.noteTimes[i] + noteDuration.TotalMilliseconds > currentTime)
+                    {
+                        this.lastPlayedNoteTimeIndex = i;
+                        return this.noteTimes[i];
+                    }
+                }
+            }
+
+            return -1;
+        }
+
+        private long GetNoteLengthInRawTime(MarkablePlaybackEvent markablePlaybackEvent)
+        {
+            if (markablePlaybackEvent != null && markablePlaybackEvent.RelatedEvents.Count > 0)
+            {
+                var noteOff = markablePlaybackEvent.RelatedEvents.Find(note =>
+                    note?.Event?.EventType == MidiEventType.NoteOff);
+                var noteOn = markablePlaybackEvent.RelatedEvents.Find(note =>
+                    note?.Event?.EventType == MidiEventType.NoteOn);
+                long noteRawTime = -1;
+                if (noteOff != null && noteOn != null)
+                {
+                    noteRawTime = noteOff.RawTime < noteOn.RawTime ? noteOff.RawTime : noteOn.RawTime;
+                }
+                else if (noteOff != null)
+                {
+                    noteRawTime = noteOff.RawTime;
+                }
+                else if (noteOn != null)
+                {
+                    noteRawTime = noteOn.RawTime;
+                }
+
+                return noteRawTime - markablePlaybackEvent.RawTime;
+            }
+
+            return -1;
+        }
+
+        private async Task MidiEngine_RenderCurrentNotesEventAsync(ConcurrentQueue<MarkablePlaybackEvent>[] markablePlaybackEvents, TimeSpan currentTime)
         {
             this.RemoveOldNotes();
+            this.RenderTimeToNextNote(currentTime);
+
             foreach (var markablePlaybackEvent in markablePlaybackEvents)
             {
                 foreach (var currentMarkablePlaybackEvent in markablePlaybackEvent)
@@ -102,30 +222,10 @@ namespace Coimbra.Pages
                     NoteControl noteControlNote = null;
 
                     double noteLengthInPercent = 16;
-                    if (currentMarkablePlaybackEvent.RelatedEvents.Count > 0)
+                    long firstNoteLength = this.GetNoteLengthInRawTime(currentMarkablePlaybackEvent);
+                    if (firstNoteLength != -1)
                     {
-                        var noteOff = currentMarkablePlaybackEvent.RelatedEvents.Find(note =>
-                            note?.Event?.EventType == MidiEventType.NoteOff);
-                        var noteOn = currentMarkablePlaybackEvent.RelatedEvents.Find(note =>
-                            note?.Event?.EventType == MidiEventType.NoteOn);
-                        long firstNoteRawTime = -1;
-                        if (noteOff != null && noteOn != null)
-                        {
-                            firstNoteRawTime = noteOff.RawTime < noteOn.RawTime ? noteOff.RawTime : noteOn.RawTime;
-                        }
-                        else if (noteOff != null)
-                        {
-                            firstNoteRawTime = noteOff.RawTime;
-                        }
-                        else if (noteOn != null)
-                        {
-                            firstNoteRawTime = noteOn.RawTime;
-                        }
-
-                        if (firstNoteRawTime != -1)
-                        {
-                            noteLengthInPercent = 1 * (firstNoteRawTime - currentMarkablePlaybackEvent.RawTime) / 50D;
-                        }
+                        noteLengthInPercent = 1 * firstNoteLength / 50D;
                     }
 
                     var lane = ConvertToLane(currentNoteOnEvent);
@@ -135,7 +235,7 @@ namespace Coimbra.Pages
                             CoreDispatcherPriority.Normal,
                             () => noteControlNote = this.InputControl.PlayNote(
                                 lane.Value,
-                                TimeSpan.FromSeconds(5),
+                                noteDuration,
                                 noteLengthInPercent));
                         this.notesOnScreen[currentMarkablePlaybackEvent.Id] =
                             new RenderedMarkablePlaybackEvent(currentMarkablePlaybackEvent, noteControlNote);

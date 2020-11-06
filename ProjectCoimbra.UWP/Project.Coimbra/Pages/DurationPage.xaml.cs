@@ -36,7 +36,14 @@ namespace Coimbra.Pages
                 UserData.ActiveDuration = UserData.Duration.ShortDuration;
             }
 
-            _ = this.Frame.Navigate(typeof(InstrumentsPage), null, new DrillInNavigationTransitionInfo());
+            if (UserData.IsOptionChangeMode)
+            {
+                _ = this.Frame.Navigate(typeof(GamePage), null, new DrillInNavigationTransitionInfo());
+            }
+            else
+            {
+                _ = this.Frame.Navigate(typeof(InstrumentsPage), null, new DrillInNavigationTransitionInfo());
+            }
         }
     }
 }
