@@ -43,6 +43,13 @@ namespace Coimbra.Controls
         public static readonly DependencyProperty SongTitleProperty =
             DependencyProperty.Register("SongTitle", typeof(string), typeof(InputControl), new PropertyMetadata("Title"));
 
+        /// <summary>
+        /// A <see cref="DependencyProperty"/> forming the backing store for the time to next note counter, to enable animation,
+        /// styling, binding, etc.
+        /// </summary>
+        public static readonly DependencyProperty TimeToNextNoteProperty =
+            DependencyProperty.Register("TimeToNextNote", typeof(string), typeof(InputControl), new PropertyMetadata("TimeToNextNote"));
+
         private readonly IList<Gamepad> gamepads = new List<Gamepad>(1);
 
         private readonly object lockObject = new object();
@@ -99,6 +106,23 @@ namespace Coimbra.Controls
             get => (string)this.GetValue(SongTitleProperty);
             set => this.SetValue(SongTitleProperty, value);
         }
+
+        /// <summary>
+        /// Gets the song title.
+        /// </summary>
+        public string TimeToNextNote
+        {
+            get => (string)this.GetValue(TimeToNextNoteProperty);
+        }
+
+        /// <summary>
+        /// Sets the song title.
+        /// </summary>
+        public async void SetTimeToNextNote(string value) => await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                () =>
+                {
+                    this.SetValue(TimeToNextNoteProperty, value);
+                });
 
         /// <summary>
         /// Gets or sets the name of the pitch rows.

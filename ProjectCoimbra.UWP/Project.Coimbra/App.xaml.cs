@@ -28,6 +28,7 @@ namespace Coimbra
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
             NetworkListener.StartListener();
+            Task.Run(DataAccess.DataAccess.InitializeDatabaseAsync).Wait();
         }
 
         /// <summary>
@@ -54,7 +55,9 @@ namespace Coimbra
                 Window.Current.Content = rootFrame;
             }
 
-            _ = rootFrame.Navigate(typeof(TermsPage), args.Arguments);
+            // Navigate to the login page once application has started
+            _ = rootFrame.Navigate(typeof(LoginPage), args.Arguments);
+
             Window.Current.Activate();
             GazeInput.Interaction = Interaction.Enabled;
         }

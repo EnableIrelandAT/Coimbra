@@ -19,7 +19,7 @@ namespace Coimbra.Pages
             this.InitializeComponent();
 
         private void BackButton_Click(object sender, RoutedEventArgs e) =>
-            _ = this.Frame.Navigate(UserData.GameMode == UserData.Mode.Solo ? typeof(SongPage) : typeof(BandSongPage), null, new DrillInNavigationTransitionInfo());
+            _ = this.Frame.Navigate(UserData.GameMode == UserData.Mode.Online ? typeof(BandSongPage) : typeof(SongPage), null, new DrillInNavigationTransitionInfo());
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
@@ -36,7 +36,14 @@ namespace Coimbra.Pages
                 UserData.ActiveDuration = UserData.Duration.ShortDuration;
             }
 
-            _ = this.Frame.Navigate(typeof(InstrumentsPage), null, new DrillInNavigationTransitionInfo());
+            if (UserData.IsOptionChangeMode)
+            {
+                _ = this.Frame.Navigate(typeof(GamePage), null, new DrillInNavigationTransitionInfo());
+            }
+            else
+            {
+                _ = this.Frame.Navigate(typeof(InstrumentsPage), null, new DrillInNavigationTransitionInfo());
+            }
         }
     }
 }

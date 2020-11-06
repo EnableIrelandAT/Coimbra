@@ -90,5 +90,10 @@ namespace Coimbra.Model
         /// Gets or sets the pitchmapper.
         /// </summary>
         public static PitchMap PitchMap { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the user is changing an option.
+        /// </summary>
+        public static bool IsOptionChangeMode { get; set; }
     }
 }
