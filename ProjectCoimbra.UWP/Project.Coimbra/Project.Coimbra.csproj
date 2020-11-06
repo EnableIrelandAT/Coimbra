@@ -79,6 +79,9 @@
     <Compile Include="Pages\LaneSettingsPage.xaml.cs">
       <DependentUpon>LaneSettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\OptionsPage.xaml.cs">
+      <DependentUpon>OptionsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
@@ -186,6 +189,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\OptionsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -251,6 +258,11 @@
     </PRIResource>
   </ItemGroup>
   <ItemGroup>
+    <SDKReference Include="Microsoft.Midi.GmDls, Version=10.0.19041.0">
+      <Name>Microsoft General MIDI DLS for Universal Windows Apps</Name>
+    </SDKReference>
+  </ItemGroup>
+  <ItemGroup> 
     <ProjectReference Include="..\DataAccessLibrary\Project.Coimbra.DataAccess.csproj">
       <Project>{060b8571-854f-4c66-b802-fc93211fe12b}</Project>
       <Name>Project.Coimbra.DataAccess</Name>

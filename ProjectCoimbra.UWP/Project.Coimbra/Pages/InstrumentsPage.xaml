@@ -26,7 +26,13 @@ Licensed under the MIT License.
         </StackPanel>
 
         <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-            <ListBox x:Name="InstrumentsBox" HorizontalAlignment="Center" Width="500" Height="250" FontSize="20" />
+            <ListBox x:Name="InstrumentsBox" HorizontalAlignment="Center" Width="500" Height="250" FontSize="20">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding NameAndNoteCount}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
             <Button x:Name="btnInstrumentSelected" HorizontalAlignment="Center" Content="Next" Width="500" Click="BtnInstrumentSelected_OnClick" x:Uid="InstrumentsPage.NextButton.Content" FontSize="20"  />
             <TextBlock x:Name="lblOtherPlayersText" HorizontalAlignment="Center" Padding="0,50,0,0" Width="500" Text="Other Players" x:Uid="InstrumentsPage.OtherPlayers.Text" FontSize="22" />
             <TextBlock x:Name="lblOtherPlayerNames" HorizontalAlignment="Center" Text="" Width="500" TextAlignment="Center"/>
