@@ -10,6 +10,7 @@ namespace Coimbra.Midi
     using System.Threading;
     using System.Threading.Tasks;
     using Coimbra.DryWetMidiIntegration;
+    using Coimbra.Midi.Models;
     using Coimbra.OSIntegration;
     using Melanchall.DryWetMidi.Common;
     using Melanchall.DryWetMidi.Core;
@@ -74,8 +75,9 @@ namespace Coimbra.Midi
         /// The render current notes delegate.
         /// </summary>
         /// <param name="queue">The queue of markable playback events.</param>
+        /// <param name="currentTime">The current time of playback.</param>
         /// <returns>An asynchronous task.</returns>
-        public delegate Task RenderCurrentNotesAsync(ConcurrentQueue<MarkablePlaybackEvent>[] queue);
+        public delegate Task RenderCurrentNotesAsync(ConcurrentQueue<MarkablePlaybackEvent>[] queue, TimeSpan currentTime);
 
         /// <summary>
         /// The output device sent event.
@@ -95,7 +97,7 @@ namespace Coimbra.Midi
         /// <summary>
         /// The playback finished.
         /// </summary>
-        public event EventHandler<EventArgs> PlaybackFinished; 
+        public event EventHandler<EventArgs> PlaybackFinished;
 
         /// <summary>
         /// Gets or sets the MIDI file.
@@ -115,8 +117,8 @@ namespace Coimbra.Midi
         /// <summary>
         /// Gets the set of instruments associated with the MIDI file.
         /// </summary>
-        public IDictionary<FourBitNumber, ICollection<SevenBitNumber>> Instruments { get; } =
-            new Dictionary<FourBitNumber, ICollection<SevenBitNumber>>();
+        public IDictionary<FourBitNumber, InstrumentInfo> Instruments { get; } =
+            new Dictionary<FourBitNumber, InstrumentInfo>();
 
         /// <summary>
         /// Gets the set of pitches associated with the selected instrument.
@@ -129,6 +131,35 @@ namespace Coimbra.Midi
                 .Select(note => note.NoteName.ToString())
                 .Distinct()
                 .ToList();
+
+        /// <summary>
+        /// Gets the play times of notes associated with the selected instrument.
+        /// </summary>
+        /// <param name="instrument">Instrument to retrieve note times for.</param>
+        /// <returns>Note times for instrument.</returns>
+        public List<long> RetrieveNoteTimesForInstrument(FourBitNumber instrument)
+        {
+            var midiMap = this.midi.GetTempoMap();
+            return this.midi.GetNotes()
+                .Where(note => note.Channel == instrument)
+                .Select(note => ((MetricTimeSpan)note.TimeAs(TimeSpanType.Metric, midiMap)).TotalMicroseconds / 1000)
+                .Distinct()
+                .ToList();
+        }
+
+        /// <summary>
+        /// Gets how many notes are there for each instrument.
+        /// </summary>
+        /// <returns>Note counts of each instrument.</returns>
+        public Dictionary<FourBitNumber, int> RetrieveNoteCountsOfInstruments() =>
+            this.midi.GetNotes()
+            .GroupBy(note => note.Channel)
+            .Select(group => new
+            {
+                Channel = group.Key,
+                Count = group.Count()
+            })
+            .ToDictionary(channelAndNoteCount => channelAndNoteCount.Channel, channelAndNoteCount => channelAndNoteCount.Count);
 
         /// <summary>
         /// Called when parsing a file.
@@ -165,6 +196,23 @@ namespace Coimbra.Midi
             this.startThread = new Task(() => this.playback.Start(), this.startThreadCancellationToken.Token);
 
             this.startTimer = new Timer(_ => this.startThread.Start(), null, TimeSpan.Zero, TimeSpan.Zero);
+            this.isStopped = false;
+        }
+
+        /// <summary>
+        /// Pause the playback
+        /// </summary>
+        public void Pause()
+        {
+            this.playback.Stop();
+        }
+
+        /// <summary>
+        /// Resume the playback
+        /// </summary>
+        public void Resume()
+        {
+            this.playback.Start();
         }
 
         /// <summary>
@@ -191,6 +239,7 @@ namespace Coimbra.Midi
             this.threadCancellationToken = new CancellationTokenSource();
             this.thread = new Task(this.RenderCurrentNotes, this.threadCancellationToken.Token);
             this.thread.Start();
+            this.disposed = false;
         }
 
         /// <summary>
@@ -248,6 +297,9 @@ namespace Coimbra.Midi
 
         private void AddInstruments(MidiFile midi)
         {
+            this.Instruments.Clear();
+            var noteCountsOfInstrument = this.RetrieveNoteCountsOfInstruments();
+
             var timedEvents = midi.GetTimedEvents();
             var events = timedEvents.Select(e => e.Event).OfType<ProgramChangeEvent>().ToList<ChannelEvent>();
 
@@ -270,14 +322,16 @@ namespace Coimbra.Midi
 
                 if (this.Instruments.ContainsKey(currentEvent.Channel))
                 {
-                    if (!this.Instruments[currentEvent.Channel].Contains(programNumber))
+                    if (!this.Instruments[currentEvent.Channel].ProgramNumbers.Contains(programNumber))
                     {
-                        this.Instruments[currentEvent.Channel].Add(programNumber);
+                        this.Instruments[currentEvent.Channel].ProgramNumbers.Add(programNumber);
                     }
                 }
                 else
                 {
-                    this.Instruments[currentEvent.Channel] = new List<SevenBitNumber> { programNumber };
+                    this.Instruments[currentEvent.Channel] =
+                        new InstrumentInfo(currentEvent.Channel, new List<SevenBitNumber> { programNumber },
+                            noteCountsOfInstrument.ContainsKey(currentEvent.Channel) ? noteCountsOfInstrument[currentEvent.Channel] : 0);
                 }
             }
         }
@@ -323,7 +377,7 @@ namespace Coimbra.Midi
         {
             while (!this.isStopped)
             {
-                var task = this.RenderCurrentNotesAsyncEvent?.Invoke(this.notesOnDisplay);
+                var task = this.RenderCurrentNotesAsyncEvent?.Invoke(this.notesOnDisplay, playback.CurrentTime);
                 task?.ConfigureAwait(true).GetAwaiter().GetResult();
                 Thread.Sleep(TimeSpan.FromMilliseconds(200));
             }
@@ -343,6 +397,7 @@ namespace Coimbra.Midi
                 this.startThreadCancellationToken.Cancel();
                 this.playback?.Dispose();
                 this.outputDevice?.Dispose();
+                this.isStopped = true;
 
                 PlaybackFinished?.Invoke(this, null);
             });

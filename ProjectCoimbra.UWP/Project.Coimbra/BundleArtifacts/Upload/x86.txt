@@ -1,0 +1,2 @@
+MainPackage=C:\src\Coimbra\ProjectCoimbra.UWP\Project.Coimbra\bin\x86\Release\Upload\Project.Coimbra_2.0.0.0_x86.msix
+SymbolPackage=C:\src\Coimbra\ProjectCoimbra.UWP\Project.Coimbra\bin\x86\Release\Upload\Project.Coimbra_2.0.0.0\Project.Coimbra_2.0.0.0_x86.appxsym

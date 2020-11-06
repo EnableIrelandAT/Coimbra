@@ -21,6 +21,7 @@ Licensed under the MIT License.
                                 <RowDefinition />
                             </Grid.RowDefinitions>
                             <TextBlock HorizontalAlignment="Center" Style="{StaticResource HeaderTextBlockStyle}" Padding="0,50,0,50" Text="{TemplateBinding SongTitle}" />
+                            <TextBlock HorizontalAlignment="Center" Style="{StaticResource HeaderTextBlockStyle}" Padding="0,50,0,50" Margin="0,50,0,0" Text="{TemplateBinding TimeToNextNote}" />
                             <Grid Grid.Row="1" x:Name="PitchBackground" Margin="200,0,0,0" />
                             <ItemsControl Grid.Row="1" x:Name="PitchTracks" Margin="100,0,0,0"
                                           Style="{StaticResource PitchListStyle}" />
