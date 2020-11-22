@@ -11,10 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.Coimbra.Midi", "Pro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.Coimbra.Model", "Project.Coimbra.Model\Project.Coimbra.Model.csproj", "{A9D0BF90-0C50-49A6-959E-34CAA1EBB87A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DryWetMidi", "DryWetMidi", "{265CFAB7-D59C-4069-9B13-36686E38FE5C}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Melanchall.DryWetMidi", "DryWetMidi\DryWetMidi\Melanchall.DryWetMidi.csproj", "{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.Coimbra.DataAccess", "Project.Coimbra.DataAccess\Project.Coimbra.DataAccess.csproj", "{060B8571-854F-4C66-B802-FC93211FE12B}"
 EndProject
 Global
@@ -163,36 +159,6 @@ Global
 		{A9D0BF90-0C50-49A6-959E-34CAA1EBB87A}.Release|x64.Build.0 = Release|x64
 		{A9D0BF90-0C50-49A6-959E-34CAA1EBB87A}.Release|x86.ActiveCfg = Release|x86
 		{A9D0BF90-0C50-49A6-959E-34CAA1EBB87A}.Release|x86.Build.0 = Release|x86
-		{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}.Coverage|Any CPU.ActiveCfg = Coverage|Any CPU
-		{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}.Coverage|Any CPU.Build.0 = Coverage|Any CPU
-		{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}.Coverage|ARM.ActiveCfg = Coverage|Any CPU
-		{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}.Coverage|ARM.Build.0 = Coverage|Any CPU
-		{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}.Coverage|ARM64.ActiveCfg = Coverage|Any CPU
-		{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}.Coverage|ARM64.Build.0 = Coverage|Any CPU
-		{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}.Coverage|x64.ActiveCfg = Coverage|Any CPU
-		{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}.Coverage|x64.Build.0 = Coverage|Any CPU
-		{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}.Coverage|x86.ActiveCfg = Coverage|Any CPU
-		{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}.Coverage|x86.Build.0 = Coverage|Any CPU
-		{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}.Debug|ARM.Build.0 = Debug|Any CPU
-		{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}.Debug|ARM64.ActiveCfg = Debug|Any CPU
-		{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}.Debug|ARM64.Build.0 = Debug|Any CPU
-		{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}.Debug|x64.Build.0 = Debug|Any CPU
-		{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}.Debug|x86.Build.0 = Debug|Any CPU
-		{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}.Release|ARM.ActiveCfg = Release|Any CPU
-		{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}.Release|ARM.Build.0 = Release|Any CPU
-		{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}.Release|ARM64.ActiveCfg = Release|Any CPU
-		{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}.Release|ARM64.Build.0 = Release|Any CPU
-		{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}.Release|x64.ActiveCfg = Release|Any CPU
-		{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}.Release|x64.Build.0 = Release|Any CPU
-		{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}.Release|x86.ActiveCfg = Release|Any CPU
-		{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}.Release|x86.Build.0 = Release|Any CPU
 		{060B8571-854F-4C66-B802-FC93211FE12B}.Coverage|Any CPU.ActiveCfg = Debug|Any CPU
 		{060B8571-854F-4C66-B802-FC93211FE12B}.Coverage|Any CPU.Build.0 = Debug|Any CPU
 		{060B8571-854F-4C66-B802-FC93211FE12B}.Coverage|ARM.ActiveCfg = Debug|ARM
@@ -226,9 +192,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F} = {265CFAB7-D59C-4069-9B13-36686E38FE5C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0142BD93-940A-4BDB-AEFE-8AF3CF414B58}

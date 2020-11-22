@@ -231,6 +231,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Melanchall.DryWetMidi">
+      <Version>5.1.2</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.Data.Sqlite">
       <Version>3.1.9</Version>
     </PackageReference>
@@ -258,18 +261,9 @@
     </PRIResource>
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="Microsoft.Midi.GmDls, Version=10.0.19041.0">
-      <Name>Microsoft General MIDI DLS for Universal Windows Apps</Name>
-    </SDKReference>
-  </ItemGroup>
-  <ItemGroup> 
-    <ProjectReference Include="..\DataAccessLibrary\Project.Coimbra.DataAccess.csproj">
+    <ProjectReference Include="..\Project.Coimbra.DataAccess\Project.Coimbra.DataAccess.csproj">
       <Project>{060b8571-854f-4c66-b802-fc93211fe12b}</Project>
       <Name>Project.Coimbra.DataAccess</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DryWetMidi\DryWetMidi\Melanchall.DryWetMidi.csproj">
-      <Project>{E32ED1E8-D9AC-4215-B0EC-B9B038DEAE1F}</Project>
-      <Name>Melanchall.DryWetMidi</Name>
     </ProjectReference>
     <ProjectReference Include="..\Project.Coimbra.Communication\Project.Coimbra.Communication.csproj">
       <Project>{5742f8f2-deda-4679-9ee0-f76400aa2cea}</Project>
@@ -285,7 +279,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="Microsoft.Midi.GmDls, Version=10.0.18362.0">
+    <SDKReference Include="Microsoft.Midi.GmDls, Version=10.0.19041.0">
       <Name>Microsoft General MIDI DLS for Universal Windows Apps</Name>
     </SDKReference>
   </ItemGroup>
