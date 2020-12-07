@@ -25,7 +25,7 @@
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Padding="0,0,0,50">
             <TextBlock x:Uid="LoginPage.EnterNickname" Padding="0,100,0,15" Text="Please enter your nickname:" HorizontalAlignment="Center"/>
-            <TextBox Name="Input_Box" Width="300" Height="25" MaxLength="100" />
+            <TextBox Name="Input_Box" Width="300" Height="25" MaxLength="100" KeyDown="Input_Box_OnKeyDown" />
             <TextBlock x:Uid="LoginPage.Error" Margin="0,0,0,0" Name="ErrorBox" HorizontalAlignment="Center" TextAlignment="Center" Foreground="Red"
                        Text="{Binding OriginalText, UpdateSourceTrigger=Default}" />
             <Button x:Name="LoginButton" x:Uid="LoginPage.LoginButton" Content="SIGN IN" 
