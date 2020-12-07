@@ -31,7 +31,7 @@ namespace Coimbra.Pages
         private readonly ConcurrentDictionary<Guid, RenderedMarkablePlaybackEvent> notesOnScreen =
             new ConcurrentDictionary<Guid, RenderedMarkablePlaybackEvent>();
 
-        ////private readonly DispatcherTimer timer = new DispatcherTimer();
+        private readonly DispatcherTimer timer = new DispatcherTimer();
         private readonly TimeSpan noteDuration = TimeSpan.FromSeconds(5);
         private readonly long msInASecond = (long)TimeSpan.FromSeconds(1).TotalMilliseconds;
 
@@ -55,21 +55,21 @@ namespace Coimbra.Pages
             }
 
             this.InitializeComponent();
-            ////this.midiEngine.PlaybackFinished += this.MidiEngine_PlaybackFinished;
+            this.midiEngine.PlaybackFinished += this.MidiEngine_PlaybackFinished;
             ////this.midiEngine.RenderCurrentNotesAsyncEvent += this.MidiEngine_RenderCurrentNotesEventAsync;
             /*this.InputControl.LaneButtonClicked += this.InputControl_LaneButtonClicked;
-            this.InputControl.EyeGazeInteracted += this.InputControl_EyeGazeInteracted;
+            this.InputControl.EyeGazeInteracted += this.InputControl_EyeGazeInteracted;*/
             this.InputControl.SongTitle = this.midiEngine.TrackDisplayName;
             this.InputControl.SecondsDuringWhichNoteIsActive = (int)UserData.ActiveDuration;
-*/
+
             this.midiEngine.Initialize();
             noteTimes = this.midiEngine.RetrieveNoteTimesForInstrument(this.midiEngine.SelectedTrack);
 
             if (UserData.GameMode == UserData.Mode.Offline || UserData.GameMode == UserData.Mode.Online)
             {
-                ////this.timer.Tick += this.Timer_Tick;
-               //// this.timer.Interval = TimeSpan.FromSeconds(1);
-                ////this.timer.Start();
+                this.timer.Tick += this.Timer_Tick;
+                this.timer.Interval = TimeSpan.FromSeconds(1);
+                this.timer.Start();
             }
             else
             {
@@ -93,9 +93,9 @@ namespace Coimbra.Pages
         }
 
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-        ////private void MidiEngine_PlaybackFinished(object sender, EventArgs e) =>
-           //// CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-           ////     this.Frame.Navigate(typeof(OptionsPage), null, new DrillInNavigationTransitionInfo()));
+        private void MidiEngine_PlaybackFinished(object sender, EventArgs e) =>
+            CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                this.Frame.Navigate(typeof(OptionsPage), null, new DrillInNavigationTransitionInfo()));
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
 
         private void RemoveOldNotes()
@@ -204,7 +204,7 @@ namespace Coimbra.Pages
             return -1;
         }
 
-        private Task MidiEngine_RenderCurrentNotesEventAsync(ConcurrentQueue<MarkablePlaybackEvent>[] markablePlaybackEvents, TimeSpan currentTime)
+        private async Task MidiEngine_RenderCurrentNotesEventAsync(ConcurrentQueue<MarkablePlaybackEvent>[] markablePlaybackEvents, TimeSpan currentTime)
         {
             this.RemoveOldNotes();
             this.RenderTimeToNextNote(currentTime);
@@ -231,19 +231,17 @@ namespace Coimbra.Pages
                     var lane = ConvertToLane(currentNoteOnEvent);
                     if (lane.HasValue)
                     {
-                        ////await this.Dispatcher.RunAsync(
-                        ////    CoreDispatcherPriority.Normal,
-                        ////    () => noteControlNote = this.InputControl.PlayNote(
-                        ////        lane.Value,
-                        ////        noteDuration,
-                        ////        noteLengthInPercent));
+                        await this.Dispatcher.RunAsync(
+                            CoreDispatcherPriority.Normal,
+                            () => noteControlNote = this.InputControl.PlayNote(
+                                lane.Value,
+                                noteDuration,
+                                noteLengthInPercent));
                         this.notesOnScreen[currentMarkablePlaybackEvent.Id] =
                             new RenderedMarkablePlaybackEvent(currentMarkablePlaybackEvent, noteControlNote);
                     }
                 }
             }
-
-            return Task.FromException(new ArgumentException("abc"));
         }
 
         private void InputControl_LaneButtonClicked(object sender, int lane)
@@ -285,15 +283,15 @@ namespace Coimbra.Pages
             {
                 if (UserData.StartTime == null || UserData.StartTime < currentTime)
                 {
-                    ////this.timer.Stop();
-                    ////this.Clockface.Text = string.Empty;
+                    this.timer.Stop();
+                    this.Clockface.Text = string.Empty;
                     ////this.InputControl.Pitches = UserData.PitchMap.Pitches;
                     this.midiEngine.Start();
                     return;
                 }
 
                 var difference = UserData.StartTime.Value - currentTime;
-                ////this.Clockface.Text = difference.ToString("T", CultureInfo.CurrentCulture);
+                this.Clockface.Text = difference.ToString("T", CultureInfo.CurrentCulture);
             }
             else
             {
@@ -305,12 +303,12 @@ namespace Coimbra.Pages
                 if (MultiPlayerData.StartTime > DateTime.UtcNow)
                 {
                     var difference = MultiPlayerData.StartTime - currentTime;
-                    ////this.Clockface.Text = difference.ToString(@"mm\:ss", CultureInfo.CurrentCulture);
+                    this.Clockface.Text = difference.ToString(@"mm\:ss", CultureInfo.CurrentCulture);
                 }
                 else
                 {
-                   //// this.timer.Stop();
-                    ////this.Clockface.Text = string.Empty;
+                    this.timer.Stop();
+                    this.Clockface.Text = string.Empty;
                     ////this.InputControl.Pitches = UserData.PitchMap.Pitches;
                     this.midiEngine.Start();
                 }

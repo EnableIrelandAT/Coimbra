@@ -10,7 +10,7 @@ namespace Coimbra.Controls
     using Coimbra.Model;
     using Microsoft.Toolkit.Uwp.Input.GazeInteraction;
     using Windows.ApplicationModel.Core;
-////    using Windows.Gaming.Input;
+    using Windows.Gaming.Input;
     using Windows.System;
     using Windows.UI;
     using Windows.UI.Core;
@@ -50,11 +50,11 @@ namespace Coimbra.Controls
         public static readonly DependencyProperty TimeToNextNoteProperty =
             DependencyProperty.Register("TimeToNextNote", typeof(string), typeof(InputControl), new PropertyMetadata("TimeToNextNote"));
 
-        ////private readonly IList<Gamepad> gamepads = new List<Gamepad>(1);
+        private readonly IList<Gamepad> gamepads = new List<Gamepad>(1);
 
         private readonly object lockObject = new object();
 
-        ////private readonly Thread gamepadThread;
+        private readonly Thread gamepadThread;
 
         private ItemsControl buttons;
 
@@ -64,7 +64,7 @@ namespace Coimbra.Controls
 
         private Canvas notes;
 
-       //// private Gamepad mainGamepad;
+        private Gamepad mainGamepad;
 
         private Button[] buttonControls;
 
@@ -81,11 +81,11 @@ namespace Coimbra.Controls
             this.SizeChanged += this.InputControl_SizeChanged;
             this.Loaded += this.InputControl_Loaded;
 
-            ////Gamepad.GamepadAdded += this.Gamepad_GamepadAdded;
-            ////Gamepad.GamepadRemoved += this.Gamepad_GamepadRemoved;
+            Gamepad.GamepadAdded += this.Gamepad_GamepadAdded;
+            Gamepad.GamepadRemoved += this.Gamepad_GamepadRemoved;
 
-            ////this.gamepadThread = new Thread(this.PollGamepad);
-            ////this.gamepadThread.Start();
+            this.gamepadThread = new Thread(this.PollGamepad);
+            this.gamepadThread.Start();
         }
 
         /// <summary>
@@ -159,10 +159,10 @@ namespace Coimbra.Controls
                 return;
             }
 
-            ////if (disposing)
-            ////{
-                ////this.gamepadThread.Join();
-            ////}
+            if (disposing)
+            {
+                this.gamepadThread.Join();
+            }
 
             this.disposed = true;
         }
@@ -267,75 +267,75 @@ namespace Coimbra.Controls
         /// <param name="e">Event.</param>
         private void InputControl_Loaded(object sender, RoutedEventArgs e) => this.UpdateButtons();
 
-        ////private void PollGamepad()
-        ////{
-        ////    while (true)
-        ////    {
-        ////        this.GetGamepads();
-        ////        if (this.gamepads?.Count > 0)
-        ////        {
-        ////            var reading = this.gamepads[0].GetCurrentReading();
-        ////            _ = CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
-        ////                CoreDispatcherPriority.Normal,
-        ////                () =>
-        ////                {
-        ////                    this.ClickLaneButton(reading, GamepadButtons.A, VirtualKey.A);
-        ////                    this.ClickLaneButton(reading, GamepadButtons.B, VirtualKey.B);
-        ////                    this.ClickLaneButton(reading, GamepadButtons.X, VirtualKey.X);
-        ////                    this.ClickLaneButton(reading, GamepadButtons.Y, VirtualKey.Y);
-        ////                    this.ClickLaneButton(reading, GamepadButtons.DPadDown, VirtualKey.GamepadDPadDown);
-        ////                    this.ClickLaneButton(reading, GamepadButtons.DPadUp, VirtualKey.GamepadDPadUp);
-        ////                    this.ClickLaneButton(reading, GamepadButtons.DPadLeft, VirtualKey.GamepadDPadLeft);
-        ////                    this.ClickLaneButton(reading, GamepadButtons.DPadRight, VirtualKey.GamepadDPadRight);
-        ////                    this.ClickLaneButton(reading, GamepadButtons.LeftShoulder, VirtualKey.GamepadLeftShoulder);
-        ////                    this.ClickLaneButton(reading, GamepadButtons.LeftThumbstick, VirtualKey.GamepadLeftThumbstickButton);
-        ////                    this.ClickLaneButton(reading, GamepadButtons.Menu, VirtualKey.GamepadMenu);
-        ////                    this.ClickLaneButton(reading, GamepadButtons.Paddle1, VirtualKey.GamepadRightThumbstickDown);
-        ////                    this.ClickLaneButton(reading, GamepadButtons.Paddle2, VirtualKey.GamepadRightThumbstickLeft);
-        ////                    this.ClickLaneButton(reading, GamepadButtons.Paddle3, VirtualKey.GamepadRightThumbstickRight);
-        ////                    this.ClickLaneButton(reading, GamepadButtons.Paddle4, VirtualKey.GamepadRightThumbstickUp);
-        ////                    this.ClickLaneButton(reading, GamepadButtons.RightShoulder, VirtualKey.GamepadRightShoulder);
-        ////                    this.ClickLaneButton(reading, GamepadButtons.RightThumbstick, VirtualKey.GamepadRightThumbstickButton);
-        ////                    this.ClickLaneButton(reading, GamepadButtons.View, VirtualKey.GamepadView);
-        ////                });
-        ////        }
+        private void PollGamepad()
+        {
+            while (true)
+            {
+                this.GetGamepads();
+                if (this.gamepads?.Count > 0)
+                {
+                    var reading = this.gamepads[0].GetCurrentReading();
+                    _ = CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                        CoreDispatcherPriority.Normal,
+                        () =>
+                        {
+                            this.ClickLaneButton(reading, GamepadButtons.A, VirtualKey.A);
+                            this.ClickLaneButton(reading, GamepadButtons.B, VirtualKey.B);
+                            this.ClickLaneButton(reading, GamepadButtons.X, VirtualKey.X);
+                            this.ClickLaneButton(reading, GamepadButtons.Y, VirtualKey.Y);
+                            this.ClickLaneButton(reading, GamepadButtons.DPadDown, VirtualKey.GamepadDPadDown);
+                            this.ClickLaneButton(reading, GamepadButtons.DPadUp, VirtualKey.GamepadDPadUp);
+                            this.ClickLaneButton(reading, GamepadButtons.DPadLeft, VirtualKey.GamepadDPadLeft);
+                            this.ClickLaneButton(reading, GamepadButtons.DPadRight, VirtualKey.GamepadDPadRight);
+                            this.ClickLaneButton(reading, GamepadButtons.LeftShoulder, VirtualKey.GamepadLeftShoulder);
+                            this.ClickLaneButton(reading, GamepadButtons.LeftThumbstick, VirtualKey.GamepadLeftThumbstickButton);
+                            this.ClickLaneButton(reading, GamepadButtons.Menu, VirtualKey.GamepadMenu);
+                            this.ClickLaneButton(reading, GamepadButtons.Paddle1, VirtualKey.GamepadRightThumbstickDown);
+                            this.ClickLaneButton(reading, GamepadButtons.Paddle2, VirtualKey.GamepadRightThumbstickLeft);
+                            this.ClickLaneButton(reading, GamepadButtons.Paddle3, VirtualKey.GamepadRightThumbstickRight);
+                            this.ClickLaneButton(reading, GamepadButtons.Paddle4, VirtualKey.GamepadRightThumbstickUp);
+                            this.ClickLaneButton(reading, GamepadButtons.RightShoulder, VirtualKey.GamepadRightShoulder);
+                            this.ClickLaneButton(reading, GamepadButtons.RightThumbstick, VirtualKey.GamepadRightThumbstickButton);
+                            this.ClickLaneButton(reading, GamepadButtons.View, VirtualKey.GamepadView);
+                        });
+                }
 
-        ////        Thread.Sleep(TimeSpan.FromMilliseconds(10));
-        ////    }
-        ////}
+                Thread.Sleep(TimeSpan.FromMilliseconds(10));
+            }
+        }
 
-        ////private void GetGamepads()
-        ////{
-        ////    lock (this.lockObject)
-        ////    {
-        ////        foreach (var gamepad in Gamepad.Gamepads)
-        ////        {
-        ////            var gamepadInList = this.gamepads.Contains(gamepad);
-        ////            if (!gamepadInList)
-        ////            {
-        ////                this.gamepads.Add(gamepad);
-        ////            }
-        ////        }
-        ////    }
-        ////}
+        private void GetGamepads()
+        {
+            lock (this.lockObject)
+            {
+                foreach (var gamepad in Gamepad.Gamepads)
+                {
+                    var gamepadInList = this.gamepads.Contains(gamepad);
+                    if (!gamepadInList)
+                    {
+                        this.gamepads.Add(gamepad);
+                    }
+                }
+            }
+        }
 
-        ////private void ClickLaneButton(GamepadReading reading, GamepadButtons button, VirtualKey key)
-        ////{
-        ////    if ((reading.Buttons & button) == button)
-        ////    {
-        ////        for (var currentPitch = 0; currentPitch < this.Pitches.Count; currentPitch++)
-        ////        {
-        ////            foreach (var pitchKey in this.Pitches[currentPitch].Keys)
-        ////            {
-        ////                if (pitchKey == key)
-        ////                {
-        ////                    this.ClickLaneButton(this.buttonControls[currentPitch]);
-        ////                    break;
-        ////                }
-        ////            }
-        ////        }
-        ////    }
-        ////}
+        private void ClickLaneButton(GamepadReading reading, GamepadButtons button, VirtualKey key)
+        {
+            if ((reading.Buttons & button) == button)
+            {
+                for (var currentPitch = 0; currentPitch < this.Pitches.Count; currentPitch++)
+                {
+                    foreach (var pitchKey in this.Pitches[currentPitch].Keys)
+                    {
+                        if (pitchKey == key)
+                        {
+                            this.ClickLaneButton(this.buttonControls[currentPitch]);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
 
         private void ClickLaneButton(object sender)
         {
@@ -482,35 +482,35 @@ namespace Coimbra.Controls
             this.UpdateButtons();
         }
 
-        ////private void Gamepad_GamepadRemoved(object sender, Gamepad e)
-        ////{
-        ////    lock (this.lockObject)
-        ////    {
-        ////        var indexRemoved = this.gamepads.IndexOf(e);
-        ////        if (indexRemoved < 0)
-        ////        {
-        ////            return;
-        ////        }
+        private void Gamepad_GamepadRemoved(object sender, Gamepad e)
+        {
+            lock (this.lockObject)
+            {
+                var indexRemoved = this.gamepads.IndexOf(e);
+                if (indexRemoved < 0)
+                {
+                    return;
+                }
 
-        ////        if (this.mainGamepad == this.gamepads[indexRemoved])
-        ////        {
-        ////            this.mainGamepad = null;
-        ////        }
+                if (this.mainGamepad == this.gamepads[indexRemoved])
+                {
+                    this.mainGamepad = null;
+                }
 
-        ////        this.gamepads.RemoveAt(indexRemoved);
-        ////    }
-        ////}
+                this.gamepads.RemoveAt(indexRemoved);
+            }
+        }
 
-        ////private void Gamepad_GamepadAdded(object sender, Gamepad e)
-        ////{
-        ////    Check if the just - added gamepad is already in the list of gamepads. If it isn't, add it.
-        ////    lock (this.lockObject)
-        ////    {
-        ////        if (!this.gamepads.Contains(e))
-        ////        {
-        ////            this.gamepads.Add(e);
-        ////        }
-        ////    }
-        ////}
+        private void Gamepad_GamepadAdded(object sender, Gamepad e)
+        {
+            // Check if the just-added gamepad is already in the list of gamepads. If it isn't, add it.
+            lock (this.lockObject)
+            {
+                if (!this.gamepads.Contains(e))
+                {
+                    this.gamepads.Add(e);
+                }
+            }
+        }
     }
 }

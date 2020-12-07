@@ -12,10 +12,10 @@ Licensed under the MIT License.
     Background="#F5F5F5">
 
     <Grid>
-        <!--<localControls:InputControl x:Name="InputControl" />
+        <localControls:InputControl x:Name="InputControl" />
         <TextBlock Name="Clockface" TextAlignment="Center" HorizontalAlignment="Center"
                    Text="{Binding OriginalText, UpdateSourceTrigger=Default}" TextWrapping="Wrap"
-                   VerticalAlignment="Center" Height="664" FontSize="300" />-->
+                   VerticalAlignment="Center" Height="664" FontSize="300" />
         <Button Content="Pause" Margin="28,28,0,0" VerticalAlignment="Top" Click="Pause_Click"/>
     </Grid>
 </Page>
