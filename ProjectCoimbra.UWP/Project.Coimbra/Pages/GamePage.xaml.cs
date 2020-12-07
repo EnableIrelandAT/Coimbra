@@ -1,9 +1,5 @@
 // Licensed under the MIT License.
 
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.ApplicationModel.Resources;
-using Windows.UI;
-
 namespace Coimbra.Pages
 {
     using System;
@@ -21,9 +17,9 @@ namespace Coimbra.Pages
     using Windows.ApplicationModel.Core;
     using Windows.ApplicationModel.Resources;
     using Windows.UI.Core;
-   //// using Windows.UI.Xaml;
+    using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;
-    ////using Windows.UI.Xaml.Media.Animation;
+    using Windows.UI.Xaml.Media.Animation;
 
     /// <summary>
     /// A class encapsulating the logic of the game page of the app.
@@ -321,45 +317,45 @@ namespace Coimbra.Pages
             }
         }
 
-        /////// <summary>
-        /////// Event handler when clicking Pause button.
-        /////// For Solo mode, the playback will be paused.
-        /////// For Offline mode or LAN mode, the playback will continue playing because other players will not be affected while they are playing.
-        /////// </summary>
-        /////// <param name="sender">A sender of this event</param>
-        /////// <param name="e">Contains state information and event data associated with a routed event</param>
-        ////private async void Pause_Click(object sender, RoutedEventArgs e)
-        ////{
-        ////    if (UserData.GameMode == UserData.Mode.Solo)
-        ////    {
-        ////        midiEngine.Pause();
-        ////    }
+        /// <summary>
+        /// Event handler when clicking Pause button.
+        /// For Solo mode, the playback will be paused.
+        /// For Offline mode or LAN mode, the playback will continue playing because other players will not be affected while they are playing.
+        /// </summary>
+        /// <param name="sender">A sender of this event</param>
+        /// <param name="e">Contains state information and event data associated with a routed event</param>
+        private async void Pause_Click(object sender, RoutedEventArgs e)
+        {
+            if (UserData.GameMode == UserData.Mode.Solo)
+            {
+                midiEngine.Pause();
+            }
 
-        ////    ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView();
+            ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView();
 
-        ////    ContentDialog dialog = new ContentDialog
-        ////    {
-        ////        Title = resourceLoader.GetString("GamePage/PauseDialog/Title"),
-        ////        Content = resourceLoader.GetString("GamePage/PauseDialog/Content"),
-        ////        PrimaryButtonText = resourceLoader.GetString("GamePage/PauseDialog/PrimaryButton"),
-        ////        CloseButtonText = resourceLoader.GetString("GamePage/PauseDialog/CloseButton"),
-        ////        DefaultButton = ContentDialogButton.Primary
-        ////    };
+            ContentDialog dialog = new ContentDialog
+            {
+                Title = resourceLoader.GetString("GamePage/PauseDialog/Title"),
+                Content = resourceLoader.GetString("GamePage/PauseDialog/Content"),
+                PrimaryButtonText = resourceLoader.GetString("GamePage/PauseDialog/PrimaryButton"),
+                CloseButtonText = resourceLoader.GetString("GamePage/PauseDialog/CloseButton"),
+                DefaultButton = ContentDialogButton.Primary
+            };
 
-        ////    var result = await dialog.ShowAsync();
-            
-        ////    if (result != ContentDialogResult.Primary)
-        ////    {
-        ////        midiEngine.Dispose();
-        ////        this.Frame.Navigate(typeof(ModePage), null, new DrillInNavigationTransitionInfo());
-        ////    }
-        ////    else
-        ////    {
-        ////        if (UserData.GameMode == UserData.Mode.Solo)
-        ////        {
-        ////            midiEngine.Resume();
-        ////        }
-        ////    }
-        ////}
+            var result = await dialog.ShowAsync();
+
+            if (result != ContentDialogResult.Primary)
+            {
+                midiEngine.Dispose();
+                this.Frame.Navigate(typeof(ModePage), null, new DrillInNavigationTransitionInfo());
+            }
+            else
+            {
+                if (UserData.GameMode == UserData.Mode.Solo)
+                {
+                    midiEngine.Resume();
+                }
+            }
+        }
     }
 }
