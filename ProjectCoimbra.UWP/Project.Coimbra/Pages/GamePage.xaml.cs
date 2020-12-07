@@ -73,7 +73,7 @@ namespace Coimbra.Pages
             }
             else
             {
-                ////this.InputControl.Pitches = UserData.PitchMap.Pitches;
+                this.InputControl.Pitches = UserData.PitchMap.Pitches;
                 this.midiEngine.Start();
             }
 
@@ -285,7 +285,7 @@ namespace Coimbra.Pages
                 {
                     this.timer.Stop();
                     this.Clockface.Text = string.Empty;
-                    ////this.InputControl.Pitches = UserData.PitchMap.Pitches;
+                    this.InputControl.Pitches = UserData.PitchMap.Pitches;
                     this.midiEngine.Start();
                     return;
                 }
@@ -309,7 +309,7 @@ namespace Coimbra.Pages
                 {
                     this.timer.Stop();
                     this.Clockface.Text = string.Empty;
-                    ////this.InputControl.Pitches = UserData.PitchMap.Pitches;
+                    this.InputControl.Pitches = UserData.PitchMap.Pitches;
                     this.midiEngine.Start();
                 }
             }
