@@ -19,7 +19,7 @@ namespace Coimbra.Pages
             this.InitializeComponent();
 
         private void BackButton_Click(object sender, RoutedEventArgs e) =>
-            _ = this.Frame.Navigate(typeof(TermsPage), null, new DrillInNavigationTransitionInfo());
+            _ = this.Frame.Navigate(typeof(LoginPage), null, new DrillInNavigationTransitionInfo());
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {

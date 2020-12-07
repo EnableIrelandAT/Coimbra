@@ -4,8 +4,10 @@ namespace Coimbra.Pages
 {
     using Coimbra.DataAccess;
     using Windows.ApplicationModel.Resources;
+    using Windows.System;
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;
+    using Windows.UI.Xaml.Input;
     using Windows.UI.Xaml.Media.Animation;
 
     /// <summary>
@@ -21,20 +23,31 @@ namespace Coimbra.Pages
             this.InitializeComponent();
         }
 
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        private void Input_Box_OnKeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == VirtualKey.Enter)
+            {
+                this.Submit();
+            }
+        }
+
+        private void LoginButton_Click(object sender, RoutedEventArgs e) =>
+            this.Submit();
+
+        private void GoToSignupPage_Click(object sender, RoutedEventArgs e) =>
+            this.Frame.Navigate(typeof(CreateAccountPage));
+
+        private void Submit()
         {
             if (DataAccess.Exists(Input_Box.Text))
             {
                 _ = this.Frame.Navigate(typeof(ModePage), null, new DrillInNavigationTransitionInfo());
-            } 
+            }
             else
             {
                 var res = ResourceLoader.GetForCurrentView();
                 this.ErrorBox.Text = res.GetString("LoginPage/Error");
             }
         }
-
-        private void GoToSignupPage_Click(object sender, RoutedEventArgs e) =>
-            this.Frame.Navigate(typeof(CreateAccountPage));
     }
 }
