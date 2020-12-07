@@ -1,8 +1,5 @@
 // Licensed under the MIT License.
 
-using Windows.ApplicationModel.Resources;
-using Windows.UI;
-
 namespace Coimbra.Pages
 {
     using System;
@@ -344,7 +341,7 @@ namespace Coimbra.Pages
             };
 
             var result = await dialog.ShowAsync();
-            
+
             if (result != ContentDialogResult.Primary)
             {
                 midiEngine.Dispose();
