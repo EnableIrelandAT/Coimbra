@@ -109,7 +109,7 @@ Licensed under the MIT License.
                         </VisualStateManager.VisualStateGroups>
                     </ContentPresenter>
                     <Canvas Grid.Column="1" VerticalAlignment="Center">
-                        <Line X1="20" X2="{TemplateBinding LineEndPoint}" Y1="-1" Y2="-1" StrokeThickness="4" Stroke="{TemplateBinding Foreground}" />
+                        <Line X1="20" X2="{Binding LineEndPoint, RelativeSource={RelativeSource TemplatedParent}}" Y1="-1" Y2="-1" StrokeThickness="4" Stroke="{TemplateBinding Foreground}" />
                     </Canvas>
                 </Grid>
             </ControlTemplate>
