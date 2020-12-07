@@ -56,9 +56,9 @@ namespace Coimbra.Pages
 
             this.InitializeComponent();
             this.midiEngine.PlaybackFinished += this.MidiEngine_PlaybackFinished;
-            ////this.midiEngine.RenderCurrentNotesAsyncEvent += this.MidiEngine_RenderCurrentNotesEventAsync;
-            /*this.InputControl.LaneButtonClicked += this.InputControl_LaneButtonClicked;
-            this.InputControl.EyeGazeInteracted += this.InputControl_EyeGazeInteracted;*/
+            this.midiEngine.RenderCurrentNotesAsyncEvent += this.MidiEngine_RenderCurrentNotesEventAsync;
+            this.InputControl.LaneButtonClicked += this.InputControl_LaneButtonClicked;
+            this.InputControl.EyeGazeInteracted += this.InputControl_EyeGazeInteracted;
             this.InputControl.SongTitle = this.midiEngine.TrackDisplayName;
             this.InputControl.SecondsDuringWhichNoteIsActive = (int)UserData.ActiveDuration;
 
@@ -102,7 +102,7 @@ namespace Coimbra.Pages
         {
             foreach (var (key, value) in this.notesOnScreen.Where(pair => (DateTime.UtcNow - pair.Value.FirstDisplayed).TotalSeconds > 20))
             {
-                ////this.InputControl.RemoveNote(value.NoteControl);
+                this.InputControl.RemoveNote(value.NoteControl);
                 _ = this.notesOnScreen.Remove(key, out _);
             }
         }
@@ -145,11 +145,11 @@ namespace Coimbra.Pages
                 previousTimeToNote = timeToNextNote;
                 this.dotCounter = 0;
                 var seconds = timeToNextNote / msInASecond;
-                ////this.InputControl.SetTimeToNextNote(string.Format(timeToNextNoteResource, seconds));
+                this.InputControl.SetTimeToNextNote(string.Format(timeToNextNoteResource, seconds));
             }
             else
             {
-                ////this.InputControl.SetTimeToNextNote($"{playingIndicatorResource}{new string('.', (this.dotCounter / 5) + 1)}");
+                this.InputControl.SetTimeToNextNote($"{playingIndicatorResource}{new string('.', (this.dotCounter / 5) + 1)}");
                 this.dotCounter++;
                 if (this.dotCounter == 15)
                 {
