@@ -1,5 +1,6 @@
 // Licensed under the MIT License.
 
+using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel.Resources;
 using Windows.UI;
 
@@ -20,9 +21,9 @@ namespace Coimbra.Pages
     using Windows.ApplicationModel.Core;
     using Windows.ApplicationModel.Resources;
     using Windows.UI.Core;
-    using Windows.UI.Xaml;
+   //// using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;
-    using Windows.UI.Xaml.Media.Animation;
+    ////using Windows.UI.Xaml.Media.Animation;
 
     /// <summary>
     /// A class encapsulating the logic of the game page of the app.
@@ -34,7 +35,7 @@ namespace Coimbra.Pages
         private readonly ConcurrentDictionary<Guid, RenderedMarkablePlaybackEvent> notesOnScreen =
             new ConcurrentDictionary<Guid, RenderedMarkablePlaybackEvent>();
 
-        private readonly DispatcherTimer timer = new DispatcherTimer();
+        ////private readonly DispatcherTimer timer = new DispatcherTimer();
         private readonly TimeSpan noteDuration = TimeSpan.FromSeconds(5);
         private readonly long msInASecond = (long)TimeSpan.FromSeconds(1).TotalMilliseconds;
 
@@ -58,25 +59,25 @@ namespace Coimbra.Pages
             }
 
             this.InitializeComponent();
-            this.midiEngine.PlaybackFinished += this.MidiEngine_PlaybackFinished;
-            this.midiEngine.RenderCurrentNotesAsyncEvent += this.MidiEngine_RenderCurrentNotesEventAsync;
-            this.InputControl.LaneButtonClicked += this.InputControl_LaneButtonClicked;
+            ////this.midiEngine.PlaybackFinished += this.MidiEngine_PlaybackFinished;
+            ////this.midiEngine.RenderCurrentNotesAsyncEvent += this.MidiEngine_RenderCurrentNotesEventAsync;
+            /*this.InputControl.LaneButtonClicked += this.InputControl_LaneButtonClicked;
             this.InputControl.EyeGazeInteracted += this.InputControl_EyeGazeInteracted;
             this.InputControl.SongTitle = this.midiEngine.TrackDisplayName;
             this.InputControl.SecondsDuringWhichNoteIsActive = (int)UserData.ActiveDuration;
-
+*/
             this.midiEngine.Initialize();
             noteTimes = this.midiEngine.RetrieveNoteTimesForInstrument(this.midiEngine.SelectedTrack);
 
             if (UserData.GameMode == UserData.Mode.Offline || UserData.GameMode == UserData.Mode.Online)
             {
-                this.timer.Tick += this.Timer_Tick;
-                this.timer.Interval = TimeSpan.FromSeconds(1);
-                this.timer.Start();
+                ////this.timer.Tick += this.Timer_Tick;
+               //// this.timer.Interval = TimeSpan.FromSeconds(1);
+                ////this.timer.Start();
             }
             else
             {
-                this.InputControl.Pitches = UserData.PitchMap.Pitches;
+                ////this.InputControl.Pitches = UserData.PitchMap.Pitches;
                 this.midiEngine.Start();
             }
 
@@ -96,16 +97,16 @@ namespace Coimbra.Pages
         }
 
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-        private void MidiEngine_PlaybackFinished(object sender, EventArgs e) =>
-            CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                this.Frame.Navigate(typeof(OptionsPage), null, new DrillInNavigationTransitionInfo()));
+        ////private void MidiEngine_PlaybackFinished(object sender, EventArgs e) =>
+           //// CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+           ////     this.Frame.Navigate(typeof(OptionsPage), null, new DrillInNavigationTransitionInfo()));
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
 
         private void RemoveOldNotes()
         {
             foreach (var (key, value) in this.notesOnScreen.Where(pair => (DateTime.UtcNow - pair.Value.FirstDisplayed).TotalSeconds > 20))
             {
-                this.InputControl.RemoveNote(value.NoteControl);
+                ////this.InputControl.RemoveNote(value.NoteControl);
                 _ = this.notesOnScreen.Remove(key, out _);
             }
         }
@@ -148,11 +149,11 @@ namespace Coimbra.Pages
                 previousTimeToNote = timeToNextNote;
                 this.dotCounter = 0;
                 var seconds = timeToNextNote / msInASecond;
-                this.InputControl.SetTimeToNextNote(string.Format(timeToNextNoteResource, seconds));
+                ////this.InputControl.SetTimeToNextNote(string.Format(timeToNextNoteResource, seconds));
             }
             else
             {
-                this.InputControl.SetTimeToNextNote($"{playingIndicatorResource}{new string('.', (this.dotCounter / 5) + 1)}");
+                ////this.InputControl.SetTimeToNextNote($"{playingIndicatorResource}{new string('.', (this.dotCounter / 5) + 1)}");
                 this.dotCounter++;
                 if (this.dotCounter == 15)
                 {
@@ -207,7 +208,7 @@ namespace Coimbra.Pages
             return -1;
         }
 
-        private async Task MidiEngine_RenderCurrentNotesEventAsync(ConcurrentQueue<MarkablePlaybackEvent>[] markablePlaybackEvents, TimeSpan currentTime)
+        private Task MidiEngine_RenderCurrentNotesEventAsync(ConcurrentQueue<MarkablePlaybackEvent>[] markablePlaybackEvents, TimeSpan currentTime)
         {
             this.RemoveOldNotes();
             this.RenderTimeToNextNote(currentTime);
@@ -234,17 +235,19 @@ namespace Coimbra.Pages
                     var lane = ConvertToLane(currentNoteOnEvent);
                     if (lane.HasValue)
                     {
-                        await this.Dispatcher.RunAsync(
-                            CoreDispatcherPriority.Normal,
-                            () => noteControlNote = this.InputControl.PlayNote(
-                                lane.Value,
-                                noteDuration,
-                                noteLengthInPercent));
+                        ////await this.Dispatcher.RunAsync(
+                        ////    CoreDispatcherPriority.Normal,
+                        ////    () => noteControlNote = this.InputControl.PlayNote(
+                        ////        lane.Value,
+                        ////        noteDuration,
+                        ////        noteLengthInPercent));
                         this.notesOnScreen[currentMarkablePlaybackEvent.Id] =
                             new RenderedMarkablePlaybackEvent(currentMarkablePlaybackEvent, noteControlNote);
                     }
                 }
             }
+
+            return Task.FromException(new ArgumentException("abc"));
         }
 
         private void InputControl_LaneButtonClicked(object sender, int lane)
@@ -286,15 +289,15 @@ namespace Coimbra.Pages
             {
                 if (UserData.StartTime == null || UserData.StartTime < currentTime)
                 {
-                    this.timer.Stop();
-                    this.Clockface.Text = string.Empty;
-                    this.InputControl.Pitches = UserData.PitchMap.Pitches;
+                    ////this.timer.Stop();
+                    ////this.Clockface.Text = string.Empty;
+                    ////this.InputControl.Pitches = UserData.PitchMap.Pitches;
                     this.midiEngine.Start();
                     return;
                 }
 
                 var difference = UserData.StartTime.Value - currentTime;
-                this.Clockface.Text = difference.ToString("T", CultureInfo.CurrentCulture);
+                ////this.Clockface.Text = difference.ToString("T", CultureInfo.CurrentCulture);
             }
             else
             {
@@ -306,57 +309,57 @@ namespace Coimbra.Pages
                 if (MultiPlayerData.StartTime > DateTime.UtcNow)
                 {
                     var difference = MultiPlayerData.StartTime - currentTime;
-                    this.Clockface.Text = difference.ToString(@"mm\:ss", CultureInfo.CurrentCulture);
+                    ////this.Clockface.Text = difference.ToString(@"mm\:ss", CultureInfo.CurrentCulture);
                 }
                 else
                 {
-                    this.timer.Stop();
-                    this.Clockface.Text = string.Empty;
-                    this.InputControl.Pitches = UserData.PitchMap.Pitches;
+                   //// this.timer.Stop();
+                    ////this.Clockface.Text = string.Empty;
+                    ////this.InputControl.Pitches = UserData.PitchMap.Pitches;
                     this.midiEngine.Start();
                 }
             }
         }
 
-        /// <summary>
-        /// Event handler when clicking Pause button.
-        /// For Solo mode, the playback will be paused.
-        /// For Offline mode or LAN mode, the playback will continue playing because other players will not be affected while they are playing.
-        /// </summary>
-        /// <param name="sender">A sender of this event</param>
-        /// <param name="e">Contains state information and event data associated with a routed event</param>
-        private async void Pause_Click(object sender, RoutedEventArgs e)
-        {
-            if (UserData.GameMode == UserData.Mode.Solo)
-            {
-                midiEngine.Pause();
-            }
+        /////// <summary>
+        /////// Event handler when clicking Pause button.
+        /////// For Solo mode, the playback will be paused.
+        /////// For Offline mode or LAN mode, the playback will continue playing because other players will not be affected while they are playing.
+        /////// </summary>
+        /////// <param name="sender">A sender of this event</param>
+        /////// <param name="e">Contains state information and event data associated with a routed event</param>
+        ////private async void Pause_Click(object sender, RoutedEventArgs e)
+        ////{
+        ////    if (UserData.GameMode == UserData.Mode.Solo)
+        ////    {
+        ////        midiEngine.Pause();
+        ////    }
 
-            ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView();
+        ////    ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView();
 
-            ContentDialog dialog = new ContentDialog
-            {
-                Title = resourceLoader.GetString("GamePage/PauseDialog/Title"),
-                Content = resourceLoader.GetString("GamePage/PauseDialog/Content"),
-                PrimaryButtonText = resourceLoader.GetString("GamePage/PauseDialog/PrimaryButton"),
-                CloseButtonText = resourceLoader.GetString("GamePage/PauseDialog/CloseButton"),
-                DefaultButton = ContentDialogButton.Primary
-            };
+        ////    ContentDialog dialog = new ContentDialog
+        ////    {
+        ////        Title = resourceLoader.GetString("GamePage/PauseDialog/Title"),
+        ////        Content = resourceLoader.GetString("GamePage/PauseDialog/Content"),
+        ////        PrimaryButtonText = resourceLoader.GetString("GamePage/PauseDialog/PrimaryButton"),
+        ////        CloseButtonText = resourceLoader.GetString("GamePage/PauseDialog/CloseButton"),
+        ////        DefaultButton = ContentDialogButton.Primary
+        ////    };
 
-            var result = await dialog.ShowAsync();
+        ////    var result = await dialog.ShowAsync();
             
-            if (result != ContentDialogResult.Primary)
-            {
-                midiEngine.Dispose();
-                this.Frame.Navigate(typeof(ModePage), null, new DrillInNavigationTransitionInfo());
-            }
-            else
-            {
-                if (UserData.GameMode == UserData.Mode.Solo)
-                {
-                    midiEngine.Resume();
-                }
-            }
-        }
+        ////    if (result != ContentDialogResult.Primary)
+        ////    {
+        ////        midiEngine.Dispose();
+        ////        this.Frame.Navigate(typeof(ModePage), null, new DrillInNavigationTransitionInfo());
+        ////    }
+        ////    else
+        ////    {
+        ////        if (UserData.GameMode == UserData.Mode.Solo)
+        ////        {
+        ////            midiEngine.Resume();
+        ////        }
+        ////    }
+        ////}
     }
 }
