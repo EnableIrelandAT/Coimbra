@@ -1,15 +1,13 @@
 ﻿// Licensed under the MIT License.
 
-using Windows.System;
-using Windows.UI.Core;
-using Windows.UI.Xaml.Input;
-
 namespace Coimbra.Pages
 {
     using Coimbra.DataAccess;
     using Windows.ApplicationModel.Resources;
+    using Windows.System;
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;
+    using Windows.UI.Xaml.Input;
     using Windows.UI.Xaml.Media.Animation;
 
     /// <summary>
