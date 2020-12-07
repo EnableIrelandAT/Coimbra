@@ -39,13 +39,13 @@ namespace Coimbra.Midi
 
         private MarkablePlayback playback;
 
-        private Thread startThread;
+        private Task startThread;
 
         private CancellationTokenSource startThreadCancellationToken;
 
         private Timer startTimer;
 
-        private Thread thread;
+        private Task thread;
 
         private CancellationTokenSource threadCancellationToken;
 
@@ -193,7 +193,7 @@ namespace Coimbra.Midi
         public void Start()
         {
             this.startThreadCancellationToken = new CancellationTokenSource();
-            this.startThread = new Thread(() => this.playback.Start());
+            this.startThread = new Task(() => this.playback.Start(), this.startThreadCancellationToken.Token);
 
             this.startTimer = new Timer(_ => this.startThread.Start(), null, TimeSpan.Zero, TimeSpan.Zero);
             this.isStopped = false;
@@ -237,7 +237,7 @@ namespace Coimbra.Midi
             }
 
             this.threadCancellationToken = new CancellationTokenSource();
-            this.thread = new Thread(this.RenderCurrentNotes);
+            this.thread = new Task(this.RenderCurrentNotes, this.threadCancellationToken.Token);
             this.thread.Start();
             this.disposed = false;
         }
