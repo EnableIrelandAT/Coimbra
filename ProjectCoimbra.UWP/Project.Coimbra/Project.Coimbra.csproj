@@ -231,9 +231,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Melanchall.DryWetMidi">
-      <Version>5.1.2</Version>
-    </PackageReference>
     <PackageReference Include="Microsoft.Data.Sqlite">
       <Version>3.1.9</Version>
     </PackageReference>
@@ -266,6 +263,10 @@
     </SDKReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Melanchall.DryWetMidi.UWP\Melanchall.DryWetMidi.UWP.csproj">
+      <Project>{3b259086-6e7d-4ecc-a419-094f71503f63}</Project>
+      <Name>Melanchall.DryWetMidi.UWP</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Project.Coimbra.DataAccess\Project.Coimbra.DataAccess.csproj">
       <Project>{060b8571-854f-4c66-b802-fc93211fe12b}</Project>
       <Name>Project.Coimbra.DataAccess</Name>

@@ -1,0 +1,635 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3B259086-6E7D-4ECC-A419-094F71503F63}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Melanchall.DryWetMidi</RootNamespace>
+    <AssemblyName>Melanchall.DryWetMidi</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.19041.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <PlatformTarget>ARM</PlatformTarget>
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM64'">
+    <PlatformTarget>ARM64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM64'">
+    <PlatformTarget>ARM64</PlatformTarget>
+    <OutputPath>bin\ARM64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Common\CircularBuffer.cs" />
+    <Compile Include="Common\ControlName.cs" />
+    <Compile Include="Common\DataTypes\DataTypesUtilities.cs" />
+    <Compile Include="Common\DataTypes\FourBitNumber.cs" />
+    <Compile Include="Common\DataTypes\SevenBitNumber.cs" />
+    <Compile Include="Common\DataTypes\ShortByteParser.cs" />
+    <Compile Include="Common\DisplayNameAttribute.cs" />
+    <Compile Include="Common\MathUtilities.cs" />
+    <Compile Include="Common\ObjectWrapper.cs" />
+    <Compile Include="Common\Parsing\Parsing.cs" />
+    <Compile Include="Common\Parsing\ParsingResult.cs" />
+    <Compile Include="Common\Parsing\ParsingStatus.cs" />
+    <Compile Include="Common\Parsing\ParsingUtilities.cs" />
+    <Compile Include="Common\SmpteFormat.cs" />
+    <Compile Include="Common\StreamWrapper.cs" />
+    <Compile Include="Common\ThrowIfArgument.cs" />
+    <Compile Include="Composing\Actions\AddAnchorAction.cs" />
+    <Compile Include="Composing\Actions\AddChordAction.cs" />
+    <Compile Include="Composing\Actions\AddNoteAction.cs" />
+    <Compile Include="Composing\Actions\AddPatternAction.cs" />
+    <Compile Include="Composing\Actions\AddTextEventAction.cs" />
+    <Compile Include="Composing\Actions\MoveToAnchorAction.cs" />
+    <Compile Include="Composing\Actions\MoveToTimeAction.cs" />
+    <Compile Include="Composing\Actions\SetProgram\SetGeneralMidi2ProgramAction.cs" />
+    <Compile Include="Composing\Actions\SetProgram\SetGeneralMidiProgramAction.cs" />
+    <Compile Include="Composing\Actions\SetProgram\SetProgramNumberAction.cs" />
+    <Compile Include="Composing\Actions\StepAction.cs" />
+    <Compile Include="Composing\Actions\StepBackAction.cs" />
+    <Compile Include="Composing\Actions\StepForwardAction.cs" />
+    <Compile Include="Composing\Descriptors\ChordDescriptor.cs" />
+    <Compile Include="Composing\Descriptors\NoteDescriptor.cs" />
+    <Compile Include="Composing\Pattern.cs" />
+    <Compile Include="Composing\PatternAction.cs" />
+    <Compile Include="Composing\PatternActionResult.cs" />
+    <Compile Include="Composing\PatternActionState.cs" />
+    <Compile Include="Composing\PatternBuilder.cs" />
+    <Compile Include="Composing\PatternContext.cs" />
+    <Compile Include="Composing\PatternUtilities.cs" />
+    <Compile Include="Composing\Selections\ChordSelection.cs" />
+    <Compile Include="Composing\Selections\NoteSelection.cs" />
+    <Compile Include="Composing\Transformations\ChordTransformation.cs" />
+    <Compile Include="Composing\Transformations\NoteTransformation.cs" />
+    <Compile Include="Core\ChunksConverters\ChunksConverterFactory.cs" />
+    <Compile Include="Core\ChunksConverters\IChunksConverter.cs" />
+    <Compile Include="Core\ChunksConverters\MultiSequenceChunksConverter.cs" />
+    <Compile Include="Core\ChunksConverters\MultiTrackChunksConverter.cs" />
+    <Compile Include="Core\ChunksConverters\SingleTrackChunksConverter.cs" />
+    <Compile Include="Core\Chunks\HeaderChunk.cs" />
+    <Compile Include="Core\Chunks\Info\ChunkType.cs" />
+    <Compile Include="Core\Chunks\Info\ChunkTypesCollection.cs" />
+    <Compile Include="Core\Chunks\Info\StandardChunkIds.cs" />
+    <Compile Include="Core\Chunks\MidiChunk.cs" />
+    <Compile Include="Core\Chunks\TrackChunk.cs" />
+    <Compile Include="Core\Chunks\UnknownChunk.cs" />
+    <Compile Include="Core\Collections\ChunksCollection.cs" />
+    <Compile Include="Core\Collections\EventsCollection.cs" />
+    <Compile Include="Core\Equality\Chunk\MidiChunkEquality.cs" />
+    <Compile Include="Core\Equality\Chunk\MidiChunkEqualityCheckSettings.cs" />
+    <Compile Include="Core\Equality\Chunk\MidiChunkEqualityComparer.cs" />
+    <Compile Include="Core\Equality\Event\MidiEventEquality.cs" />
+    <Compile Include="Core\Equality\Event\MidiEventEqualityCheckSettings.cs" />
+    <Compile Include="Core\Equality\Event\MidiEventEqualityComparer.cs" />
+    <Compile Include="Core\Equality\File\MidiFileEquality.cs" />
+    <Compile Include="Core\Equality\File\MidiFileEqualityCheckSettings.cs" />
+    <Compile Include="Core\Equality\File\MidiFileEqualityComparer.cs" />
+    <Compile Include="Core\Events\Base\ChannelEvent.cs" />
+    <Compile Include="Core\Events\Base\MetaEvent.cs" />
+    <Compile Include="Core\Events\Base\MidiEvent.cs" />
+    <Compile Include="Core\Events\Base\MidiEventType.cs" />
+    <Compile Include="Core\Events\Base\SysExEvent.cs" />
+    <Compile Include="Core\Events\Base\SystemCommonEvent.cs" />
+    <Compile Include="Core\Events\Base\SystemRealTimeEvent.cs" />
+    <Compile Include="Core\Events\Channel\ChannelAftertouchEvent.cs" />
+    <Compile Include="Core\Events\Channel\ControlChangeEvent.cs" />
+    <Compile Include="Core\Events\Channel\NoteAftertouchEvent.cs" />
+    <Compile Include="Core\Events\Channel\NoteEvent.cs" />
+    <Compile Include="Core\Events\Channel\NoteOffEvent.cs" />
+    <Compile Include="Core\Events\Channel\NoteOnEvent.cs" />
+    <Compile Include="Core\Events\Channel\PitchBendEvent.cs" />
+    <Compile Include="Core\Events\Channel\ProgramChangeEvent.cs" />
+    <Compile Include="Core\Events\Converters\BytesToMidiEventConverter.cs" />
+    <Compile Include="Core\Events\Converters\MidiEventToBytesConverter.cs" />
+    <Compile Include="Core\Events\Info\EventStatusBytes.cs" />
+    <Compile Include="Core\Events\Info\EventType.cs" />
+    <Compile Include="Core\Events\Info\EventTypesCollection.cs" />
+    <Compile Include="Core\Events\Info\StandardMetaEventStatusBytes.cs" />
+    <Compile Include="Core\Events\Meta\BaseTextEvent.cs" />
+    <Compile Include="Core\Events\Meta\ChannelPrefixEvent.cs" />
+    <Compile Include="Core\Events\Meta\CopyrightNoticeEvent.cs" />
+    <Compile Include="Core\Events\Meta\CuePointEvent.cs" />
+    <Compile Include="Core\Events\Meta\DeviceNameEvent.cs" />
+    <Compile Include="Core\Events\Meta\EndOfTrackEvent.cs" />
+    <Compile Include="Core\Events\Meta\InstrumentNameEvent.cs" />
+    <Compile Include="Core\Events\Meta\KeySignatureEvent.cs" />
+    <Compile Include="Core\Events\Meta\LyricEvent.cs" />
+    <Compile Include="Core\Events\Meta\MarkerEvent.cs" />
+    <Compile Include="Core\Events\Meta\PortPrefixEvent.cs" />
+    <Compile Include="Core\Events\Meta\ProgramNameEvent.cs" />
+    <Compile Include="Core\Events\Meta\SequenceNumberEvent.cs" />
+    <Compile Include="Core\Events\Meta\SequencerSpecificEvent.cs" />
+    <Compile Include="Core\Events\Meta\SequenceTrackNameEvent.cs" />
+    <Compile Include="Core\Events\Meta\SetTempoEvent.cs" />
+    <Compile Include="Core\Events\Meta\SmpteOffsetEvent.cs" />
+    <Compile Include="Core\Events\Meta\TextEvent.cs" />
+    <Compile Include="Core\Events\Meta\TimeSignatureEvent.cs" />
+    <Compile Include="Core\Events\Meta\UnknownMetaEvent.cs" />
+    <Compile Include="Core\Events\Readers\ChannelEventReader.cs" />
+    <Compile Include="Core\Events\Readers\EventReaderFactory.cs" />
+    <Compile Include="Core\Events\Readers\IEventReader.cs" />
+    <Compile Include="Core\Events\Readers\MetaEventReader.cs" />
+    <Compile Include="Core\Events\Readers\SysExEventReader.cs" />
+    <Compile Include="Core\Events\Readers\SystemCommonEventReader.cs" />
+    <Compile Include="Core\Events\Readers\SystemRealTimeEventReader.cs" />
+    <Compile Include="Core\Events\SysEx\EscapeSysExEvent.cs" />
+    <Compile Include="Core\Events\SysEx\NormalSysExEvent.cs" />
+    <Compile Include="Core\Events\SystemCommon\MidiTimeCodeComponent.cs" />
+    <Compile Include="Core\Events\SystemCommon\MidiTimeCodeEvent.cs" />
+    <Compile Include="Core\Events\SystemCommon\MidiTimeCodeType.cs" />
+    <Compile Include="Core\Events\SystemCommon\SongPositionPointerEvent.cs" />
+    <Compile Include="Core\Events\SystemCommon\SongSelectEvent.cs" />
+    <Compile Include="Core\Events\SystemCommon\TuneRequestEvent.cs" />
+    <Compile Include="Core\Events\SystemRealTime\ActiveSensingEvent.cs" />
+    <Compile Include="Core\Events\SystemRealTime\ContinueEvent.cs" />
+    <Compile Include="Core\Events\SystemRealTime\ResetEvent.cs" />
+    <Compile Include="Core\Events\SystemRealTime\StartEvent.cs" />
+    <Compile Include="Core\Events\SystemRealTime\StopEvent.cs" />
+    <Compile Include="Core\Events\SystemRealTime\TimingClockEvent.cs" />
+    <Compile Include="Core\Events\Writers\ChannelEventWriter.cs" />
+    <Compile Include="Core\Events\Writers\EventWriterFactory.cs" />
+    <Compile Include="Core\Events\Writers\IEventWriter.cs" />
+    <Compile Include="Core\Events\Writers\MetaEventWriter.cs" />
+    <Compile Include="Core\Events\Writers\SysExEventWriter.cs" />
+    <Compile Include="Core\Events\Writers\SystemCommonEventWriter.cs" />
+    <Compile Include="Core\Events\Writers\SystemRealTimeEventWriter.cs" />
+    <Compile Include="Core\Exceptions\InvalidChannelEventParameterValueException.cs" />
+    <Compile Include="Core\Exceptions\InvalidChunkSizeException.cs" />
+    <Compile Include="Core\Exceptions\InvalidMetaEventParameterValueException.cs" />
+    <Compile Include="Core\Exceptions\InvalidMidiTimeCodeComponentException.cs" />
+    <Compile Include="Core\Exceptions\InvalidSystemCommonEventParameterValueException.cs" />
+    <Compile Include="Core\Exceptions\MidiException.cs" />
+    <Compile Include="Core\Exceptions\MissedEndOfTrackEventException.cs" />
+    <Compile Include="Core\Exceptions\NoHeaderChunkException.cs" />
+    <Compile Include="Core\Exceptions\NotEnoughBytesException.cs" />
+    <Compile Include="Core\Exceptions\TooManyTrackChunksException.cs" />
+    <Compile Include="Core\Exceptions\UnexpectedRunningStatusException.cs" />
+    <Compile Include="Core\Exceptions\UnexpectedTrackChunksCountException.cs" />
+    <Compile Include="Core\Exceptions\UnknownChannelEventException.cs" />
+    <Compile Include="Core\Exceptions\UnknownChunkException.cs" />
+    <Compile Include="Core\Exceptions\UnknownFileFormatException.cs" />
+    <Compile Include="Core\MidiFile.cs" />
+    <Compile Include="Core\MidiFileFormat.cs" />
+    <Compile Include="Core\MidiReader.cs" />
+    <Compile Include="Core\MidiWriter.cs" />
+    <Compile Include="Core\ReadingSettings\BufferingPolicy.cs" />
+    <Compile Include="Core\ReadingSettings\DecodeTextCallback.cs" />
+    <Compile Include="Core\ReadingSettings\ExtraTrackChunkPolicy.cs" />
+    <Compile Include="Core\ReadingSettings\InvalidChannelEventParameterValuePolicy.cs" />
+    <Compile Include="Core\ReadingSettings\InvalidChunkSizePolicy.cs" />
+    <Compile Include="Core\ReadingSettings\InvalidMetaEventParameterValuePolicy.cs" />
+    <Compile Include="Core\ReadingSettings\InvalidSystemCommonEventParameterValuePolicy.cs" />
+    <Compile Include="Core\ReadingSettings\MissedEndOfTrackPolicy.cs" />
+    <Compile Include="Core\ReadingSettings\NoHeaderChunkPolicy.cs" />
+    <Compile Include="Core\ReadingSettings\NotEnoughBytesPolicy.cs" />
+    <Compile Include="Core\ReadingSettings\ReaderSettings.cs" />
+    <Compile Include="Core\ReadingSettings\ReadingHandler.cs" />
+    <Compile Include="Core\ReadingSettings\ReadingSettings.cs" />
+    <Compile Include="Core\ReadingSettings\SilentNoteOnPolicy.cs" />
+    <Compile Include="Core\ReadingSettings\UnexpectedTrackChunksCountPolicy.cs" />
+    <Compile Include="Core\ReadingSettings\UnknownChannelEventAction.cs" />
+    <Compile Include="Core\ReadingSettings\UnknownChannelEventCallback.cs" />
+    <Compile Include="Core\ReadingSettings\UnknownChannelEventInstruction.cs" />
+    <Compile Include="Core\ReadingSettings\UnknownChannelEventPolicy.cs" />
+    <Compile Include="Core\ReadingSettings\UnknownChunkIdPolicy.cs" />
+    <Compile Include="Core\ReadingSettings\UnknownFileFormatPolicy.cs" />
+    <Compile Include="Core\ReadingSettings\ZeroLengthDataPolicy.cs" />
+    <Compile Include="Core\TimeDivision\SmpteTimeDivision.cs" />
+    <Compile Include="Core\TimeDivision\TicksPerQuarterNoteTimeDivision.cs" />
+    <Compile Include="Core\TimeDivision\TimeDivision.cs" />
+    <Compile Include="Core\TimeDivision\TimeDivisionFactory.cs" />
+    <Compile Include="Core\Utilities\ArrayUtilities.cs" />
+    <Compile Include="Core\Utilities\ControlUtilities.cs" />
+    <Compile Include="Core\Utilities\IOUtilities.cs" />
+    <Compile Include="Core\Utilities\MidiFileUtilities.cs" />
+    <Compile Include="Core\Utilities\NoteEventUtilities.cs" />
+    <Compile Include="Core\Utilities\SmfConstants.cs" />
+    <Compile Include="Core\Utilities\SmpteData.cs" />
+    <Compile Include="Core\Utilities\TrackChunkUtilities.cs" />
+    <Compile Include="Core\WritingSettings\CompressionPolicy.cs" />
+    <Compile Include="Core\WritingSettings\WriterSettings.cs" />
+    <Compile Include="Core\WritingSettings\WritingSettings.cs" />
+    <Compile Include="Devices\Clock\IClockDrivenObject.cs" />
+    <Compile Include="Devices\Clock\MidiClock.cs" />
+    <Compile Include="Devices\Clock\MidiClockSettings.cs" />
+    <Compile Include="Devices\Clock\TickGenerator\HighPrecisionTickGenerator.cs" />
+    <Compile Include="Devices\Clock\TickGenerator\MidiTimerWinApi.cs" />
+    <Compile Include="Devices\Clock\TickGenerator\RegularPrecisionTickGenerator.cs" />
+    <Compile Include="Devices\Clock\TickGenerator\TickGenerator.cs" />
+    <Compile Include="Devices\DevicesConnector\DevicesConnector.cs" />
+    <Compile Include="Devices\DevicesConnector\DevicesConnectorUtilities.cs" />
+    <Compile Include="Devices\ErrorOccurredEventArgs.cs" />
+    <Compile Include="Devices\IMidiDevice.cs" />
+    <Compile Include="Devices\InputDevice\IInputDevice.cs" />
+    <Compile Include="Devices\InputDevice\InputDevice.cs" />
+    <Compile Include="Devices\InputDevice\InvalidShortEventReceivedEventArgs.cs" />
+    <Compile Include="Devices\InputDevice\InvalidSysExEventReceivedEventArgs.cs" />
+    <Compile Include="Devices\InputDevice\MidiEventReceivedEventArgs.cs" />
+    <Compile Include="Devices\InputDevice\MidiInWinApi.cs" />
+    <Compile Include="Devices\InputDevice\MidiTimeCodeReceivedEventArgs.cs" />
+    <Compile Include="Devices\Manufacturer.cs" />
+    <Compile Include="Devices\MidiDevice.cs" />
+    <Compile Include="Devices\MidiDeviceException.cs" />
+    <Compile Include="Devices\OutputDevice\IOutputDevice.cs" />
+    <Compile Include="Devices\OutputDevice\MidiEventSentEventArgs.cs" />
+    <Compile Include="Devices\OutputDevice\MidiOutWinApi.cs" />
+    <Compile Include="Devices\OutputDevice\OutputDevice.cs" />
+    <Compile Include="Devices\OutputDevice\OutputDeviceType.cs" />
+    <Compile Include="Devices\OutputDevice\Volume.cs" />
+    <Compile Include="Devices\Playback\Callbacks\EventCallback.cs" />
+    <Compile Include="Devices\Playback\Callbacks\NoteCallback.cs" />
+    <Compile Include="Devices\Playback\Callbacks\NotePlaybackData.cs" />
+    <Compile Include="Devices\Playback\CurrentTimeWatcher\PlaybackCurrentTime.cs" />
+    <Compile Include="Devices\Playback\CurrentTimeWatcher\PlaybackCurrentTimeChangedEventArgs.cs" />
+    <Compile Include="Devices\Playback\CurrentTimeWatcher\PlaybackCurrentTimeWatcher.cs" />
+    <Compile Include="Devices\Playback\MidiEventPlayedEventArgs.cs" />
+    <Compile Include="Devices\Playback\NotesEventArgs.cs" />
+    <Compile Include="Devices\Playback\Playback.cs" />
+    <Compile Include="Devices\Playback\PlaybackEvent.cs" />
+    <Compile Include="Devices\Playback\PlaybackEventCallback.cs" />
+    <Compile Include="Devices\Playback\PlaybackEventMetadata\NotePlaybackEventMetadata.cs" />
+    <Compile Include="Devices\Playback\PlaybackEventMetadata\PlaybackEventMetadata.cs" />
+    <Compile Include="Devices\Playback\PlaybackEventsComparer.cs" />
+    <Compile Include="Devices\Playback\PlaybackUtilities.cs" />
+    <Compile Include="Devices\Playback\Snapping\PlaybackSnapping.cs" />
+    <Compile Include="Devices\Playback\Snapping\SnapPoint.cs" />
+    <Compile Include="Devices\Playback\Snapping\SnapPointsGroup.cs" />
+    <Compile Include="Devices\Recording\Recording.cs" />
+    <Compile Include="Devices\Recording\RecordingEvent.cs" />
+    <Compile Include="Devices\Recording\RecordingUtilities.cs" />
+    <Compile Include="Devices\WinApi\MidiMessage.cs" />
+    <Compile Include="Devices\WinApi\MidiWinApi.cs" />
+    <Compile Include="Interaction\BuildObjects\BuildObjectsUtilities.cs" />
+    <Compile Include="Interaction\BuildObjects\Contexts\ChordsContext.cs" />
+    <Compile Include="Interaction\BuildObjects\Contexts\IBuildingContext.cs" />
+    <Compile Include="Interaction\BuildObjects\Contexts\NotesContext.cs" />
+    <Compile Include="Interaction\BuildObjects\Contexts\RegisteredParametersContext.cs" />
+    <Compile Include="Interaction\BuildObjects\Contexts\TimedEventsContext.cs" />
+    <Compile Include="Interaction\BuildObjects\ObjectsBags\ChordsBag.cs" />
+    <Compile Include="Interaction\BuildObjects\ObjectsBags\NotesBag.cs" />
+    <Compile Include="Interaction\BuildObjects\ObjectsBags\ObjectsBag.cs" />
+    <Compile Include="Interaction\BuildObjects\ObjectsBags\RegisteredParametersBag.cs" />
+    <Compile Include="Interaction\BuildObjects\ObjectsBags\TimedEventsBag.cs" />
+    <Compile Include="Interaction\BuildObjects\ObjectsBuildingSettings.cs" />
+    <Compile Include="Interaction\BuildObjects\OverlayBuilders\IOverlayBuilder.cs" />
+    <Compile Include="Interaction\BuildObjects\OverlayBuilders\RestsBuilder.cs" />
+    <Compile Include="Interaction\BuildObjects\SequentialBuilders\ChordsBuilder.cs" />
+    <Compile Include="Interaction\BuildObjects\SequentialBuilders\ISequentialObjectsBuilder.cs" />
+    <Compile Include="Interaction\BuildObjects\SequentialBuilders\NotesBuilder.cs" />
+    <Compile Include="Interaction\BuildObjects\SequentialBuilders\RegisteredParametersBuilder.cs" />
+    <Compile Include="Interaction\BuildObjects\SequentialBuilders\SequentialObjectsBuilder.cs" />
+    <Compile Include="Interaction\BuildObjects\SequentialBuilders\TimedEventsBuilder.cs" />
+    <Compile Include="Interaction\BuildObjects\Settings\ChordBuilderSettings.cs" />
+    <Compile Include="Interaction\BuildObjects\Settings\RestBuilderSettings.cs" />
+    <Compile Include="Interaction\Chords\Chord.cs" />
+    <Compile Include="Interaction\Chords\ChordsCollection.cs" />
+    <Compile Include="Interaction\Chords\ChordsCollectionChangedEventArgs.cs" />
+    <Compile Include="Interaction\Chords\ChordsManager.cs" />
+    <Compile Include="Interaction\Chords\ChordsManagingUtilities.cs" />
+    <Compile Include="Interaction\Grid\ArbitraryGrid.cs" />
+    <Compile Include="Interaction\Grid\IGrid.cs" />
+    <Compile Include="Interaction\Grid\SteppedGrid.cs" />
+    <Compile Include="Interaction\IMusicalObject.cs" />
+    <Compile Include="Interaction\LengthedObject\ILengthedObject.cs" />
+    <Compile Include="Interaction\LengthedObject\INotifyLengthChanged.cs" />
+    <Compile Include="Interaction\LengthedObject\LengthChangedEventArgs.cs" />
+    <Compile Include="Interaction\LengthedObject\LengthedObjectPart.cs" />
+    <Compile Include="Interaction\LengthedObject\LengthedObjectUtilities.cs" />
+    <Compile Include="Interaction\LengthedObject\SplittedLengthedObject.cs" />
+    <Compile Include="Interaction\Notes\Note.cs" />
+    <Compile Include="Interaction\Notes\NotesCollection.cs" />
+    <Compile Include="Interaction\Notes\NotesCollectionChangedEventArgs.cs" />
+    <Compile Include="Interaction\Notes\NotesManager.cs" />
+    <Compile Include="Interaction\Notes\NotesManagingUtilities.cs" />
+    <Compile Include="Interaction\Notes\NotesReadingHandler.cs" />
+    <Compile Include="Interaction\Notes\Utilities\GetNotesAndRests\GetNotesAndRestsUtilities.cs" />
+    <Compile Include="Interaction\Notes\Utilities\GetNotesAndRests\Rest.cs" />
+    <Compile Include="Interaction\Notes\Utilities\GetNotesAndRests\RestSeparationPolicy.cs" />
+    <Compile Include="Interaction\Notes\Utilities\GetTimedEventsAndNotesUtilities.cs" />
+    <Compile Include="Interaction\Notes\Utilities\ResizeNotesUtilities.cs" />
+    <Compile Include="Interaction\Parameters\Parameter.cs" />
+    <Compile Include="Interaction\Parameters\ParameterValueType.cs" />
+    <Compile Include="Interaction\Parameters\Registered\ChannelCoarseTuningParameter.cs" />
+    <Compile Include="Interaction\Parameters\Registered\ChannelFineTuningParameter.cs" />
+    <Compile Include="Interaction\Parameters\Registered\ModulationDepthRangeParameter.cs" />
+    <Compile Include="Interaction\Parameters\Registered\PitchBendSensitivityParameter.cs" />
+    <Compile Include="Interaction\Parameters\Registered\RegisteredParameter.cs" />
+    <Compile Include="Interaction\Parameters\Registered\RegisteredParameterNumbers.cs" />
+    <Compile Include="Interaction\Parameters\Registered\RegisteredParameterType.cs" />
+    <Compile Include="Interaction\Parameters\Registered\TuningBankSelectParameter.cs" />
+    <Compile Include="Interaction\Parameters\Registered\TuningProgramChangeParameter.cs" />
+    <Compile Include="Interaction\TempoMap\ITempoMapValuesCache.cs" />
+    <Compile Include="Interaction\TempoMap\Tempo.cs" />
+    <Compile Include="Interaction\TempoMap\TempoMap.cs" />
+    <Compile Include="Interaction\TempoMap\TempoMapLine.cs" />
+    <Compile Include="Interaction\TempoMap\TempoMapManager.cs" />
+    <Compile Include="Interaction\TempoMap\TempoMapManagingUtilities.cs" />
+    <Compile Include="Interaction\TempoMap\TempoMapReadingHandler.cs" />
+    <Compile Include="Interaction\TempoMap\TimeSignature.cs" />
+    <Compile Include="Interaction\TimedEvents\TimedEvent.cs" />
+    <Compile Include="Interaction\TimedEvents\TimedEventsCollection.cs" />
+    <Compile Include="Interaction\TimedEvents\TimedEventsComparer.cs" />
+    <Compile Include="Interaction\TimedEvents\TimedEventsManager.cs" />
+    <Compile Include="Interaction\TimedEvents\TimedEventsManagingUtilities.cs" />
+    <Compile Include="Interaction\TimedEvents\TimedEventsReadingHandler.cs" />
+    <Compile Include="Interaction\TimedObject\INotifyTimeChanged.cs" />
+    <Compile Include="Interaction\TimedObject\ITimedObject.cs" />
+    <Compile Include="Interaction\TimedObject\TimeChangedEventArgs.cs" />
+    <Compile Include="Interaction\TimedObject\TimedObjectsCollection.cs" />
+    <Compile Include="Interaction\TimedObject\TimedObjectsComparer.cs" />
+    <Compile Include="Interaction\TimedObject\TimedObjectUtilities.cs" />
+    <Compile Include="Interaction\TimeSpan\Converters\BarBeatFractionTimeSpanConverter.cs" />
+    <Compile Include="Interaction\TimeSpan\Converters\BarBeatTicksTimeSpanConverter.cs" />
+    <Compile Include="Interaction\TimeSpan\Converters\ITimeSpanConverter.cs" />
+    <Compile Include="Interaction\TimeSpan\Converters\LengthConverter.cs" />
+    <Compile Include="Interaction\TimeSpan\Converters\MathTimeSpanConverter.cs" />
+    <Compile Include="Interaction\TimeSpan\Converters\MetricTimeSpanConverter.cs" />
+    <Compile Include="Interaction\TimeSpan\Converters\MidiTimeSpanConverter.cs" />
+    <Compile Include="Interaction\TimeSpan\Converters\MusicalTimeSpanConverter.cs" />
+    <Compile Include="Interaction\TimeSpan\Converters\TimeConverter.cs" />
+    <Compile Include="Interaction\TimeSpan\Converters\TimeSpanConverter.cs" />
+    <Compile Include="Interaction\TimeSpan\ITimeSpan.cs" />
+    <Compile Include="Interaction\TimeSpan\MathOperation.cs" />
+    <Compile Include="Interaction\TimeSpan\Parsers\BarBeatFractionTimeSpanParser.cs" />
+    <Compile Include="Interaction\TimeSpan\Parsers\BarBeatTicksTimeSpanParser.cs" />
+    <Compile Include="Interaction\TimeSpan\Parsers\MetricTimeSpanParser.cs" />
+    <Compile Include="Interaction\TimeSpan\Parsers\MidiTimeSpanParser.cs" />
+    <Compile Include="Interaction\TimeSpan\Parsers\MusicalTimeSpanParser.cs" />
+    <Compile Include="Interaction\TimeSpan\Representations\BarBeatFractionTimeSpan.cs" />
+    <Compile Include="Interaction\TimeSpan\Representations\BarBeatTicksTimeSpan.cs" />
+    <Compile Include="Interaction\TimeSpan\Representations\MathTimeSpan.cs" />
+    <Compile Include="Interaction\TimeSpan\Representations\MetricTimeSpan.cs" />
+    <Compile Include="Interaction\TimeSpan\Representations\MidiTimeSpan.cs" />
+    <Compile Include="Interaction\TimeSpan\Representations\MusicalTimeSpan.cs" />
+    <Compile Include="Interaction\TimeSpan\TempoMapValuesCaches\MetricTempoMapValuesCache.cs" />
+    <Compile Include="Interaction\TimeSpan\TimeSpanComparer.cs" />
+    <Compile Include="Interaction\TimeSpan\TimeSpanMode.cs" />
+    <Compile Include="Interaction\TimeSpan\TimeSpanType.cs" />
+    <Compile Include="Interaction\TimeSpan\TimeSpanUtilities.cs" />
+    <Compile Include="Interaction\TimeSpan\Utilities\BarBeatTimeSpanUtilities.cs" />
+    <Compile Include="Interaction\Utilities\MidiFileUtilities.cs" />
+    <Compile Include="Interaction\Utilities\NoteId\NoteId.cs" />
+    <Compile Include="Interaction\Utilities\NoteId\NoteIdUtilities.cs" />
+    <Compile Include="Interaction\Utilities\ThrowIf\ThrowIfLengthArgument.cs" />
+    <Compile Include="Interaction\Utilities\ThrowIf\ThrowIfNotesTolerance.cs" />
+    <Compile Include="Interaction\Utilities\ThrowIf\ThrowIfTimeArgument.cs" />
+    <Compile Include="Interaction\Utilities\TrackChunkUtilities.cs" />
+    <Compile Include="Interaction\ValueLine\ValueChange.cs" />
+    <Compile Include="Interaction\ValueLine\ValueLine.cs" />
+    <Compile Include="MusicTheory\ChordProgression\ChordProgression.cs" />
+    <Compile Include="MusicTheory\ChordProgression\ChordProgressionParser.cs" />
+    <Compile Include="MusicTheory\Chord\Chord.cs" />
+    <Compile Include="MusicTheory\Chord\ChordParser.cs" />
+    <Compile Include="MusicTheory\Chord\ChordQuality.cs" />
+    <Compile Include="MusicTheory\Chord\ChordsNamesTable.cs" />
+    <Compile Include="MusicTheory\Chord\ChordUtilities.cs" />
+    <Compile Include="MusicTheory\Interval\Interval.cs" />
+    <Compile Include="MusicTheory\Interval\IntervalDefinition.cs" />
+    <Compile Include="MusicTheory\Interval\IntervalDirection.cs" />
+    <Compile Include="MusicTheory\Interval\IntervalParser.cs" />
+    <Compile Include="MusicTheory\Interval\IntervalQuality.cs" />
+    <Compile Include="MusicTheory\Interval\IntervalUtilities.cs" />
+    <Compile Include="MusicTheory\Notes.cs" />
+    <Compile Include="MusicTheory\Note\Note.cs" />
+    <Compile Include="MusicTheory\Note\NoteName.cs" />
+    <Compile Include="MusicTheory\Note\NoteNameParser.cs" />
+    <Compile Include="MusicTheory\Note\NoteParser.cs" />
+    <Compile Include="MusicTheory\Note\NoteUtilities.cs" />
+    <Compile Include="MusicTheory\Octave\Octave.cs" />
+    <Compile Include="MusicTheory\Octave\OctaveParser.cs" />
+    <Compile Include="MusicTheory\Scale\Scale.cs" />
+    <Compile Include="MusicTheory\Scale\ScaleDegree.cs" />
+    <Compile Include="MusicTheory\Scale\ScaleIntervals.cs" />
+    <Compile Include="MusicTheory\Scale\ScaleParser.cs" />
+    <Compile Include="MusicTheory\Scale\ScaleUtilities.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Standards\GeneralMidi2\GeneralMidi2PercussionSet.cs" />
+    <Compile Include="Standards\GeneralMidi2\GeneralMidi2Program.cs" />
+    <Compile Include="Standards\GeneralMidi2\GeneralMidi2Utilities.cs" />
+    <Compile Include="Standards\GeneralMidi2\Percussion\GeneralMidi2AnalogPercussion.cs" />
+    <Compile Include="Standards\GeneralMidi2\Percussion\GeneralMidi2BrushPercussion.cs" />
+    <Compile Include="Standards\GeneralMidi2\Percussion\GeneralMidi2ElectronicPercussion.cs" />
+    <Compile Include="Standards\GeneralMidi2\Percussion\GeneralMidi2JazzPercussion.cs" />
+    <Compile Include="Standards\GeneralMidi2\Percussion\GeneralMidi2OrchestraPercussion.cs" />
+    <Compile Include="Standards\GeneralMidi2\Percussion\GeneralMidi2PowerPercussion.cs" />
+    <Compile Include="Standards\GeneralMidi2\Percussion\GeneralMidi2RoomPercussion.cs" />
+    <Compile Include="Standards\GeneralMidi2\Percussion\GeneralMidi2SfxPercussion.cs" />
+    <Compile Include="Standards\GeneralMidi2\Percussion\GeneralMidi2StandardPercussion.cs" />
+    <Compile Include="Standards\GeneralMidi\GeneralMidi.cs" />
+    <Compile Include="Standards\GeneralMidi\GeneralMidiPercussion.cs" />
+    <Compile Include="Standards\GeneralMidi\GeneralMidiProgram.cs" />
+    <Compile Include="Standards\GeneralMidi\GeneralMidiUtilities.cs" />
+    <Compile Include="Standards\GeneralSound\GeneralSoundPercussionSet.cs" />
+    <Compile Include="Standards\GeneralSound\GeneralSoundUtilities.cs" />
+    <Compile Include="Standards\GeneralSound\Percussion\GeneralSoundBrushPercussion.cs" />
+    <Compile Include="Standards\GeneralSound\Percussion\GeneralSoundCm6432LPercussion.cs" />
+    <Compile Include="Standards\GeneralSound\Percussion\GeneralSoundElectronicPercussion.cs" />
+    <Compile Include="Standards\GeneralSound\Percussion\GeneralSoundJazzPercussion.cs" />
+    <Compile Include="Standards\GeneralSound\Percussion\GeneralSoundOrchestraPercussion.cs" />
+    <Compile Include="Standards\GeneralSound\Percussion\GeneralSoundPowerPercussion.cs" />
+    <Compile Include="Standards\GeneralSound\Percussion\GeneralSoundRoomPercussion.cs" />
+    <Compile Include="Standards\GeneralSound\Percussion\GeneralSoundSfxPercussion.cs" />
+    <Compile Include="Standards\GeneralSound\Percussion\GeneralSoundStandardPercussion.cs" />
+    <Compile Include="Standards\GeneralSound\Percussion\GeneralSoundTr808Percussion.cs" />
+    <Compile Include="Tools\Common\LengthedObjectTarget.cs" />
+    <Compile Include="Tools\Common\TimeProcessing\TimeProcessingAction.cs" />
+    <Compile Include="Tools\Common\TimeProcessing\TimeProcessingInstruction.cs" />
+    <Compile Include="Tools\CsvConverter\Common\CsvError.cs" />
+    <Compile Include="Tools\CsvConverter\Common\CsvReader.cs" />
+    <Compile Include="Tools\CsvConverter\Common\CsvRecord.cs" />
+    <Compile Include="Tools\CsvConverter\Common\CsvSettings.cs" />
+    <Compile Include="Tools\CsvConverter\Common\CsvWriter.cs" />
+    <Compile Include="Tools\CsvConverter\CsvConverter.cs" />
+    <Compile Include="Tools\CsvConverter\CsvUtilities.cs" />
+    <Compile Include="Tools\CsvConverter\MidiFile\FromCsv\CsvToMidiFileConverter.cs" />
+    <Compile Include="Tools\CsvConverter\MidiFile\FromCsv\EventParser.cs" />
+    <Compile Include="Tools\CsvConverter\MidiFile\FromCsv\EventParserProvider.cs" />
+    <Compile Include="Tools\CsvConverter\MidiFile\FromCsv\EventsNamesProvider.cs" />
+    <Compile Include="Tools\CsvConverter\MidiFile\FromCsv\ParameterParser.cs" />
+    <Compile Include="Tools\CsvConverter\MidiFile\FromCsv\Record.cs" />
+    <Compile Include="Tools\CsvConverter\MidiFile\FromCsv\RecordType.cs" />
+    <Compile Include="Tools\CsvConverter\MidiFile\FromCsv\TimedMidiEvent.cs" />
+    <Compile Include="Tools\CsvConverter\MidiFile\FromCsv\TypeParser.cs" />
+    <Compile Include="Tools\CsvConverter\MidiFile\MidiFileCsvConversionSettings.cs" />
+    <Compile Include="Tools\CsvConverter\MidiFile\MidiFileCsvLayout.cs" />
+    <Compile Include="Tools\CsvConverter\MidiFile\NoteFormat.cs" />
+    <Compile Include="Tools\CsvConverter\MidiFile\RecordTypes\DryWetMidiRecordTypes.cs" />
+    <Compile Include="Tools\CsvConverter\MidiFile\RecordTypes\MidiCsvRecordTypes.cs" />
+    <Compile Include="Tools\CsvConverter\MidiFile\ToCsv\EventNameGetter.cs" />
+    <Compile Include="Tools\CsvConverter\MidiFile\ToCsv\EventNameGetterProvider.cs" />
+    <Compile Include="Tools\CsvConverter\MidiFile\ToCsv\EventParametersGetter.cs" />
+    <Compile Include="Tools\CsvConverter\MidiFile\ToCsv\EventParametersGetterProvider.cs" />
+    <Compile Include="Tools\CsvConverter\MidiFile\ToCsv\MidiFileToCsvConverter.cs" />
+    <Compile Include="Tools\CsvConverter\Notes\CsvToNotesConverter.cs" />
+    <Compile Include="Tools\CsvConverter\Notes\NoteCsvConversionSettings.cs" />
+    <Compile Include="Tools\CsvConverter\Notes\NoteCsvConversionUtilities.cs" />
+    <Compile Include="Tools\CsvConverter\Notes\NoteNumberFormat.cs" />
+    <Compile Include="Tools\CsvConverter\Notes\NotesToCsvConverter.cs" />
+    <Compile Include="Tools\LengthedObjectsSplitter\Base\LengthedObjectsSplitter.cs" />
+    <Compile Include="Tools\LengthedObjectsSplitter\ChordsSplitter.cs" />
+    <Compile Include="Tools\LengthedObjectsSplitter\NotesSplitter.cs" />
+    <Compile Include="Tools\LengthedObjectsSplitter\Utilities\ChordsSplitterUtilities.cs" />
+    <Compile Include="Tools\LengthedObjectsSplitter\Utilities\NotesSplitterUtilities.cs" />
+    <Compile Include="Tools\MidiFileSplitter\MidiFileSlicer.cs" />
+    <Compile Include="Tools\MidiFileSplitter\MidiFileSplitter.cs" />
+    <Compile Include="Tools\MidiFileSplitter\SliceMidiFileMarkers.cs" />
+    <Compile Include="Tools\MidiFileSplitter\SliceMidiFileSettings.cs" />
+    <Compile Include="Tools\NotesMerger\NotesMerger.cs" />
+    <Compile Include="Tools\NotesMerger\NotesMergerUtilities.cs" />
+    <Compile Include="Tools\NotesMerger\NotesMergingSettings.cs" />
+    <Compile Include="Tools\NotesMerger\VelocityMergers\AverageVelocityMerger.cs" />
+    <Compile Include="Tools\NotesMerger\VelocityMergers\FirstVelocityMerger.cs" />
+    <Compile Include="Tools\NotesMerger\VelocityMergers\LastVelocityMerger.cs" />
+    <Compile Include="Tools\NotesMerger\VelocityMergers\MaxVelocityMerger.cs" />
+    <Compile Include="Tools\NotesMerger\VelocityMergers\MinVelocityMerger.cs" />
+    <Compile Include="Tools\NotesMerger\VelocityMergers\VelocityMerger.cs" />
+    <Compile Include="Tools\NotesMerger\VelocityMergingPolicy.cs" />
+    <Compile Include="Tools\Quantizer\Base\QuantizedTime.cs" />
+    <Compile Include="Tools\Quantizer\Base\Quantizer.cs" />
+    <Compile Include="Tools\Quantizer\Base\QuantizingSettings.cs" />
+    <Compile Include="Tools\Quantizer\ChordsQuantizer.cs" />
+    <Compile Include="Tools\Quantizer\LengthedObjectsQuantizer\LengthedObjectsQuantizer.cs" />
+    <Compile Include="Tools\Quantizer\LengthedObjectsQuantizer\LengthedObjectsQuantizingSettings.cs" />
+    <Compile Include="Tools\Quantizer\LengthedObjectsQuantizer\QuantizingBeyondFixedEndPolicy.cs" />
+    <Compile Include="Tools\Quantizer\LengthedObjectsQuantizer\QuantizingBeyondZeroPolicy.cs" />
+    <Compile Include="Tools\Quantizer\NotesQuantizer.cs" />
+    <Compile Include="Tools\Quantizer\TimedEventsQuantizer.cs" />
+    <Compile Include="Tools\Quantizer\Utilities\ChordsQuantizerUtilities.cs" />
+    <Compile Include="Tools\Quantizer\Utilities\NotesQuantizerUtilities.cs" />
+    <Compile Include="Tools\Quantizer\Utilities\TimedEventsQuantizerUtilities.cs" />
+    <Compile Include="Tools\Randomizer\Base\Randomizer.cs" />
+    <Compile Include="Tools\Randomizer\Base\RandomizingSettings.cs" />
+    <Compile Include="Tools\Randomizer\Bounds\ConstantBounds.cs" />
+    <Compile Include="Tools\Randomizer\Bounds\IBounds.cs" />
+    <Compile Include="Tools\Randomizer\ChordsRandomizer.cs" />
+    <Compile Include="Tools\Randomizer\LengthedObjectsRandomizer\LengthedObjectsRandomizer.cs" />
+    <Compile Include="Tools\Randomizer\LengthedObjectsRandomizer\LengthedObjectsRandomizingSettings.cs" />
+    <Compile Include="Tools\Randomizer\NotesRandomizer.cs" />
+    <Compile Include="Tools\Randomizer\TimedEventsRandomizer.cs" />
+    <Compile Include="Tools\Randomizer\Utilities\ChordsRandomizerUtilities.cs" />
+    <Compile Include="Tools\Randomizer\Utilities\NotesRandomizerUtilities.cs" />
+    <Compile Include="Tools\Randomizer\Utilities\TimedEventsRandomizerUtilities.cs" />
+    <EmbeddedResource Include="Properties\Melanchall.DryWetMidi.UWP.rd.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
+      <Version>6.2.10</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icon.png" />
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

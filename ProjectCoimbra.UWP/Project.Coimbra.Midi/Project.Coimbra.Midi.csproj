@@ -135,14 +135,15 @@
     <EmbeddedResource Include="Properties\Project.Coimbra.Midi.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Melanchall.DryWetMidi">
-      <Version>5.1.2</Version>
-    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.10</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Melanchall.DryWetMidi.UWP\Melanchall.DryWetMidi.UWP.csproj">
+      <Project>{3b259086-6e7d-4ecc-a419-094f71503f63}</Project>
+      <Name>Melanchall.DryWetMidi.UWP</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Project.Coimbra.Model\Project.Coimbra.Model.csproj">
       <Project>{a9d0bf90-0c50-49a6-959e-34caa1ebb87a}</Project>
       <Name>Project.Coimbra.Model</Name>
